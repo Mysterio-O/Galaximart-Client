@@ -1,0 +1,72 @@
+/* Ensure Swiper slides are properly hidden when not active */
+.swiper-slide {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.swiper-slide-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Video container styling */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Ensure video covers the slide */
+video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Overlay styling for text and button */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/* Custom Swiper navigation buttons */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #FBBF24;
+    /* Neon yellow */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Custom pagination bullets */
+.swiper-pagination-bullet {
+    background: #7C3AED;
+    /* Neon purple */
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    background: #FBBF24;
+    /* Neon yellow */
+    opacity: 1;
+}

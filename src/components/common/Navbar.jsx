@@ -29,10 +29,10 @@ const Navbar = () => {
 
     const links = [
         { name: 'Home', to: '/' },
-        { name: 'Categories', to: '/categories' },
-        { name: 'All Product', to: '/all-product' },
-        { name: 'Add Product', to: '/add-product' },
-        { name: 'My Product', to: '/my-product' }
+        { name: 'Categories', to: '/categories', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' },
+        { name: 'All Product', to: '/all-product', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' },
+        { name: 'Add Product', to: '/add-product', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' },
+        { name: 'My Product', to: '/my-product', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' }
     ];
 
     return (
@@ -70,8 +70,7 @@ const Navbar = () => {
                                 >
                                     <NavLink
                                         to={link.to}
-                                        className="px-4 py-2 rounded-lg transition-all duration-300 relative z-10"
-                                        activeClassName="bg-gradient-to-r from-cyan-500/40 to-violet-500/40 text-white font-bold shadow-[0_0_12px_rgba(139,92,246,0.6)] border border-cyan-400/50"
+                                        className={`px-4 py-2 rounded-lg transition-all duration-300 relative z-10 ${(isActive) => (isActive ? link.active : '')}`}
                                     >
                                         {link.name}
                                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-magenta-500 transition-all duration-500 group-hover:w-full"></span>
@@ -98,8 +97,7 @@ const Navbar = () => {
                                 {/* signin button */}
                                 <NavLink
                                     to="/auth/signin"
-                                    className="btn btn-ghost text-sm font-semibold uppercase tracking-wide text-gray-100 hover:bg-cyan-500/30 hover:text-cyan-400 px-4 py-2 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] transition-all duration-300"
-                                    activeClassName="bg-gradient-to-r from-cyan-500/40 to-violet-500/40 text-white font-bold shadow-[0_0_12px_rgba(139,92,246,0.6)] border border-cyan-400/50"
+                                    className={`btn btn-ghost text-sm font-semibold uppercase tracking-wide text-gray-100 hover:bg-cyan-500/30 hover:text-cyan-400 px-4 py-2 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] transition-all duration-300 ${(isActive) => (isActive ? 'bg-gradient-to-r from-cyan-500/40 to-violet-500/40 text-white font-bold shadow-[0_0_12px_rgba(139,92,246,0.6)] border border-cyan-400/50' : '')}`}
                                 >
                                     Sign In
                                 </NavLink>
@@ -153,8 +151,7 @@ const Navbar = () => {
                                 >
                                     <NavLink
                                         to={link.to}
-                                        className="block text-gray-100 px-4 py-3 rounded-xl text-base font-semibold uppercase tracking-wide transition-all duration-300"
-                                        activeClassName="bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                                        className={`block text-gray-100 px-4 py-3 rounded-xl text-base font-semibold uppercase tracking-wide transition-all duration-300 ${(isActive) => (isActive ? link.active : '')}`}
                                     >
                                         {link.name}
                                     </NavLink>
@@ -173,8 +170,7 @@ const Navbar = () => {
                                 </NavLink>
                                 <NavLink
                                     to="/signin"
-                                    className="text-gray-100 hover:text-cyan-400 px-4 py-3 text-base font-semibold uppercase tracking-wide hover:bg-cyan-500/20 rounded-xl"
-                                    activeClassName="bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                                    className={`text-gray-100 hover:text-cyan-400 px-4 py-3 text-base font-semibold uppercase tracking-wide hover:bg-cyan-500/20 rounded-xl ${(isActive) => (isActive ? 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' : '')}`}
                                 >
                                     Sign In
                                 </NavLink>

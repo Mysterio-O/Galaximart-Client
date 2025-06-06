@@ -5,7 +5,7 @@ import Footer from '../components/common/Footer';
 
 const RootLayout = () => {
     return (
-        <div className='inter'>
+        <div className='inter bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95'>
             <Navbar/>
             <Outlet/>
             <Footer/>
