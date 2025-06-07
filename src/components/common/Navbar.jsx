@@ -76,12 +76,12 @@ const Navbar = () => {
                 animate="animate"
                 exit="exit"
                 className="bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95 backdrop-blur-2xl shadow-[0_0_15px_rgba(139,92,246,0.3)] border-b border-cyan-500/30"
-                >
+            >
                 {/* Background Particle Effect */}
                 <style>{customStyle}</style>
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute w-72 h-72 bg-cyan-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 top-[-120px] left-[-120px]"></div>
-                    <div className="absolute w-96 h-96 bg-magenta-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 bottom-[-180px] right-[-180px] animate-pulse-slow"></div>
+                <div className="absolute inset-0 pointer-events-none overflow-hidden"> 
+                    <div className="absolute w-72 h-72 bg-cyan-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 top-[-80px] left-[-80px]"></div>
+                    <div className="absolute w-96 h-96 bg-magenta-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 bottom-[-120px] right-[-120px] animate-pulse-slow"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

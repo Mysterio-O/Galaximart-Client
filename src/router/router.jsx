@@ -4,6 +4,7 @@ import RootLayout from '../RootLayout/RootLayout';
 import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import Home from '../pages/Home/Home';
+import Products from '../components/Products/Products';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: '/auth/signup',
                 Component: SignUp
+            },
+            {
+                path:'/products/:product_name',
+                Component:Products
             }
         ]
     }
