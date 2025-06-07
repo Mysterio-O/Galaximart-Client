@@ -40,8 +40,26 @@ const Footer = () => {
         { name: 'Sign Up', to: '/auth/signup' }
     ];
 
+    const customStyles = `
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.35; transform: scale(1.15); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 7s ease-in-out infinite;
+        }
+        @keyframes wave {
+          0% { background-position-x: 0; }
+          100% { background-position-x: 1440px; }
+        }
+        .animate-wave {
+          animation: wave 20s linear infinite;
+        }
+      `
+
     return (
         <footer className="relative bg-gradient-to-t from-gray-900/90 via-violet-950/90 to-cyan-900/90 backdrop-blur-2xl shadow-[0_0_20px_rgba(139,92,246,0.4)] border-t border-cyan-500/40 py-12 overflow-hidden">
+            <style>{customStyles}</style>
             {/* Wave Background Animation */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute w-full h-full bg-bottom bg-no-repeat opacity-30 animate-wave"></div>
@@ -167,23 +185,6 @@ const Footer = () => {
                     </p>
                 </motion.div>
             </div>
-
-            <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.35; transform: scale(1.15); }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 7s ease-in-out infinite;
-        }
-        @keyframes wave {
-          0% { background-position-x: 0; }
-          100% { background-position-x: 1440px; }
-        }
-        .animate-wave {
-          animation: wave 20s linear infinite;
-        }
-      `}</style>
         </footer>
     );
 };
