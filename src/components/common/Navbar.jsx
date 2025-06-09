@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { IoCartOutline } from 'react-icons/io5';
 import './nav.css';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+
+    const navigate = useNavigate();
 
     const navVariants = {
         initial: { opacity: 0, y: -50 },
@@ -34,12 +37,37 @@ const Navbar = () => {
         visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
     };
 
+
+    const handleCategories = () => {
+        console.log('clicked');
+        if (window.location.pathname === '/') {
+            const element = document.getElementById('categories');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' })
+            } else {
+                setTimeout(() => {
+                    const retryElement = document.getElementById('categories');
+                    if (retryElement) {
+                        retryElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 500);
+            }
+        }
+        else {
+            navigate('/#categories');
+        }
+
+    }
+
+
     const links = [
-        { name: 'Home', to: '/' },
+        { name: 'Home', to: '/', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' },
         {
             name: 'Categories',
-            to: '/categories',
-            active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
+            to: '/#categories',
+            click:()=> handleCategories(),
+            // scroll:'#categories'
+            // active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
         },
         {
             name: 'All Product',
@@ -79,7 +107,7 @@ const Navbar = () => {
             >
                 {/* Background Particle Effect */}
                 <style>{customStyle}</style>
-                <div className="absolute inset-0 pointer-events-none overflow-hidden"> 
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <div className="absolute w-72 h-72 bg-cyan-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 top-[-80px] left-[-80px]"></div>
                     <div className="absolute w-96 h-96 bg-magenta-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 bottom-[-120px] right-[-120px] animate-pulse-slow"></div>
                 </div>
@@ -105,12 +133,13 @@ const Navbar = () => {
                                 {links.map((link) => (
                                     <motion.li
                                         key={link.name}
+                                        onClick={link?.click}
                                         className="relative text-gray-100 text-sm font-semibold tracking-wide uppercase group"
                                         whileHover={{ scale: 1.15, y: -3 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         <NavLink
-                                            to={link.to}
+                                            to={link?.to}
                                             className={({ isActive }) =>
                                                 `px-4 py-2 rounded-lg transition-all duration-300 relative z-10 ${isActive ? link.active : ''}`
                                             }
@@ -191,7 +220,10 @@ const Navbar = () => {
                                     <motion.div
                                         key={link.name}
                                         variants={itemVariants}
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => {
+                                            setIsOpen(false);
+                                            if (link.click) link.click();
+                                        }}
                                     >
                                         <NavLink
                                             to={link.to}

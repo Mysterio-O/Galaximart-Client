@@ -2723,8 +2723,24 @@
         "description": "An affordable and reliable electric toothbrush for a superior clean and healthier gums.",
         "price": 226.69,
         "rating": 4.8,
-        "image": ["https://i.ibb.co/TBCHXdkF/download.jpg","https://i.ibb.co/bR3PKFhr/download.jpg"],
-        "features": [{"title":"Sonic Technology","details":" Delivers up to 62,000 brush movements per minute (e.g., Sonicare 4300 Series), removing up to 7x more plaque than manual brushes, with whitening in one week."},{"title":"Smart Features","details":" Includes QuadPacer and Smartimer for 2-minute brushing guidance, plus a pressure sensor that pulses to prevent overbrushing, protecting gums."},{"title":"Battery Life","details":" Rechargeable lithium-ion battery lasts up to two weeks on a single charge, with a slim ergonomic handle and travel case for portability."}],
+        "image": [
+          "https://i.ibb.co/TBCHXdkF/download.jpg",
+          "https://i.ibb.co/bR3PKFhr/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Sonic Technology",
+            "details": " Delivers up to 62,000 brush movements per minute (e.g., Sonicare 4300 Series), removing up to 7x more plaque than manual brushes, with whitening in one week."
+          },
+          {
+            "title": "Smart Features",
+            "details": " Includes QuadPacer and Smartimer for 2-minute brushing guidance, plus a pressure sensor that pulses to prevent overbrushing, protecting gums."
+          },
+          {
+            "title": "Battery Life",
+            "details": " Rechargeable lithium-ion battery lasts up to two weeks on a single charge, with a slim ergonomic handle and travel case for portability."
+          }
+        ],
         "stock": 300
       },
       {
@@ -2736,8 +2752,24 @@
         "description": "A compact and stylish facial cleansing brush for deep and gentle skin exfoliation.",
         "price": 447.08,
         "rating": 5.0,
-        "image": ["https://i.ibb.co/6JnJZCj4/download.jpg","https://i.ibb.co/rR8Fb9Ck/download.jpg"],
-        "features": [{"title":"T-Sonic Pulsations","details":" Uses up to 8,000 pulsations per minute (e.g., Foreo Luna 3) to gently exfoliate and remove dirt, oil, and makeup residue for deeper cleansing."},{"title":"Silicone Material","details":" Made with ultra-hygienic, non-porous silicone, resistant to bacteria buildup, with customizable intensity settings via app control for sensitive or oily skin."},{"title":"Long Battery Life","details":" Offers up to 650 uses on a single USB charge, with a lightweight (126g) and waterproof (IPX7) design for use in the shower."}],
+        "image": [
+          "https://i.ibb.co/6JnJZCj4/download.jpg",
+          "https://i.ibb.co/rR8Fb9Ck/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "T-Sonic Pulsations",
+            "details": " Uses up to 8,000 pulsations per minute (e.g., Foreo Luna 3) to gently exfoliate and remove dirt, oil, and makeup residue for deeper cleansing."
+          },
+          {
+            "title": "Silicone Material",
+            "details": " Made with ultra-hygienic, non-porous silicone, resistant to bacteria buildup, with customizable intensity settings via app control for sensitive or oily skin."
+          },
+          {
+            "title": "Long Battery Life",
+            "details": " Offers up to 650 uses on a single USB charge, with a lightweight (126g) and waterproof (IPX7) design for use in the shower."
+          }
+        ],
         "stock": 665
       },
       {
@@ -2749,9 +2781,25 @@
         "description": "A professional-grade hair straightener, recommended by stylists for sleek and long-lasting results.",
         "price": 428.25,
         "rating": 3.9,
-        "image": ["https://i.ibb.co/Hf3m05Gr/61x-j-ZEWUd-L-SL1500.jpg","https://i.ibb.co/4ggL1GQy/images.jpg"],
-        "features":[{"title":"Ultra-Zone Technology","details":" Features predictive heat sensors that adjust temperature (185°C) across ceramic plates for consistent styling, reducing hair damage by up to 50%."},{"title":"Sleek Design","details":" Includes a rounded barrel for versatile styling (straightening, curls, waves), with a 9-foot swivel cord and 30-minute auto shut-off for safety."},{"title":"Fast Heat-Up","details":" Reaches optimal temperature in 20 seconds, with a glossy finish and wishbone hinge for precise control, suitable for all hair types."}],
-        "stock":669
+        "image": [
+          "https://i.ibb.co/Hf3m05Gr/61x-j-ZEWUd-L-SL1500.jpg",
+          "https://i.ibb.co/4ggL1GQy/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "Ultra-Zone Technology",
+            "details": " Features predictive heat sensors that adjust temperature (185°C) across ceramic plates for consistent styling, reducing hair damage by up to 50%."
+          },
+          {
+            "title": "Sleek Design",
+            "details": " Includes a rounded barrel for versatile styling (straightening, curls, waves), with a 9-foot swivel cord and 30-minute auto shut-off for safety."
+          },
+          {
+            "title": "Fast Heat-Up",
+            "details": " Reaches optimal temperature in 20 seconds, with a glossy finish and wishbone hinge for precise control, suitable for all hair types."
+          }
+        ],
+        "stock": 669
       },
       {
         "id": "cb9f9ad2-5524-48e0-a3eb-d30ea9dead42",
@@ -2762,8 +2810,24 @@
         "description": "A revolutionary hair dryer, recommended by professionals for fast drying and minimized heat damage.",
         "price": 373.29,
         "rating": 4.4,
-        "image": ["https://i.ibb.co/nstJ3Kw1/download.jpg","https://i.ibb.co/Zzg9cNsQ/download.jpg"],
-        "features": [{"title":"Intelligent Heat Control","details":" Uses Nural™ sensors to monitor scalp proximity and adjust heat (up to 3 settings) to prevent damage, with airflow up to 70 m/s for fast drying."},{"title":"Attachments","details":" Includes five magnetic attachments (e.g., diffuser, flyaway smoother) for styling versatility, optimized for straight, wavy, or curly hair."},{"title":"Lightweight and Quiet","details":" Weighs 1.5 pounds with a low-noise design (70–75 dB), powered by the Dyson V9 motor, with a 9-foot cord for maneuverability."}],
+        "image": [
+          "https://i.ibb.co/nstJ3Kw1/download.jpg",
+          "https://i.ibb.co/Zzg9cNsQ/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Intelligent Heat Control",
+            "details": " Uses Nural™ sensors to monitor scalp proximity and adjust heat (up to 3 settings) to prevent damage, with airflow up to 70 m/s for fast drying."
+          },
+          {
+            "title": "Attachments",
+            "details": " Includes five magnetic attachments (e.g., diffuser, flyaway smoother) for styling versatility, optimized for straight, wavy, or curly hair."
+          },
+          {
+            "title": "Lightweight and Quiet",
+            "details": " Weighs 1.5 pounds with a low-noise design (70–75 dB), powered by the Dyson V9 motor, with a 9-foot cord for maneuverability."
+          }
+        ],
         "stock": 997
       },
       {
@@ -2775,8 +2839,24 @@
         "description": "A high-performance electric shaver, recommended by professionals for a smooth and comfortable shave.",
         "price": 287.24,
         "rating": 4.1,
-        "image": ["https://i.ibb.co/N20MGD7f/download.jpg","https://i.ibb.co/RGfXCDYv/images.jpg"],
-        "features": [{"title":"3-Flex Head","details":" Features three independent floating elements that adapt to facial contours, providing a close shave on 3-day beards with wet or dry use."},{"title":"MicroComb Technology","details":" Guides hairs into cutting elements for faster shaving, with a precision trimmer for sideburns or mustaches."},{"title":"Battery and Waterproofing","details":" Offers 20 minutes of cordless shaving after a 1-hour charge, fully waterproof (IPX7) for easy cleaning under water."}],
+        "image": [
+          "https://i.ibb.co/N20MGD7f/download.jpg",
+          "https://i.ibb.co/RGfXCDYv/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "3-Flex Head",
+            "details": " Features three independent floating elements that adapt to facial contours, providing a close shave on 3-day beards with wet or dry use."
+          },
+          {
+            "title": "MicroComb Technology",
+            "details": " Guides hairs into cutting elements for faster shaving, with a precision trimmer for sideburns or mustaches."
+          },
+          {
+            "title": "Battery and Waterproofing",
+            "details": " Offers 20 minutes of cordless shaving after a 1-hour charge, fully waterproof (IPX7) for easy cleaning under water."
+          }
+        ],
         "stock": 1102
       },
       {
@@ -2788,8 +2868,24 @@
         "description": "A mini-refrigerator perfect for everyday use to keep your skincare products cool and fresh.",
         "price": 66.98,
         "rating": 3.3,
-        "image": ["https://i.ibb.co/BH2F6ZwZ/download.jpg","https://i.ibb.co/FbbBXzkF/download.jpg"],
-        "features": [{"title":"Capacity and Versatility","details":" Holds up to 12 liters (18 cans or skincare products), with removable shelves and a door basket, ideal for cosmetics or beverages."},{"title":"Thermo-Technology","details":" Features thermoelectric cooling/heating, maintaining 35°F below or 149°F above ambient temperature, with AC/DC and USB power options."},{"title":"Portable Design","details":" Weighs 9 pounds with a carry handle, available in multiple colors (e.g., pink, black), and operates quietly (25–30 dB) for bedroom use."}],
+        "image": [
+          "https://i.ibb.co/BH2F6ZwZ/download.jpg",
+          "https://i.ibb.co/FbbBXzkF/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Capacity and Versatility",
+            "details": " Holds up to 12 liters (18 cans or skincare products), with removable shelves and a door basket, ideal for cosmetics or beverages."
+          },
+          {
+            "title": "Thermo-Technology",
+            "details": " Features thermoelectric cooling/heating, maintaining 35°F below or 149°F above ambient temperature, with AC/DC and USB power options."
+          },
+          {
+            "title": "Portable Design",
+            "details": " Weighs 9 pounds with a carry handle, available in multiple colors (e.g., pink, black), and operates quietly (25–30 dB) for bedroom use."
+          }
+        ],
         "stock": 1000
       },
       {
@@ -2801,8 +2897,24 @@
         "description": "An LED makeup mirror with adjustable lighting, made with eco-friendly materials for flawless application.",
         "price": 18.58,
         "rating": 4.8,
-        "image": ["https://i.ibb.co/vCKqJXGj/634d2abdb0c5e97c65426f92-conair-reflections-led-lighted-vanity.jpg","https://i.ibb.co/v4XCHQ5b/images.jpg"],
-        "features": [{"title":"Lighting Options","details":" Features adjustable LED lights with dimmable settings, mimicking natural daylight for precise makeup application, with touch or button controls."},{"title":"Magnification","details":" Offers 1x/5x or 1x/7x dual-sided mirrors, with a 360° swivel for flexible positioning, typically 8–9 inches in diameter."},{"title":"Power and Portability","details":" Operates via corded electric or battery (AA or AAA), with a sleek chrome or matte finish, ideal for home or travel."}],
+        "image": [
+          "https://i.ibb.co/vCKqJXGj/634d2abdb0c5e97c65426f92-conair-reflections-led-lighted-vanity.jpg",
+          "https://i.ibb.co/v4XCHQ5b/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "Lighting Options",
+            "details": " Features adjustable LED lights with dimmable settings, mimicking natural daylight for precise makeup application, with touch or button controls."
+          },
+          {
+            "title": "Magnification",
+            "details": " Offers 1x/5x or 1x/7x dual-sided mirrors, with a 360° swivel for flexible positioning, typically 8–9 inches in diameter."
+          },
+          {
+            "title": "Power and Portability",
+            "details": " Operates via corded electric or battery (AA or AAA), with a sleek chrome or matte finish, ideal for home or travel."
+          }
+        ],
         "stock": 700
       },
       {
@@ -2814,8 +2926,24 @@
         "description": "A limited edition microdermabrasion machine for professional-level skin exfoliation at home.",
         "price": 137.11,
         "rating": 3.7,
-        "image": ["https://i.ibb.co/hFDn2HvM/download.jpg","https://i.ibb.co/0yns3zzM/download.jpg"],
-        "features": [{"title":"Exfoliation Technology","details":" Uses spinning crystal or diamond-tip discs with vacuum suction to remove dead skin, reducing fine lines and improving skin texture."},{"title":"Customizable Settings","details":" Includes multiple disc sizes and suction levels for sensitive or resilient skin, suitable for face and body treatments at home."},{"title":"Portable and Rechargeable","details":" Lightweight (approx. 1 lb) with a rechargeable battery, comes with a storage case and replacement filters for hygiene."}],
+        "image": [
+          "https://i.ibb.co/hFDn2HvM/download.jpg",
+          "https://i.ibb.co/0yns3zzM/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Exfoliation Technology",
+            "details": " Uses spinning crystal or diamond-tip discs with vacuum suction to remove dead skin, reducing fine lines and improving skin texture."
+          },
+          {
+            "title": "Customizable Settings",
+            "details": " Includes multiple disc sizes and suction levels for sensitive or resilient skin, suitable for face and body treatments at home."
+          },
+          {
+            "title": "Portable and Rechargeable",
+            "details": " Lightweight (approx. 1 lb) with a rechargeable battery, comes with a storage case and replacement filters for hygiene."
+          }
+        ],
         "stock": 500
       },
       {
@@ -2827,8 +2955,24 @@
         "description": "A safe and effective IPL hair removal device, recommended by professionals for long-lasting smoothness.",
         "price": 462.58,
         "rating": 4.3,
-        "image": ["https://i.ibb.co/yBsdkGVC/69ebfa9634a2452a9981afe300c37f31.webp","https://i.ibb.co/nWmbD0j/images.jpg"],
-        "features": [{"title":"IPL Technology","details":" Uses Intense Pulsed Light to reduce hair growth by up to 92% after 3 treatments, safe for body and face with 5 light intensity settings."},{"title":"Smart Skin Sensor","details":" Automatically detects skin tone and adjusts light intensity for safe, effective use, with corded or cordless options (e.g., Lumea 9000)."},{"title":"Attachments","details":" Includes precision attachments for face, body, and bikini areas, with a long-lasting lamp (up to 450,000 flashes) for years of use."}],
+        "image": [
+          "https://i.ibb.co/yBsdkGVC/69ebfa9634a2452a9981afe300c37f31.webp",
+          "https://i.ibb.co/nWmbD0j/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "IPL Technology",
+            "details": " Uses Intense Pulsed Light to reduce hair growth by up to 92% after 3 treatments, safe for body and face with 5 light intensity settings."
+          },
+          {
+            "title": "Smart Skin Sensor",
+            "details": " Automatically detects skin tone and adjusts light intensity for safe, effective use, with corded or cordless options (e.g., Lumea 9000)."
+          },
+          {
+            "title": "Attachments",
+            "details": " Includes precision attachments for face, body, and bikini areas, with a long-lasting lamp (up to 450,000 flashes) for years of use."
+          }
+        ],
         "stock": 997
       }
     ]

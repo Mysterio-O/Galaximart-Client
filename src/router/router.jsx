@@ -5,6 +5,10 @@ import SignIn from '../components/auth/SignIn';
 import SignUp from '../components/auth/SignUp';
 import Home from '../pages/Home/Home';
 import Products from '../components/Products/Products';
+import AllProducts from '../pages/AllProducts/AllProducts';
+import AddProduct from '../pages/AddProduct/AddProduct';
+import MyProducts from '../pages/MyProducts/MyProducts';
+import CategoryModal from '../components/Categories/CategoryModal';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +30,18 @@ const router = createBrowserRouter([
             {
                 path:'/products/:product_name',
                 Component:Products
+            },
+            {
+                path:'/all-product',
+                Component: AllProducts
+            },
+            {
+                path:'/add-product',
+                Component: AddProduct
+            },
+            {
+                path:'/my-product',
+                Component: MyProducts
             }
         ]
     }

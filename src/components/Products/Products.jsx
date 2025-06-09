@@ -26,7 +26,7 @@ const Products = () => {
 
 
     const findTheRightProduct = allProducts.filter(product => product.category === param?.product_name);
-    console.log(findTheRightProduct)
+    // console.log(findTheRightProduct)
 
     // findTheRightProduct.map(p => console.log(p.products))
 
