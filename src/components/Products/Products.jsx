@@ -10,23 +10,23 @@ const Products = () => {
     const [loading, setLoading] = useState(true);
 
     const param = useParams();
-    // console.log(param?.product_name)
+    console.log(param?.product_name)
 
     useEffect(() => {
-        fetch('http://localhost:3000/products')
+        fetch(`http://localhost:3000/products/category/${param?.product_name}`)
             .then(res => res.json())
             .then(data => {
                 setAllProducts(data)
                 setLoading(false);
             })
             .catch(err => console.log('error fetching product data in Products Component', err))
-    }, [])
+    }, [param])
 
-    // console.log(allProducts);
+    console.log(allProducts);
 
 
-    const findTheRightProduct = allProducts.filter(product => product.category === param?.product_name);
-    console.log(findTheRightProduct)
+    // const findTheRightProduct = allProducts.filter(product => product.category === param?.product_name);
+    // console.log(findTheRightProduct)
 
     // findTheRightProduct.map(p => console.log(p.products))
 
@@ -38,18 +38,20 @@ const Products = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-                {findTheRightProduct[0]?.category}
+                {allProducts[0]?.category}
             </motion.h2>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
-                {
-                    !loading ? findTheRightProduct.map((product, index) => <ProductCard
-                        key={product._id}
-                        product={product}
-                        index={index}
-                    />)
-                        : <Loader />
-                }
-            </div>
+            {
+                loading ? <Loader />
+                    : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+                        {
+                            allProducts.map((product, index) => <ProductCard
+                                key={product._id}
+                                product={product}
+                                index={index}
+                            />)
+                        }
+                    </div>
+            }
         </section>
     );
 };
