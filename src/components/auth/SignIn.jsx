@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router';
+import React, { useContext, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignIn = () => {
 
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+
+    const {signInUser} = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const inputVariants = {
         focus: {
@@ -31,6 +36,19 @@ const SignIn = () => {
         }
     };
 
+    const handleSignIn = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signInUser(email, password)
+        .then(result => {
+            console.log('user signed in', result);
+            navigate('/')
+        }).catch(err => console.log(err));
+    }
+
     return (
         <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-gray-900 via-violet-950 to-cyan-900 relative overflow-hidden px-4 md:px-0">
             {/* Background Particle Effect */}
@@ -45,16 +63,19 @@ const SignIn = () => {
                 initial="hidden"
                 animate="visible"
             >
-                <h2 className="font-orbitron text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
+                <h2 className="orbitron text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
                     Sign In
                 </h2>
-                <form className="space-y-6">
+                <form 
+                onSubmit={handleSignIn}
+                className="space-y-6">
                     <div className="form-control">
                         <label className="label">
                             <span className="font-inter label-text font-semibold text-gray-100">Email</span>
                         </label>
                         <motion.input
                             type="email"
+                            name='email'
                             placeholder="Enter your email"
                             className="font-inter input input-bordered w-full bg-gray-800/50 text-gray-100 border-gray-600 focus:border-cyan-400"
                             whileFocus="focus"
@@ -67,6 +88,7 @@ const SignIn = () => {
                         </label>
                         <motion.input
                             type={showPassword ? 'text' : 'password'}
+                            name='password'
                             placeholder="Enter your password"
                             className="font-inter input input-bordered w-full bg-gray-800/50 text-gray-100 border-gray-600 focus:border-cyan-400"
                             whileFocus="focus"

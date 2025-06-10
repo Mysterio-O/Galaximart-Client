@@ -4,8 +4,9 @@ import CategoryHeader from '../../components/Headers/CategoryHeader'
 import { getCategories } from '../../apis/categoryApi';
 
 const Categories = () => {
+
     const productsPromise = getCategories();
-    // console.log(products, typeof products, Array.isArray(products));
+
     return (
         <div>
             <CategoryHeader />

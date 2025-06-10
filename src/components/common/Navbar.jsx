@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { IoCartOutline } from 'react-icons/io5';
 import './nav.css';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const { user,signOutUser } = useContext(AuthContext);
 
 
     const navigate = useNavigate();
@@ -65,7 +68,7 @@ const Navbar = () => {
         {
             name: 'Categories',
             to: '/#categories',
-            click:()=> handleCategories(),
+            click: () => handleCategories(),
             // scroll:'#categories'
             // active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
         },
@@ -95,6 +98,10 @@ const Navbar = () => {
             animation: pulse-slow 7s ease-in-out infinite;
           }
     `
+
+    const handleSignOut = ()=> {
+        signOutUser().then(()=> console.log('user signed out')).catch(err => console.log(err));
+    }
 
     return (
         <AnimatePresence>
@@ -161,20 +168,47 @@ const Navbar = () => {
                                         <IoCartOutline size={30} className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
                                     </Link>
                                 </motion.div>
-                                {/* Sign In */}
-                                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                                    <NavLink
-                                        to="/auth/signin"
-                                        className={({ isActive }) =>
-                                            `btn btn-ghost text-sm font-semibold uppercase tracking-wide text-gray-100 hover:bg-cyan-500/30 hover:text-cyan-400 px-4 py-2 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] transition-all duration-300 ${isActive
-                                                ? 'bg-gradient-to-r from-cyan-500/40 to-violet-500/40 text-white font-bold shadow-[0_0_12px_rgba(139,92,246,0.6)] border border-cyan-400/50'
-                                                : ''
-                                            }`
-                                        }
+
+                                {
+                                    user ? <motion.div
+                                        whileHover={{ scale: 1.05, rotate: 2, boxShadow: '0 0 15px rgba(34, 211, 238, 0.5)' }}
+                                        whileTap={{ scale: 0.98, rotate: -2 }}
+                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                                     >
-                                        Sign In
-                                    </NavLink>
-                                </motion.div>
+                                        <button
+                                        onClick={handleSignOut}
+                                            className='btn btn-ghost text-sm font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-xl 
+                                            bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 
+                                            hover:from-cyan-500 hover:to-indigo-500 
+                                            hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] 
+                                            border border-cyan-300/30 
+                                            transition-all duration-500 ease-out'>
+                                            Sign Out
+                                        </button>
+                                    </motion.div> : <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                                        <NavLink
+                                            to="/auth/signin"
+                                            className={({ isActive }) =>
+                                                `btn btn-ghost text-sm font-semibold uppercase tracking-wide text-gray-100 hover:bg-cyan-500/30 hover:text-cyan-400 px-4 py-2 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] transition-all duration-300 ${isActive
+                                                    ? 'bg-gradient-to-r from-cyan-500/40 to-violet-500/40 text-white font-bold shadow-[0_0_12px_rgba(139,92,246,0.6)] border border-cyan-400/50'
+                                                    : ''
+                                                }`
+                                            }
+                                        >
+                                            Sign In
+                                        </NavLink>
+                                    </motion.div>
+                                }
+
+                                {
+                                    user && <div
+                                        className='w-16 h-16 rounded-full p-2 bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95'>
+                                        <img src={user?.photoURL} alt="" />
+                                    </div>
+                                }
+
+
+
                             </div>
                         </div>
 
