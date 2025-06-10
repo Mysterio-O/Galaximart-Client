@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { getCategories } from '../../apis/products_api';
 import CategoryLayout from './CategoryLayout';
 import CategoryHeader from '../../components/Headers/CategoryHeader'
+import { getCategories } from '../../apis/categoryApi';
 
 const Categories = () => {
     const productsPromise = getCategories();

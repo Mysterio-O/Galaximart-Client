@@ -8,7 +8,7 @@ import Products from '../components/Products/Products';
 import AllProducts from '../pages/AllProducts/AllProducts';
 import AddProduct from '../pages/AddProduct/AddProduct';
 import MyProducts from '../pages/MyProducts/MyProducts';
-import CategoryModal from '../components/Categories/CategoryModal';
+import ProductDetails from '../pages/ProductDetials/ProductDetails';
 
 const router = createBrowserRouter([
     {
@@ -42,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path:'/my-product',
                 Component: MyProducts
+            },
+            {
+                path:'/product/details/:id',
+                Component:ProductDetails
             }
         ]
     }

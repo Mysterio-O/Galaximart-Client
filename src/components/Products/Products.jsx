@@ -13,7 +13,7 @@ const Products = () => {
     // console.log(param?.product_name)
 
     useEffect(() => {
-        fetch('/product_categories.json')
+        fetch('http://localhost:3000/products')
             .then(res => res.json())
             .then(data => {
                 setAllProducts(data)
@@ -26,7 +26,7 @@ const Products = () => {
 
 
     const findTheRightProduct = allProducts.filter(product => product.category === param?.product_name);
-    // console.log(findTheRightProduct)
+    console.log(findTheRightProduct)
 
     // findTheRightProduct.map(p => console.log(p.products))
 
@@ -43,8 +43,8 @@ const Products = () => {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
                 {
                     !loading ? findTheRightProduct.map((product, index) => <ProductCard
-                        key={`${product?.category}'-'${index} `}
-                        products={product?.products}
+                        key={product._id}
+                        product={product}
                         index={index}
                     />)
                         : <Loader />

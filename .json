@@ -1,9 +1,5 @@
 [
-  {
-    "id": "dd0a3170-cb2e-48f5-b236-193557774bea",
-    "category": "Electronics",
-    "products": [
-      {
+    {
         "id": "f258dfe4-2966-4421-bf49-c33ec85c4af5",
         "name": "Blender",
         "brand": "Ninja",
@@ -565,13 +561,7 @@
           }
         ],
         "stock": 700
-      }
-    ]
-  },
-  {
-    "id": "0d4a186b-5f6c-4f73-b507-d8fbda667b1b",
-    "category": "Clothing & Apparel",
-    "products": [
+      },
       {
         "id": "2a69945a-1f48-4962-a926-fd4536d41c1d",
         "name": "Men's T-Shirt",
@@ -869,284 +859,7 @@
           }
         ],
         "stock": 2000
-      }
-    ]
-  },
-  {
-    "id": "8c9190d2-d351-4925-842d-ce970379e2a3",
-    "category": "Home Appliances",
-    "products": [
-      {
-        "id": "fcc9c6b1-c38f-4857-9822-f5a02b6c2285",
-        "name": "Lenovo TV P27Q-30/IPS/27/16:9/2K QHD/3 27/16:9/2K QHD/350CD/4MS/HDMI/DP",
-        "brand": "Lenovo",
-        "category": "Home Appliances",
-        "minQuantity": 5,
-        "description": "Experience stunning visuals and smart features with this high-quality and durable Smart TV.",
-        "price": 128.07,
-        "rating": 4.1,
-        "image": [
-          "https://i.ibb.co/v47NyxkZ/41d-Egc-ma2-L-AC-SL1422.jpg",
-          "https://i.ibb.co/CK5Ptzxc/31e-Z3-MD6mg-L-AC-SL1422.jpg",
-          "https://i.ibb.co/2YKCpBGg/31fv7-Upql-L-AC-SL1422.jpg",
-          "https://i.ibb.co/mWfSs9W/31tr-y-CQZx-L-AC-SL1422.jpg"
-        ],
-        "features": [
-          {
-            "title": "Display Quality",
-            "details": " Features a 27-inch QHD (2560x1440) IPS display with a 4-side NearEdgeless design, offering crisp visuals, excellent color accuracy, and wide viewing angles (178°/178°)."
-          },
-          {
-            "title": "Connectivity",
-            "details": " Includes HDMI 2.0, DisplayPort 1.4, DP output for daisy-chaining, and multiple USB ports, with USB-C supporting power delivery and docking for external devices."
-          },
-          {
-            "title": "Ergonomic Features",
-            "details": " Comes with an adjustable stand offering tilt, swivel, pivot, and lift, plus Natural Low Blue Light technology to reduce eye strain during long work sessions."
-          }
-        ],
-        "stock": 1000
       },
-      {
-        "id": "146e868d-e655-4c3f-b831-c39613341c65",
-        "name": "Coffee Maker",
-        "brand": "Reebok",
-        "category": "Home Appliances",
-        "minQuantity": 10,
-        "description": "Start your day right with this top-rated coffee maker, perfect for a quick and delicious brew.",
-        "price": 211.41,
-        "rating": 4.5,
-        "image": [
-          "https://i.ibb.co/fV6zgVmn/download.jpg",
-          "https://i.ibb.co/Rpc0YTKF/download.jpg"
-        ],
-        "features": [
-          {
-            "title": "Brewing Capacity",
-            "details": " Typically brews 10–12 cups (1.5–1.8 liters) in a glass or thermal carafe, suitable for households or small offices."
-          },
-          {
-            "title": "Programmable Features",
-            "details": " Includes auto-brew timers, brew strength control, and pause-and-serve functionality for convenient use."
-          },
-          {
-            "title": "Ease of Maintenance",
-            "details": " Features removable water reservoirs and filter baskets, with some models offering self-cleaning cycles for descaling."
-          }
-        ],
-        "stock": 500
-      },
-      {
-        "id": "739c9eec-26df-4cd5-9695-9650e0a413c1",
-        "name": "Vacuum and Mop Robot 7000 Series",
-        "brand": "Philips",
-        "category": "Home Appliances",
-        "minQuantity": 15,
-        "description": "Keep your home spotless effortlessly with this smart robot vacuum, perfect for everyday use.",
-        "price": 334.16,
-        "rating": 4.6,
-        "image": [
-          "https://i.ibb.co/sJjBRw0V/auto-empty-feature-thumbnail.jpg",
-          "https://i.ibb.co/3yvRm67p/images.jpg",
-          "https://i.ibb.co/xq5JrCHk/images.jpg"
-        ],
-        "features": [
-          {
-            "title": "Dual Functionality",
-            "details": " Combines vacuuming and mopping with powerful suction (up to 7000 Pa in high-end models) and a wet-dry system for simultaneous cleaning of dust and stains."
-          },
-          {
-            "title": "Smart Navigation",
-            "details": " Uses LiDAR or laser-based mapping with app control for precise room mapping, obstacle avoidance, and customizable cleaning schedules."
-          },
-          {
-            "title": "Battery and Runtime",
-            "details": " Equipped with a high-capacity battery (e.g., 5200mAh), offering 120–180 minutes of cleaning and auto-recharge functionality."
-          }
-        ],
-        "stock": 1000
-      },
-      {
-        "id": "e66ab3c1-6748-4e77-9a63-25e213ef12a0",
-        "name": "Singer 2447-BB Air Fryer",
-        "brand": "Singer",
-        "category": "Home Appliances",
-        "minQuantity": 25,
-        "description": "Enjoy healthier fried foods with this lightweight and portable air fryer.",
-        "price": 452.99,
-        "rating": 3.3,
-        "image": [
-          "https://i.ibb.co/4gF40FZP/2447-bb-01-500x500.webp",
-          "https://i.ibb.co/Rr7bTfR/images.jpg"
-        ],
-        "features": [
-          {
-            "title": "Cooking Capacity",
-            "details": " Offers a 4–6 liter basket, suitable for preparing meals for 4–6 people, with rapid air technology for crispy results using up to 80% less oil."
-          },
-          {
-            "title": "Temperature Control",
-            "details": " Adjustable temperature settings (80–200°C) and a 60-minute timer with auto-shutoff for versatile cooking, from fries to chicken."
-          },
-          {
-            "title": "Easy Cleaning",
-            "details": " Features a non-stick, dishwasher-safe basket and tray, with a compact design for easy storage."
-          }
-        ],
-        "stock": 700
-      },
-      {
-        "id": "d4d1c4b4-31ab-4b40-8c63-becd566ecada",
-        "name": "Induction Oven",
-        "brand": "Philips",
-        "category": "Home Appliances",
-        "minQuantity": 10,
-        "description": "Reheat and cook with ease using this top-rated microwave oven, loved by users.",
-        "price": 202.01,
-        "rating": 4.9,
-        "image": [
-          "https://i.ibb.co/cj2ZfwP/Philips-HD4911-62-Induction-Cooker-Daily-Collection-1.webp",
-          "https://i.ibb.co/0Rhszxtk/images.jpg"
-        ],
-        "features": [
-          {
-            "title": "Precision Cooking",
-            "details": " Utilizes induction technology for fast, even heating with precise temperature control, ideal for baking, roasting, or grilling."
-          },
-          {
-            "title": "Energy Efficiency",
-            "details": " Consumes less power than traditional ovens, with quick preheat times (e.g., 3–5 minutes) and auto-shutoff features."
-          },
-          {
-            "title": "Smart Features",
-            "details": " Some models include digital displays, preset cooking modes, and compatibility with smart home apps for remote monitoring."
-          }
-        ],
-        "stock": 1000
-      },
-      {
-        "id": "13c2d23e-c952-440d-8638-cdd06e568a11",
-        "name": "SAMSUNG BESPOKE Qooker 22L 4in1",
-        "brand": "Samsung",
-        "category": "Home Appliances",
-        "minQuantity": 40,
-        "description": "Get perfectly toasted bread every time with this top-rated toaster.",
-        "price": 404.99,
-        "rating": 3.4,
-        "image": [
-          "https://i.ibb.co/m57c2QRZ/s-l1200.jpg",
-          "https://i.ibb.co/vWSPjWg/images.jpg"
-        ],
-        "features": [
-          {
-            "title": "Versatile Cooking Modes",
-            "details": " Combines microwave, grill, convection oven, and air fryer functions in a 22-liter capacity, suitable for baking, roasting, and frying."
-          },
-          {
-            "title": "Smart Control",
-            "details": " Supports SmartThings app integration for remote operation, recipe suggestions, and voice control via Bixby, Alexa, or Google Assistant."
-          },
-          {
-            "title": "Customizable Design",
-            "details": " Features BESPOKE’s sleek, modular aesthetic with customizable color panels to match kitchen decor."
-          }
-        ],
-        "stock": 2000
-      },
-      {
-        "id": "5af36dcf-8116-493f-8813-e67796ce7a61",
-        "name": "Philips HD9395/90 Electric Kettle Double",
-        "brand": "Philips",
-        "category": "Home Appliances",
-        "minQuantity": 10,
-        "description": "Boil water quickly and stylishly with this compact electric kettle.",
-        "price": 263.04,
-        "rating": 3.5,
-        "image": [
-          "https://i.ibb.co/r22jbcMJ/Philips-HD939590-Electric-Kettle-Double-Philips-93597-426405.png",
-          "https://i.ibb.co/9m9yz2mw/images.jpg"
-        ],
-        "features": [
-          {
-            "title": "Dual Capacity",
-            "details": " Likely features a double-wall design for better insulation, keeping water hot longer and the exterior cool, with a 1.7-liter capacity."
-          },
-          {
-            "title": "Fast Boiling",
-            "details": " Equipped with a 2200–2400W heating element for rapid boiling (2–3 minutes for a full kettle) and auto-shutoff for safety."
-          },
-          {
-            "title": "Durability and Safety",
-            "details": " Made with stainless steel or BPA-free plastic, featuring a 360° swivel base, water level indicator, and boil-dry protection."
-          }
-        ],
-        "stock": 2000
-      },
-      {
-        "id": "049eef83-cc7d-40d1-9c44-11720a7d75f8",
-        "name": "Food Processor",
-        "brand": "Reebok",
-        "category": "Home Appliances",
-        "minQuantity": 35,
-        "description": "Prepare meals with ease using this versatile food processor, perfect for everyday use.",
-        "price": 391.31,
-        "rating": 4.4,
-        "image": [
-          "https://i.ibb.co/Jw3sF5bb/download.jpg",
-          "https://i.ibb.co/nNrkG2hk/download.jpg"
-        ],
-        "features": [
-          {
-            "title": "Multifunctionality",
-            "details": " Includes attachments for chopping, slicing, shredding, and kneading, with a 1–2 liter bowl for preparing meals for small to medium families."
-          },
-          {
-            "title": "Power",
-            "details": " Typically features a 600–1000W motor for efficient processing of tough ingredients like nuts, vegetables, or dough."
-          },
-          {
-            "title": "Safety Features",
-            "details": " Equipped with safety locks, non-slip feet, and overload protection, with dishwasher-safe parts for easy cleanup."
-          }
-        ],
-        "stock": 1500
-      },
-      {
-        "id": "new-product-id-1",
-        "name": "Dishwasher",
-        "brand": "Bosch",
-        "category": "Home Appliances",
-        "minQuantity": 10,
-        "description": "Efficiently clean your dishes with this high-performance and quiet dishwasher.",
-        "price": 799.00,
-        "rating": 4.8,
-        "image": [
-          "https://i.ibb.co/S9Tk1rn/sms46mi10m-sms46mi10m-image-sms46mi10m.jpg",
-          "https://i.ibb.co/3mZThZxc/images.jpg",
-          "https://i.ibb.co/wZbhMmG6/download.jpg"
-        ],
-        "features": [
-          {
-            "title": "Capacity and Flexibility",
-            "details": " Offers 12–16 place settings with adjustable racks and foldable tines, accommodating various dish sizes and shapes."
-          },
-          {
-            "title": "Efficient Cleaning",
-            "details": " Features EcoSilence Drive for quiet operation (40–45 dB) and multiple wash programs, including intensive, eco, and quick cycles"
-          },
-          {
-            "title": "Smart Technology",
-            "details": " Some models include Home Connect for remote control via app, plus water-saving sensors and AquaStop leak protection."
-          }
-        ],
-        "stock": 3000
-      }
-    ]
-  },
-  {
-    "id": "b5ff3046-0c2e-404c-a0ee-82828c85d488",
-    "category": "Books & Stationery",
-    "products": [
       {
         "id": "dd337f4a-c54b-4934-9501-e6c3706ba010",
         "name": "Moleskine Notebooks A5 - Cahiers",
@@ -1643,13 +1356,7 @@
           }
         ],
         "stock": 1000
-      }
-    ]
-  },
-  {
-    "id": "6f60e08d-d50b-46c7-a7a7-3cdceba2cd82",
-    "category": "Sports & Outdoors",
-    "products": [
+      },
       {
         "id": "f58c60d2-74c5-4e60-a06d-b52283dd75ac",
         "name": "Running Shoes",
@@ -2235,13 +1942,7 @@
           }
         ],
         "stock": 997
-      }
-    ]
-  },
-  {
-    "id": "fda8320c-a36c-4c88-862e-bb68ea2da4d5",
-    "category": "Toys & Games",
-    "products": [
+      },
       {
         "id": "d56f9a2f-73c5-4336-9f5d-df23692a05b8",
         "name": "Children’s Puzzle",
@@ -2707,13 +2408,7 @@
           }
         ],
         "stock": 1121
-      }
-    ]
-  },
-  {
-    "id": "a6ace440-4164-4a09-97d3-6741ebbbd516",
-    "category": "Beauty & Personal Care",
-    "products": [
+      },
       {
         "id": "3f608b7a-ec9a-4f19-bf72-6db67c3e5cde",
         "name": "Philips Sonicare Electric Toothbrush Power Rechargeable ",
@@ -2723,8 +2418,24 @@
         "description": "An affordable and reliable electric toothbrush for a superior clean and healthier gums.",
         "price": 226.69,
         "rating": 4.8,
-        "image": ["https://i.ibb.co/TBCHXdkF/download.jpg","https://i.ibb.co/bR3PKFhr/download.jpg"],
-        "features": [{"title":"Sonic Technology","details":" Delivers up to 62,000 brush movements per minute (e.g., Sonicare 4300 Series), removing up to 7x more plaque than manual brushes, with whitening in one week."},{"title":"Smart Features","details":" Includes QuadPacer and Smartimer for 2-minute brushing guidance, plus a pressure sensor that pulses to prevent overbrushing, protecting gums."},{"title":"Battery Life","details":" Rechargeable lithium-ion battery lasts up to two weeks on a single charge, with a slim ergonomic handle and travel case for portability."}],
+        "image": [
+          "https://i.ibb.co/TBCHXdkF/download.jpg",
+          "https://i.ibb.co/bR3PKFhr/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Sonic Technology",
+            "details": " Delivers up to 62,000 brush movements per minute (e.g., Sonicare 4300 Series), removing up to 7x more plaque than manual brushes, with whitening in one week."
+          },
+          {
+            "title": "Smart Features",
+            "details": " Includes QuadPacer and Smartimer for 2-minute brushing guidance, plus a pressure sensor that pulses to prevent overbrushing, protecting gums."
+          },
+          {
+            "title": "Battery Life",
+            "details": " Rechargeable lithium-ion battery lasts up to two weeks on a single charge, with a slim ergonomic handle and travel case for portability."
+          }
+        ],
         "stock": 300
       },
       {
@@ -2736,8 +2447,24 @@
         "description": "A compact and stylish facial cleansing brush for deep and gentle skin exfoliation.",
         "price": 447.08,
         "rating": 5.0,
-        "image": ["https://i.ibb.co/6JnJZCj4/download.jpg","https://i.ibb.co/rR8Fb9Ck/download.jpg"],
-        "features": [{"title":"T-Sonic Pulsations","details":" Uses up to 8,000 pulsations per minute (e.g., Foreo Luna 3) to gently exfoliate and remove dirt, oil, and makeup residue for deeper cleansing."},{"title":"Silicone Material","details":" Made with ultra-hygienic, non-porous silicone, resistant to bacteria buildup, with customizable intensity settings via app control for sensitive or oily skin."},{"title":"Long Battery Life","details":" Offers up to 650 uses on a single USB charge, with a lightweight (126g) and waterproof (IPX7) design for use in the shower."}],
+        "image": [
+          "https://i.ibb.co/6JnJZCj4/download.jpg",
+          "https://i.ibb.co/rR8Fb9Ck/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "T-Sonic Pulsations",
+            "details": " Uses up to 8,000 pulsations per minute (e.g., Foreo Luna 3) to gently exfoliate and remove dirt, oil, and makeup residue for deeper cleansing."
+          },
+          {
+            "title": "Silicone Material",
+            "details": " Made with ultra-hygienic, non-porous silicone, resistant to bacteria buildup, with customizable intensity settings via app control for sensitive or oily skin."
+          },
+          {
+            "title": "Long Battery Life",
+            "details": " Offers up to 650 uses on a single USB charge, with a lightweight (126g) and waterproof (IPX7) design for use in the shower."
+          }
+        ],
         "stock": 665
       },
       {
@@ -2749,9 +2476,25 @@
         "description": "A professional-grade hair straightener, recommended by stylists for sleek and long-lasting results.",
         "price": 428.25,
         "rating": 3.9,
-        "image": ["https://i.ibb.co/Hf3m05Gr/61x-j-ZEWUd-L-SL1500.jpg","https://i.ibb.co/4ggL1GQy/images.jpg"],
-        "features":[{"title":"Ultra-Zone Technology","details":" Features predictive heat sensors that adjust temperature (185°C) across ceramic plates for consistent styling, reducing hair damage by up to 50%."},{"title":"Sleek Design","details":" Includes a rounded barrel for versatile styling (straightening, curls, waves), with a 9-foot swivel cord and 30-minute auto shut-off for safety."},{"title":"Fast Heat-Up","details":" Reaches optimal temperature in 20 seconds, with a glossy finish and wishbone hinge for precise control, suitable for all hair types."}],
-        "stock":669
+        "image": [
+          "https://i.ibb.co/Hf3m05Gr/61x-j-ZEWUd-L-SL1500.jpg",
+          "https://i.ibb.co/4ggL1GQy/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "Ultra-Zone Technology",
+            "details": " Features predictive heat sensors that adjust temperature (185°C) across ceramic plates for consistent styling, reducing hair damage by up to 50%."
+          },
+          {
+            "title": "Sleek Design",
+            "details": " Includes a rounded barrel for versatile styling (straightening, curls, waves), with a 9-foot swivel cord and 30-minute auto shut-off for safety."
+          },
+          {
+            "title": "Fast Heat-Up",
+            "details": " Reaches optimal temperature in 20 seconds, with a glossy finish and wishbone hinge for precise control, suitable for all hair types."
+          }
+        ],
+        "stock": 669
       },
       {
         "id": "cb9f9ad2-5524-48e0-a3eb-d30ea9dead42",
@@ -2762,8 +2505,24 @@
         "description": "A revolutionary hair dryer, recommended by professionals for fast drying and minimized heat damage.",
         "price": 373.29,
         "rating": 4.4,
-        "image": ["https://i.ibb.co/nstJ3Kw1/download.jpg","https://i.ibb.co/Zzg9cNsQ/download.jpg"],
-        "features": [{"title":"Intelligent Heat Control","details":" Uses Nural™ sensors to monitor scalp proximity and adjust heat (up to 3 settings) to prevent damage, with airflow up to 70 m/s for fast drying."},{"title":"Attachments","details":" Includes five magnetic attachments (e.g., diffuser, flyaway smoother) for styling versatility, optimized for straight, wavy, or curly hair."},{"title":"Lightweight and Quiet","details":" Weighs 1.5 pounds with a low-noise design (70–75 dB), powered by the Dyson V9 motor, with a 9-foot cord for maneuverability."}],
+        "image": [
+          "https://i.ibb.co/nstJ3Kw1/download.jpg",
+          "https://i.ibb.co/Zzg9cNsQ/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Intelligent Heat Control",
+            "details": " Uses Nural™ sensors to monitor scalp proximity and adjust heat (up to 3 settings) to prevent damage, with airflow up to 70 m/s for fast drying."
+          },
+          {
+            "title": "Attachments",
+            "details": " Includes five magnetic attachments (e.g., diffuser, flyaway smoother) for styling versatility, optimized for straight, wavy, or curly hair."
+          },
+          {
+            "title": "Lightweight and Quiet",
+            "details": " Weighs 1.5 pounds with a low-noise design (70–75 dB), powered by the Dyson V9 motor, with a 9-foot cord for maneuverability."
+          }
+        ],
         "stock": 997
       },
       {
@@ -2775,8 +2534,24 @@
         "description": "A high-performance electric shaver, recommended by professionals for a smooth and comfortable shave.",
         "price": 287.24,
         "rating": 4.1,
-        "image": ["https://i.ibb.co/N20MGD7f/download.jpg","https://i.ibb.co/RGfXCDYv/images.jpg"],
-        "features": [{"title":"3-Flex Head","details":" Features three independent floating elements that adapt to facial contours, providing a close shave on 3-day beards with wet or dry use."},{"title":"MicroComb Technology","details":" Guides hairs into cutting elements for faster shaving, with a precision trimmer for sideburns or mustaches."},{"title":"Battery and Waterproofing","details":" Offers 20 minutes of cordless shaving after a 1-hour charge, fully waterproof (IPX7) for easy cleaning under water."}],
+        "image": [
+          "https://i.ibb.co/N20MGD7f/download.jpg",
+          "https://i.ibb.co/RGfXCDYv/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "3-Flex Head",
+            "details": " Features three independent floating elements that adapt to facial contours, providing a close shave on 3-day beards with wet or dry use."
+          },
+          {
+            "title": "MicroComb Technology",
+            "details": " Guides hairs into cutting elements for faster shaving, with a precision trimmer for sideburns or mustaches."
+          },
+          {
+            "title": "Battery and Waterproofing",
+            "details": " Offers 20 minutes of cordless shaving after a 1-hour charge, fully waterproof (IPX7) for easy cleaning under water."
+          }
+        ],
         "stock": 1102
       },
       {
@@ -2788,8 +2563,24 @@
         "description": "A mini-refrigerator perfect for everyday use to keep your skincare products cool and fresh.",
         "price": 66.98,
         "rating": 3.3,
-        "image": ["https://i.ibb.co/BH2F6ZwZ/download.jpg","https://i.ibb.co/FbbBXzkF/download.jpg"],
-        "features": [{"title":"Capacity and Versatility","details":" Holds up to 12 liters (18 cans or skincare products), with removable shelves and a door basket, ideal for cosmetics or beverages."},{"title":"Thermo-Technology","details":" Features thermoelectric cooling/heating, maintaining 35°F below or 149°F above ambient temperature, with AC/DC and USB power options."},{"title":"Portable Design","details":" Weighs 9 pounds with a carry handle, available in multiple colors (e.g., pink, black), and operates quietly (25–30 dB) for bedroom use."}],
+        "image": [
+          "https://i.ibb.co/BH2F6ZwZ/download.jpg",
+          "https://i.ibb.co/FbbBXzkF/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Capacity and Versatility",
+            "details": " Holds up to 12 liters (18 cans or skincare products), with removable shelves and a door basket, ideal for cosmetics or beverages."
+          },
+          {
+            "title": "Thermo-Technology",
+            "details": " Features thermoelectric cooling/heating, maintaining 35°F below or 149°F above ambient temperature, with AC/DC and USB power options."
+          },
+          {
+            "title": "Portable Design",
+            "details": " Weighs 9 pounds with a carry handle, available in multiple colors (e.g., pink, black), and operates quietly (25–30 dB) for bedroom use."
+          }
+        ],
         "stock": 1000
       },
       {
@@ -2801,8 +2592,24 @@
         "description": "An LED makeup mirror with adjustable lighting, made with eco-friendly materials for flawless application.",
         "price": 18.58,
         "rating": 4.8,
-        "image": ["https://i.ibb.co/vCKqJXGj/634d2abdb0c5e97c65426f92-conair-reflections-led-lighted-vanity.jpg","https://i.ibb.co/v4XCHQ5b/images.jpg"],
-        "features": [{"title":"Lighting Options","details":" Features adjustable LED lights with dimmable settings, mimicking natural daylight for precise makeup application, with touch or button controls."},{"title":"Magnification","details":" Offers 1x/5x or 1x/7x dual-sided mirrors, with a 360° swivel for flexible positioning, typically 8–9 inches in diameter."},{"title":"Power and Portability","details":" Operates via corded electric or battery (AA or AAA), with a sleek chrome or matte finish, ideal for home or travel."}],
+        "image": [
+          "https://i.ibb.co/vCKqJXGj/634d2abdb0c5e97c65426f92-conair-reflections-led-lighted-vanity.jpg",
+          "https://i.ibb.co/v4XCHQ5b/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "Lighting Options",
+            "details": " Features adjustable LED lights with dimmable settings, mimicking natural daylight for precise makeup application, with touch or button controls."
+          },
+          {
+            "title": "Magnification",
+            "details": " Offers 1x/5x or 1x/7x dual-sided mirrors, with a 360° swivel for flexible positioning, typically 8–9 inches in diameter."
+          },
+          {
+            "title": "Power and Portability",
+            "details": " Operates via corded electric or battery (AA or AAA), with a sleek chrome or matte finish, ideal for home or travel."
+          }
+        ],
         "stock": 700
       },
       {
@@ -2814,8 +2621,24 @@
         "description": "A limited edition microdermabrasion machine for professional-level skin exfoliation at home.",
         "price": 137.11,
         "rating": 3.7,
-        "image": ["https://i.ibb.co/hFDn2HvM/download.jpg","https://i.ibb.co/0yns3zzM/download.jpg"],
-        "features": [{"title":"Exfoliation Technology","details":" Uses spinning crystal or diamond-tip discs with vacuum suction to remove dead skin, reducing fine lines and improving skin texture."},{"title":"Customizable Settings","details":" Includes multiple disc sizes and suction levels for sensitive or resilient skin, suitable for face and body treatments at home."},{"title":"Portable and Rechargeable","details":" Lightweight (approx. 1 lb) with a rechargeable battery, comes with a storage case and replacement filters for hygiene."}],
+        "image": [
+          "https://i.ibb.co/hFDn2HvM/download.jpg",
+          "https://i.ibb.co/0yns3zzM/download.jpg"
+        ],
+        "features": [
+          {
+            "title": "Exfoliation Technology",
+            "details": " Uses spinning crystal or diamond-tip discs with vacuum suction to remove dead skin, reducing fine lines and improving skin texture."
+          },
+          {
+            "title": "Customizable Settings",
+            "details": " Includes multiple disc sizes and suction levels for sensitive or resilient skin, suitable for face and body treatments at home."
+          },
+          {
+            "title": "Portable and Rechargeable",
+            "details": " Lightweight (approx. 1 lb) with a rechargeable battery, comes with a storage case and replacement filters for hygiene."
+          }
+        ],
         "stock": 500
       },
       {
@@ -2827,10 +2650,24 @@
         "description": "A safe and effective IPL hair removal device, recommended by professionals for long-lasting smoothness.",
         "price": 462.58,
         "rating": 4.3,
-        "image": ["https://i.ibb.co/yBsdkGVC/69ebfa9634a2452a9981afe300c37f31.webp","https://i.ibb.co/nWmbD0j/images.jpg"],
-        "features": [{"title":"IPL Technology","details":" Uses Intense Pulsed Light to reduce hair growth by up to 92% after 3 treatments, safe for body and face with 5 light intensity settings."},{"title":"Smart Skin Sensor","details":" Automatically detects skin tone and adjusts light intensity for safe, effective use, with corded or cordless options (e.g., Lumea 9000)."},{"title":"Attachments","details":" Includes precision attachments for face, body, and bikini areas, with a long-lasting lamp (up to 450,000 flashes) for years of use."}],
+        "image": [
+          "https://i.ibb.co/yBsdkGVC/69ebfa9634a2452a9981afe300c37f31.webp",
+          "https://i.ibb.co/nWmbD0j/images.jpg"
+        ],
+        "features": [
+          {
+            "title": "IPL Technology",
+            "details": " Uses Intense Pulsed Light to reduce hair growth by up to 92% after 3 treatments, safe for body and face with 5 light intensity settings."
+          },
+          {
+            "title": "Smart Skin Sensor",
+            "details": " Automatically detects skin tone and adjusts light intensity for safe, effective use, with corded or cordless options (e.g., Lumea 9000)."
+          },
+          {
+            "title": "Attachments",
+            "details": " Includes precision attachments for face, body, and bikini areas, with a long-lasting lamp (up to 450,000 flashes) for years of use."
+          }
+        ],
         "stock": 997
       }
-    ]
-  }
 ]
