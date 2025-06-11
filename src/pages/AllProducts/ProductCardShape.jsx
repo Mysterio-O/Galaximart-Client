@@ -1,8 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const ProductCardShape = ({ product, index }) => {
+    const navigate = useNavigate();
+
+
+    const handleUpdateProduct = (id)=> {
+        console.log(id);
+        navigate(`/product/update/${id}`)
+    }
+
     return (
         <motion.div
             key={product?.id}
@@ -38,31 +46,30 @@ const ProductCardShape = ({ product, index }) => {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <Link to={`/product/details/${product?._id}`}>
-                            <motion.button
-                                className="flex items-center px-6 py-3 text-sm font-semibold uppercase tracking-wide text-gray-100 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] hover:bg-gradient-to-r hover:from-cyan-400 hover:to-magenta-500 hover:text-white group"
-                                transition={{ duration: 0.3 }}
+                        <motion.button
+                        onClick={()=>handleUpdateProduct(product._id)}
+                            className="flex items-center px-6 py-3 text-sm font-semibold uppercase tracking-wide text-gray-100 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] hover:bg-gradient-to-r hover:from-cyan-400 hover:to-magenta-500 hover:text-white group"
+                            transition={{ duration: 0.3 }}
+                        >
+                            Update Product
+                            <span
+                                className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             >
-                                View Details
-                                <span
-                                    className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                <svg
+                                    width="28"
+                                    height="28"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <svg
-                                        width="28"
-                                        height="28"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </span>
-                            </motion.button>
-                        </Link>
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </motion.button>
                     </motion.div>
                 </div>
             </div>

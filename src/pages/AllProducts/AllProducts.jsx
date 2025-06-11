@@ -7,7 +7,7 @@ const AllProducts = () => {
     const productsPromise = getProducts();
     console.log(productsPromise)
     return (
-        <div className='min-h-screen'>
+        <div className='min-h-screen mt-32 max-w-6xl mx-auto'>
             <Suspense fallback={<Loader/>}>
                 <Products productsPromise={productsPromise}></Products>
             </Suspense>

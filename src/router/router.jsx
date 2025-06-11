@@ -10,6 +10,7 @@ import AddProduct from '../pages/AddProduct/AddProduct';
 import MyProducts from '../pages/MyProducts/MyProducts';
 import ProductDetails from '../pages/ProductDetials/ProductDetails';
 import PrivateRoute from '../Provider/PrivateRoute';
+import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,12 @@ const router = createBrowserRouter([
             {
                 path:'/product/details/:id',
                 Component:ProductDetails
+            },
+            {
+                path:'/product/update/:id',
+                element:<PrivateRoute>
+                    <UpdateProduct/>
+                </PrivateRoute>
             }
         ]
     }
