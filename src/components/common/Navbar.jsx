@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import { IoCartOutline } from 'react-icons/io5';
 import './nav.css';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { Tooltip } from 'react-tooltip';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const { user,signOutUser } = useContext(AuthContext);
+    const { user, signOutUser } = useContext(AuthContext);
 
 
     const navigate = useNavigate();
@@ -39,6 +40,12 @@ const Navbar = () => {
         hidden: { opacity: 0, x: -30 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
     };
+
+    const photoVariants = {
+        initial: { background: 'white' },
+        whileHover: { background: `linear-gradient(to right,rgba(17, 24, 39, 0.95),rgba(46, 16, 101, 0.95),rgba(22, 78, 99, 0.95))` },
+        transition: { delay: 2 }
+    }
 
 
     const handleCategories = () => {
@@ -99,9 +106,10 @@ const Navbar = () => {
           }
     `
 
-    const handleSignOut = ()=> {
-        signOutUser().then(()=> console.log('user signed out')).catch(err => console.log(err));
+    const handleSignOut = () => {
+        signOutUser().then(() => console.log('user signed out')).catch(err => console.log(err));
     }
+
 
     return (
         <AnimatePresence>
@@ -170,22 +178,7 @@ const Navbar = () => {
                                 </motion.div>
 
                                 {
-                                    user ? <motion.div
-                                        whileHover={{ scale: 1.05, rotate: 2, boxShadow: '0 0 15px rgba(34, 211, 238, 0.5)' }}
-                                        whileTap={{ scale: 0.98, rotate: -2 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    >
-                                        <button
-                                        onClick={handleSignOut}
-                                            className='btn btn-ghost text-sm font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-xl 
-                                            bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 
-                                            hover:from-cyan-500 hover:to-indigo-500 
-                                            hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] 
-                                            border border-cyan-300/30 
-                                            transition-all duration-500 ease-out'>
-                                            Sign Out
-                                        </button>
-                                    </motion.div> : <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                                    !user && <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                                         <NavLink
                                             to="/auth/signin"
                                             className={({ isActive }) =>
@@ -200,12 +193,59 @@ const Navbar = () => {
                                     </motion.div>
                                 }
 
-                                {
-                                    user && <div
-                                        className='w-16 h-16 rounded-full p-2 bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95'>
-                                        <img src={user?.photoURL} alt="" />
-                                    </div>
-                                }
+                                <div data-tooltip-id='name_tooltip'>
+                                    <Tooltip
+                                        id='name_tooltip'
+                                        delayShow={300}
+                                        delayHide={200}
+                                        place='bottom'
+                                        clickable={true}
+                                        style={{
+                                            backgroundColor: 'rgb(46 16 101)',
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                            textShadow: '0 0 5px rgba(0,0,0,0.7)',
+                                            padding: '20px'
+
+                                        }}>
+                                        <div className='flex flex-col gap-3 bg-[#1a1a2e] text-white px-3 py-2 rounded-[20px_18px_14px_16px] shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.4),0_0_20px_rgba(79,70,229,0.3)]'>
+                                            <span>{user?.displayName}</span>
+                                            <span>
+                                                <motion.div
+                                                    whileHover={{ scale: 1.05, rotate: 2, boxShadow: '0 0 15px rgba(34, 211, 238, 0.5)' }}
+                                                    whileTap={{ scale: 0.98, rotate: -2 }}
+                                                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                                >
+                                                    <button
+                                                        onClick={handleSignOut}
+                                                        className='btn btn-ghost btn-block text-sm font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-xl 
+                                                        bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 
+                                                        hover:from-cyan-500 hover:to-indigo-500 
+                                                        hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] 
+                                                        border border-cyan-300/30 
+                                                        transition-all duration-500 ease-out'>
+                                                        Sign Out
+                                                    </button>
+                                                </motion.div>
+                                            </span>
+                                        </div>
+
+                                    </Tooltip>
+
+                                    {
+                                        user && <motion.div
+                                            variants={photoVariants}
+                                            initial='initial'
+                                            whileHover='whileHover'
+                                            transition='transition'
+                                            className='w-16 h-16 rounded-full mx-auto cursor-pointer p-1'>
+                                            <img className='rounded-full' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
+                                                : user?.email}'s photo`} />
+                                        </motion.div>
+                                    }
+                                </div>
+
+
 
 
 
@@ -213,6 +253,14 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Menu Button */}
+
+                        {
+                            user && <div
+                                className='w-12 h-12 rounded-full p-2 bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95 md:hidden'>
+                                <img className='rounded-full' src={user?.photoURL} alt="" />
+                            </div>
+                        }
+
                         <div className="md:hidden flex items-center">
                             <motion.button
                                 className="btn btn-ghost text-gray-400 hover:bg-cyan-500/30 rounded-full p-3 shadow-[0_0_8px_rgba(34,211,238,0.3)]"
@@ -250,6 +298,9 @@ const Navbar = () => {
                             exit="exit"
                         >
                             <div className="px-4 pt-4 pb-6 space-y-4">
+                                <p
+                                    className='block px-4 py-3 rounded-xl text-base  uppercase tracking-wide transition-all duration-300 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]'
+                                >{user?.displayName}</p>
                                 {links.map((link) => (
                                     <motion.div
                                         key={link.name}
@@ -281,17 +332,33 @@ const Navbar = () => {
                                     >
                                         <IoCartOutline size={28} className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
                                     </NavLink>
-                                    <NavLink
-                                        to="/auth/signin"
-                                        className={({ isActive }) =>
-                                            `text-gray-100 hover:text-cyan-400 px-4 py-3 text-base font-semibold uppercase tracking-wide hover:bg-cyan-500/20 rounded-xl ${isActive
-                                                ? 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]'
-                                                : ''
-                                            }`
-                                        }
-                                    >
-                                        Sign In
-                                    </NavLink>
+
+                                    {
+                                        user ? <button
+                                            onClick={handleSignOut}
+                                            className='btn btn-ghost text-sm font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-xl 
+                                            bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 
+                                            hover:from-cyan-500 hover:to-indigo-500 
+                                            hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] 
+                                            border border-cyan-300/30 
+                                            transition-all duration-500 ease-out'>
+                                            Sign Out
+                                        </button>
+                                            : <NavLink
+                                                to="/auth/signin"
+                                                className={({ isActive }) =>
+                                                    `text-gray-100 hover:text-cyan-400 px-4 py-3 text-base font-semibold uppercase tracking-wide hover:bg-cyan-500/20 rounded-xl ${isActive
+                                                        ? 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]'
+                                                        : ''
+                                                    }`
+                                                }
+                                            >
+                                                Sign In
+                                            </NavLink>
+                                    }
+
+
+
                                 </motion.div>
                             </div>
                         </motion.div>

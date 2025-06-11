@@ -43,7 +43,7 @@ const ProductCard = ({ product, index }) => {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <Link to={`/product/details/${product?.id}`}>
+                            <Link to={`/product/details/${product?._id}`}>
                                 <motion.button
                                     className="flex items-center px-6 py-3 text-sm font-semibold uppercase tracking-wide text-gray-100 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] hover:bg-gradient-to-r hover:from-cyan-400 hover:to-magenta-500 hover:text-white group"
                                     transition={{ duration: 0.3 }}

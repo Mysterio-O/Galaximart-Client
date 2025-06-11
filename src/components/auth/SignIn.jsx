@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { AuthContext } from '../../Provider/AuthProvider';
+import GoogleLoginButton from '../common/shared/GoogleLoginButton';
 
 const SignIn = () => {
 
@@ -119,6 +120,8 @@ const SignIn = () => {
                         </NavLink>
                     </p>
                 </form>
+                <div className="divider divider-info text-white">Or Login With</div>
+                <GoogleLoginButton/>
             </motion.div>
 
             <style jsx>{`

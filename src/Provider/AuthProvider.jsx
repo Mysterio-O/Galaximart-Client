@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
 
-    console.log(user)
+    // console.log(user)
 
     const signUpNewUser = (email, password) => {
         setLoading(true)
@@ -37,11 +37,11 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log('user signed in')
+                // console.log('user signed in')
                 setUser(user);
                 setLoading(false)
             } else {
-                console.log('user signed out');
+                // console.log('user signed out');
                 setUser(null);
             }
             setLoading(false);
