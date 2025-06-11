@@ -2,23 +2,22 @@ import React, { useState, useEffect, use } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import PurchaseModal from "./PurchaseModal";
 
 const ProductDetailsShape = ({ productPromise }) => {
 
     const product = use(productPromise)
-const ratingNumber = Math.floor(product.rating);
+    const ratingNumber = Math.floor(product.rating);
     useEffect(() => {
         console.log(product)
-        
-        console.log(typeof ratingNumber)
     }
-        , [product, ratingNumber])
+        , [product])
 
 
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(product.minQuantity);
     const [isFavorite, setIsFavorite] = useState(false);
     const [timeLeft, setTimeLeft] = useState({
         days: 2,
@@ -55,6 +54,22 @@ const ratingNumber = Math.floor(product.rating);
     };
 
     const formatNumber = (number) => number.toString().padStart(2, "0");
+
+
+    const handleAddToCart = () => {
+        console.log('clicked add to cart')
+    }
+
+    const handleBuyNow = () => {
+        // console.log('clicked buy now')
+
+        setIsModalOpen(true)
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    }
+
 
     return (
         <div className="mx-auto md:px-8 md:py-12 bg-[#1a1a2e] text-white">
@@ -114,7 +129,7 @@ const ratingNumber = Math.floor(product.rating);
                     </div>
 
                     {/* Thumbnail images */}
-                    <div className="flex gap-4 justify-between">
+                    <div className="flex gap-4 flex-wrap">
                         {product.image.map((image, index) => (
                             <motion.button
                                 key={index}
@@ -143,7 +158,7 @@ const ratingNumber = Math.floor(product.rating);
                         <span className="text-sm text-cyan-200">11 Reviews</span>
                     </div>
 
-                    <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-cyan-100 tracking-wide">{product.name || "Tray Table"}</h1>
+                    <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-cyan-100 tracking-wide">{product.name}</h1>
 
                     <p className="text-cyan-200/80 text-[0.9rem] leading-relaxed">
                         {product.description ||
@@ -152,7 +167,7 @@ const ratingNumber = Math.floor(product.rating);
 
                     <div className="flex items-center gap-3">
                         <span className="text-[1.6rem] font-semibold text-cyan-100">${product.price || "199.00"}</span>
-                        <span className="text-lg text-cyan-200/50 line-through">${product.originalPrice || "400.00"}</span>
+                        <span className="text-lg text-cyan-200/50 line-through">${product.price * 2}</span>
                     </div>
 
                     <div className="pb-2">
@@ -178,11 +193,11 @@ const ratingNumber = Math.floor(product.rating);
                     <div className="space-y-2 border-t border-cyan-300/30 pt-4">
                         <p className="font-medium text-[0.9rem] text-cyan-100">Short Details</p>
                         {
-                            product.features.map((details, index) => <p 
-                            key={index}
-                            className="text-cyan-200/80"><span className="text-cyan-100 font-bold">{details.title}:</span> <span>{details?.details}</span></p>)
+                            product.features.map((details, index) => <p
+                                key={index}
+                                className="text-cyan-200/80"><span className="text-cyan-100 font-bold">{details.title}:</span> <span>{details?.details}</span></p>)
                         }
-                        
+
                     </div>
 
                     <div className="flex gap-4 items-center pt-6">
@@ -225,15 +240,33 @@ const ratingNumber = Math.floor(product.rating);
                         </motion.button>
                     </div>
 
-                    <motion.button
-                        className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.98 }}
-                    >
-                        Add to Cart
-                    </motion.button>
+                    <div className="flex gap-5">
+                        <motion.button
+                            onClick={handleAddToCart}
+                            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Add to Cart
+                        </motion.button>
+                        <motion.button
+                            onClick={handleBuyNow}
+                            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Buy Now
+                        </motion.button>
+                    </div>
                 </div>
             </div>
+
+
+            <AnimatePresence>
+                {isModalOpen && <PurchaseModal product={product} handleCloseModal={handleCloseModal} quantity={quantity} setIsModalOpen={setIsModalOpen}/>}
+            </AnimatePresence>
+
+
         </div>
     );
 };

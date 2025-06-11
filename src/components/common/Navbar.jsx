@@ -42,9 +42,9 @@ const Navbar = () => {
     };
 
     const photoVariants = {
-        initial: { background: 'white' },
-        whileHover: { background: `linear-gradient(to right,rgba(17, 24, 39, 0.95),rgba(46, 16, 101, 0.95),rgba(22, 78, 99, 0.95))` },
-        transition: { delay: 2 }
+        initial: { backgroundColor: 'white' },
+        whileHover: { backgroundColor: 'rgba(46, 16, 101, 0.95)' },
+        transition: { duration: 0.5, ease: 'easeInOut' }
     }
 
 
@@ -198,14 +198,16 @@ const Navbar = () => {
                                         id='name_tooltip'
                                         delayShow={300}
                                         delayHide={200}
-                                        place='bottom'
+                                        place='right'
                                         clickable={true}
                                         style={{
                                             backgroundColor: 'rgb(46 16 101)',
                                             color: 'white',
                                             fontWeight: 'bold',
                                             textShadow: '0 0 5px rgba(0,0,0,0.7)',
-                                            padding: '20px'
+                                            padding: '10px',
+                                            zIndex: 9999,
+                                            borderRadius:'30px'
 
                                         }}>
                                         <div className='flex flex-col gap-3 bg-[#1a1a2e] text-white px-3 py-2 rounded-[20px_18px_14px_16px] shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.4),0_0_20px_rgba(79,70,229,0.3)]'>
