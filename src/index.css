@@ -3,6 +3,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@tailwind utilities;
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
 
 .orbitron {
   font-family: "Orbitron", sans-serif;
@@ -81,4 +89,26 @@
 .swal2-info .swal2-icon {
   border-color: #4f46e5 !important;
   color: #4f46e5 !important;
+}
+
+.swal-cancel-button {
+  background: linear-gradient(to right, rgba(239, 68, 68, 0.5), rgba(153, 27, 27, 0.5)) !important;
+  color: #ffffff !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 1rem !important;
+  padding: 10px 20px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-cancel-button:hover {
+  background: linear-gradient(to right, #ef4444, #991b1b) !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.7) !important;
+  transform: scale(1.05) !important;
+}
+
+.swal-cancel-button:active {
+  transform: scale(0.95) !important;
 }
