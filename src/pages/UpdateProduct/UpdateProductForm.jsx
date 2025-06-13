@@ -97,6 +97,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     <AnimatePresence>
                         {extraInput.length >= 0 && extraInput.map((inputId, index) => (
                             <motion.div
+                            className='flex gap-1 items-center'
                                 key={inputId}
                                 initial={{ scale: 0.7, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
@@ -115,7 +116,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                                     whileTap={{ scale: 1, opacity: 0.4 }}
                                     transition={{ duration: 0.3 }}
                                     onClick={() => fnRemoveInput(inputId)}
-                                    className='absolute right-7 top-45 z-10 text-red-500 cursor-pointer'>
+                                    className=' right-7 top-45 z-10 text-red-500 cursor-pointer'>
                                     <RxCross2 size={24} />
 
                                 </motion.span>
