@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 // import ProductRating from '../Rating/ProductRating';
 
 const ProductCard = ({ product, index }) => {
+
     return (
         <>
             <motion.div
@@ -30,6 +31,10 @@ const ProductCard = ({ product, index }) => {
                     <h2 className="card-title text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400 tracking-tight [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)]">
                         {product?.name} ({product?.brand})
                     </h2>
+                    <h3>{product?.category}</h3>
+                    <p
+                        className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold`}
+                    >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` :'Out of Stock'}`}</p>
                     <p className="text-gray-300 text-sm md:text-base mt-3 line-clamp-2">
                         {product?.description}
                     </p>

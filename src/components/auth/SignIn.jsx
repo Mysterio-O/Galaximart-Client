@@ -50,8 +50,19 @@ const SignIn = () => {
         }).catch(err => console.log(err));
     }
 
+    const customStyles = `
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.35; transform: scale(1.15); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 7s ease-in-out infinite;
+        }
+      `
+
     return (
         <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-gray-900 via-violet-950 to-cyan-900 relative overflow-hidden px-4 md:px-0">
+            <style>{customStyles}</style>
             {/* Background Particle Effect */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute w-80 h-80 bg-cyan-500/20 rounded-full filter blur-3xl animate-pulse opacity-20 top-[10%] left-[10%]"></div>
@@ -123,16 +134,6 @@ const SignIn = () => {
                 <div className="divider divider-info text-white">Or Login With</div>
                 <GoogleLoginButton/>
             </motion.div>
-
-            <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.35; transform: scale(1.15); }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 7s ease-in-out infinite;
-        }
-      `}</style>
         </div>
     );
 };

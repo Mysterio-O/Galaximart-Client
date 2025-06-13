@@ -1,7 +1,12 @@
-import React, { use } from 'react';
-import { motion } from 'framer-motion';
+import React, { use, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
-const UpdateProductForm = ({ productPromise }) => {
+const UpdateProductForm = ({ productPromise, fnProductName }) => {
+
+    const [extraInput, setExtraInput] = useState([]);
+
     const product = use(productPromise);
 
     const inputVariants = {
@@ -16,17 +21,45 @@ const UpdateProductForm = ({ productPromise }) => {
         }
     };
 
-    const handleUpdateProduct = (e)=> {
-         e.preventDefault();
-         const form = e.target;
-         const formData = new FormData(form)
-         const data = Object.fromEntries(formData.entries());
-         console.log(data);
+    const handleUpdateProduct = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form)
+        const data = Object.fromEntries(formData.entries());
+        // console.log(data);
+
+        const images = Object.keys(data).filter(key => key.startsWith('image-') || key.startsWith('newImage-'))
+            .map(key => data[key])
+            .filter(url => url.trim() !== '');
+
+        const updatedProduct = {
+            ...data, images
+        }
+
+        console.log(updatedProduct)
+
+    }
+
+
+
+    useEffect(() => {
+        fnProductName(product?.name)
+    }, [fnProductName, product?.name])
+
+    // console.log(extraInput)
+
+    const fnAddInput = () => {
+        setExtraInput([...extraInput, Date.now()])
+    }
+    // console.log(extraInput);
+
+    const fnRemoveInput = (id) => {
+        setExtraInput(extraInput.filter(input => input !== id))
     }
 
     return (
         <motion.form
-        onSubmit={handleUpdateProduct}
+            onSubmit={handleUpdateProduct}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 bg-[#1a1a2e] rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] relative overflow-hidden max-w-4xl mx-auto"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -40,8 +73,17 @@ const UpdateProductForm = ({ productPromise }) => {
 
             {/* Image Fields */}
             <motion.fieldset variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron text-lg">Product Images</label>
-                <div className="flex flex-col gap-4">
+                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">Product Images
+                    <motion.span
+                        className='cursor-pointer'
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.2, rotate: 90, color: 'green' }}
+                        whileTap={{ scale: 1 }}
+                        onClick={fnAddInput}>
+                        <IoMdAddCircleOutline size={26} />
+                    </motion.span>
+                </label>
+                <div className="flex flex-col gap-4 max-h-[200px] overflow-scroll">
                     {product.image.map((image, index) => (
                         <input
                             key={index}
@@ -52,6 +94,34 @@ const UpdateProductForm = ({ productPromise }) => {
                             placeholder={`Image URL ${index + 1}`}
                         />
                     ))}
+                    <AnimatePresence>
+                        {extraInput.length >= 0 && extraInput.map((inputId, index) => (
+                            <motion.div
+                                key={inputId}
+                                initial={{ scale: 0.7, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.7, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <motion.input
+                                    name={`newImage-${index + 1}`}
+                                    type="text"
+                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] relative"
+                                    placeholder={`enter new image url-${index + 1}`}
+                                />
+                                <motion.span
+                                    initial={{ scale: 1, opacity: 0.4 }}
+                                    whileHover={{ scale: 1.2, opacity: 1 }}
+                                    whileTap={{ scale: 1, opacity: 0.4 }}
+                                    transition={{ duration: 0.3 }}
+                                    onClick={() => fnRemoveInput(inputId)}
+                                    className='absolute right-7 top-45 z-10 text-red-500 cursor-pointer'>
+                                    <RxCross2 size={24} />
+
+                                </motion.span>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </div>
             </motion.fieldset>
 

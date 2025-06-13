@@ -11,6 +11,8 @@ const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext);
 
+    console.log(user);
+
 
     const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ const Navbar = () => {
     };
 
     const photoVariants = {
-        initial: { backgroundColor: 'white' },
+        initial: { backgroundColor: 'transparent' },
         whileHover: { backgroundColor: 'rgba(46, 16, 101, 0.95)' },
         transition: { duration: 0.5, ease: 'easeInOut' }
     }
@@ -211,7 +213,7 @@ const Navbar = () => {
 
                                         }}>
                                         <div className='flex flex-col gap-3 bg-[#1a1a2e] text-white px-3 py-2 rounded-[20px_18px_14px_16px] shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.4),0_0_20px_rgba(79,70,229,0.3)]'>
-                                            <span>{user?.displayName}</span>
+                                            <span>{user?.displayName || user?.email}</span>
                                             <span>
                                                 <motion.div
                                                     whileHover={{ scale: 1.05, rotate: 2, boxShadow: '0 0 15px rgba(34, 211, 238, 0.5)' }}

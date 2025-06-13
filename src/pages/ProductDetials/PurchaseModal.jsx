@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) => {
     const { user } = useContext(AuthContext);
@@ -52,8 +53,34 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                 }
             });
         }
-        console.log('Purchase confirmed:', { product, quantity, paymentOption });
-        setIsModalOpen(false);
+
+        axios.patch(`http://localhost:3000/purchase/product/${product?._id}`, { quantity })
+            .then(res => {
+                console.log('Purchase successful', res.data);
+                Swal.fire({
+                    title: 'Purchase Successful',
+                    text: 'Product Purchased successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    background: '#1a1a2e',
+                    color: '#e0f7ff',
+                    confirmButtonColor: '#22d3ee'
+                });
+                setIsModalOpen(false);
+            })
+            .catch(err => {
+                console.log('error purchasing product', err);
+                Swal.fire({
+                    title: 'Purchase Failed',
+                    text: err.response?.data?.error || 'Something went wrong',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    background: '#1a1a2e',
+                    color: '#e0f7ff',
+                    confirmButtonColor: '#22d3ee'
+                });
+            })
+
     };
 
     // Animation variants for modal
@@ -81,7 +108,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
     return (
         <AnimatePresence>
             <motion.div
-                className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50"
+                className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 min-w-4xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -89,7 +116,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                 onClick={handleCloseModal}
             >
                 <motion.div
-                    className="bg-[#1a1a2e] text-white rounded-[20px_18px_14px_16px] p-8 max-w-lg w-full mx-4 shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] relative overflow-hidden"
+                    className="bg-[#1a1a2e] text-white rounded-[20px_18px_14px_16px] p-8 max-w-4xl w-full mx-4 shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] relative overflow-hidden"
                     variants={modalVariants}
                     initial="initial"
                     animate="animate"
@@ -102,85 +129,108 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                         <div className="absolute w-96 h-96 bg-indigo-500/20 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
                     </div>
 
-                    <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400 tracking-tight orbitron mb-6 relative z-10">
-                        Confirm Your Purchase
-                    </h2>
+                    <div className='flex flex-col md:flex-row gap-4'>
+                        <div>
+                            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400 tracking-tight orbitron mb-6 relative z-10">
+                                Confirm Your Purchase
+                            </h2>
 
-                    <p className="text-cyan-200/90 mb-6 text-lg leading-relaxed relative z-10">
-                        You are about to purchase <strong>{product.name}</strong> for <span className="text-cyan-100 font-semibold">${product.price}</span> (Quantity: {quantity}).
-                    </p>
+                            <p className="text-cyan-200/90 mb-6 text-lg leading-relaxed relative z-10">
+                                You are about to purchase <strong>{product.name}</strong> for <span className="text-cyan-100 font-semibold">${product.price}</span>.
+                            </p>
 
-                    <form className="space-y-6 relative z-10">
-                        <motion.div variants={inputVariants}>
-                            <label className="block text-cyan-100 font-medium mb-2">User Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={user?.email || ''}
-                                readOnly
-                                className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
-                                placeholder="Your email"
-                            />
-                        </motion.div>
+                            <form className="space-y-6 relative z-10">
+                                <motion.div variants={inputVariants}>
+                                    <label className="block text-cyan-100 font-medium mb-2">User Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={user?.email || ''}
+                                        readOnly
+                                        className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
+                                        placeholder="Your email"
+                                    />
+                                </motion.div>
 
-                        <motion.div variants={inputVariants}>
-                            <label className="block text-cyan-100 font-medium mb-2">User Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={user?.displayName || ''}
-                                readOnly
-                                className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
-                                placeholder="Your name"
-                            />
-                        </motion.div>
+                                <motion.div variants={inputVariants}>
+                                    <label className="block text-cyan-100 font-medium mb-2">User Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        defaultValue={user?.displayName || ''}
+                                        className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
+                                        placeholder="Your name"
+                                        required
+                                    />
+                                </motion.div>
+                                <motion.div variants={inputVariants}>
+                                    <label className="block text-cyan-100 font-medium mb-2">User Address</label>
+                                    <input
+                                        type="text"
+                                        name="address"
+                                        className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
+                                        placeholder="Your Address (e.g 120 E 12th St, New York)"
+                                        required
+                                    />
+                                </motion.div>
 
-                        <motion.div variants={inputVariants}>
-                            <label className="block text-cyan-100 font-medium mb-3">Payment Option</label>
-                            <div className="grid grid-cols-1 gap-4">
-                                {[
-                                    { name: 'COD', label: 'Cash on Delivery' },
-                                    { name: 'GPay', label: 'Google Pay' },
-                                    { name: 'Card', label: 'Credit/Debit Card' }
-                                ].map((option) => (
-                                    <motion.label
-                                        key={option.name}
-                                        className="flex items-center gap-3 p-3 rounded-lg bg-gray-900/30 hover:bg-cyan-500/20 transition-all duration-300 cursor-pointer"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                    >
-                                        <input
-                                            type="radio"
-                                            name="paymentOption"
-                                            value={option.name}
-                                            checked={paymentOption === option.name}
-                                            onChange={(e) => setPaymentOption(e.target.value)}
-                                            className="h-5 w-5 text-cyan-400 border-cyan-300/50 focus:ring-cyan-400/50 bg-gray-900/50 rounded-full"
-                                        />
-                                        <span className="text-cyan-100">{option.label}</span>
-                                    </motion.label>
-                                ))}
+                                <motion.div variants={inputVariants}>
+                                    <label className="block text-cyan-100 font-medium mb-3">Payment Option</label>
+                                    <div className="grid grid-cols-1 gap-4">
+                                        {[
+                                            { name: 'COD', label: 'Cash on Delivery' },
+                                            { name: 'GPay', label: 'Google Pay' },
+                                            { name: 'Card', label: 'Credit/Debit Card' }
+                                        ].map((option) => (
+                                            <motion.label
+                                                key={option.name}
+                                                className="flex items-center gap-3 p-3 rounded-lg bg-gray-900/30 hover:bg-cyan-500/20 transition-all duration-300 cursor-pointer"
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    name="paymentOption"
+                                                    value={option.name}
+                                                    checked={paymentOption === option.name}
+                                                    onChange={(e) => setPaymentOption(e.target.value)}
+                                                    className="h-5 w-5 text-cyan-400 border-cyan-300/50 focus:ring-cyan-400/50 bg-gray-900/50 rounded-full"
+                                                />
+                                                <span className="text-cyan-100">{option.label}</span>
+                                            </motion.label>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </form>
+
+                            <div className="flex justify-end gap-4 mt-8 relative z-10">
+                                <motion.button
+                                    className="px-6 py-2.5 bg-gradient-to-r from-gray-600/50 to-gray-800/50 text-white rounded-lg hover:from-gray-500 hover:to-gray-700 shadow-[0_0_10px_rgba(0,0,0,0.3)] transition-all duration-300"
+                                    onClick={handleCloseModal}
+                                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.4)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    Cancel
+                                </motion.button>
+                                <motion.button
+                                    className="px-6 py-2.5 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300"
+                                    onClick={handleBuy}
+                                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    Confirm Purchase
+                                </motion.button>
                             </div>
-                        </motion.div>
-                    </form>
-
-                    <div className="flex justify-end gap-4 mt-8 relative z-10">
-                        <motion.button
-                            className="px-6 py-2.5 bg-gradient-to-r from-gray-600/50 to-gray-800/50 text-white rounded-lg hover:from-gray-500 hover:to-gray-700 shadow-[0_0_10px_rgba(0,0,0,0.3)] transition-all duration-300"
-                            onClick={handleCloseModal}
-                            whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.4)' }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Cancel
-                        </motion.button>
-                        <motion.button
-                            className="px-6 py-2.5 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300"
-                            onClick={handleBuy}
-                            whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Confirm Purchase
-                        </motion.button>
+                        </div>
+                        <div className="divider lg:divider-horizontal"></div>
+                        <div className='w-1/2'>
+                            <div className=''>
+                                <img className='p-4' src={product?.image[0]} alt={`${product?.name}'s photo`} />
+                                <h3>Product Name: {product?.name} X({quantity})</h3>
+                                <div className="divider divider-primary"></div>
+                                <p className='text-xl text-cyan-100'>Total: {`${product?.price} x ${quantity} = ${product?.price * quantity}`}$</p>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
             </motion.div>
