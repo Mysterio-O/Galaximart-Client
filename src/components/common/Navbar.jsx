@@ -195,12 +195,12 @@ const Navbar = () => {
                                     </motion.div>
                                 }
 
-                                <div data-tooltip-id='name_tooltip'>
+                                <div className='z-50' data-tooltip-id='name_tooltip'>
                                     <Tooltip
                                         id='name_tooltip'
                                         delayShow={300}
                                         delayHide={200}
-                                        place='right'
+                                        place='bottom'
                                         clickable={true}
                                         style={{
                                             backgroundColor: 'rgb(46 16 101)',

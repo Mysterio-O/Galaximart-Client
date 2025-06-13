@@ -6,8 +6,9 @@ import axios from 'axios';
 
 const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) => {
     const { user } = useContext(AuthContext);
-    const [paymentOption, setPaymentOption] = useState(''); // State for selected payment option
+    const [paymentOption, setPaymentOption] = useState('');
     // console.log(paymentOption)
+
 
     // Handle Escape key to close modal
     useEffect(() => {
@@ -20,7 +21,19 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
         return () => window.removeEventListener('keydown', handleEsc);
     }, [setIsModalOpen]);
 
-    const handleBuy = () => {
+    const handleBuy = (e) => {
+        e.preventDefault();
+
+
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+
+        const { address, paymentOption, userName, email } = data;
+
+
+
         if (product?.minQuantity > quantity) {
             return Swal.fire({
                 title: 'Minimum Quantity Required',
@@ -54,32 +67,66 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
             });
         }
 
-        axios.patch(`http://localhost:3000/purchase/product/${product?._id}`, { quantity })
+        const { brand, category, description, image, name, minQuantity, rating } = product;
+
+        const now = new Date();
+        // console.log(now)
+
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+
+        // console.log(`${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+
+        const buyingDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+
+        console.log(buyingDate)
+
+        const orderedProducts = {
+            brand, category, description, image, name, minQuantity, rating, quantity, buyingDate, address, paymentOption, userName, email
+        }
+
+
+        axios.post(`http://localhost:3000/ordered/products`, { orderedProducts })
             .then(res => {
-                console.log('Purchase successful', res.data);
-                Swal.fire({
-                    title: 'Purchase Successful',
-                    text: 'Product Purchased successfully!',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                    background: '#1a1a2e',
-                    color: '#e0f7ff',
-                    confirmButtonColor: '#22d3ee'
-                });
-                setIsModalOpen(false);
+                if (res.data.acknowledged || res.data.insertedId) {
+                    axios.patch(`http://localhost:3000/purchase/product/${product?._id}`, { quantity })
+                        .then(res => {
+                            console.log('Purchase successful', res.data);
+                            Swal.fire({
+                                title: 'Purchase Successful',
+                                text: 'Product Purchased successfully!',
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                background: '#1a1a2e',
+                                color: '#e0f7ff',
+                                confirmButtonColor: '#22d3ee'
+                            });
+                            setIsModalOpen(false);
+                        })
+                        .catch(err => {
+                            console.log('error purchasing product', err);
+                            Swal.fire({
+                                title: 'Purchase Failed',
+                                text: err.response?.data?.error || 'Something went wrong',
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                background: '#1a1a2e',
+                                color: '#e0f7ff',
+                                confirmButtonColor: '#22d3ee'
+                            });
+                        })
+                }
             })
-            .catch(err => {
-                console.log('error purchasing product', err);
-                Swal.fire({
-                    title: 'Purchase Failed',
-                    text: err.response?.data?.error || 'Something went wrong',
-                    icon: 'error',
-                    confirmButtonText: 'OK',
-                    background: '#1a1a2e',
-                    color: '#e0f7ff',
-                    confirmButtonColor: '#22d3ee'
-                });
-            })
+            .catch(err => console.log(err));
+
+
+
 
     };
 
@@ -139,7 +186,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                                 You are about to purchase <strong>{product.name}</strong> for <span className="text-cyan-100 font-semibold">${product.price}</span>.
                             </p>
 
-                            <form className="space-y-6 relative z-10">
+                            <form onSubmit={handleBuy} className="space-y-6 relative z-10">
                                 <motion.div variants={inputVariants}>
                                     <label className="block text-cyan-100 font-medium mb-2">User Email</label>
                                     <input
@@ -156,7 +203,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                                     <label className="block text-cyan-100 font-medium mb-2">User Name</label>
                                     <input
                                         type="text"
-                                        name="name"
+                                        name="userName"
                                         defaultValue={user?.displayName || ''}
                                         className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300"
                                         placeholder="Your name"
@@ -201,26 +248,27 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                                         ))}
                                     </div>
                                 </motion.div>
+                                <div className="flex justify-end gap-4 mt-8 relative z-10">
+                                    <motion.button
+                                        className="px-6 py-2.5 bg-gradient-to-r from-gray-600/50 to-gray-800/50 text-white rounded-lg hover:from-gray-500 hover:to-gray-700 shadow-[0_0_10px_rgba(0,0,0,0.3)] transition-all duration-300"
+                                        onClick={handleCloseModal}
+                                        whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.4)' }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Cancel
+                                    </motion.button>
+                                    <motion.button
+                                        className="px-6 py-2.5 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300"
+                                        type='submit'
+                                        whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Confirm Purchase
+                                    </motion.button>
+                                </div>
                             </form>
 
-                            <div className="flex justify-end gap-4 mt-8 relative z-10">
-                                <motion.button
-                                    className="px-6 py-2.5 bg-gradient-to-r from-gray-600/50 to-gray-800/50 text-white rounded-lg hover:from-gray-500 hover:to-gray-700 shadow-[0_0_10px_rgba(0,0,0,0.3)] transition-all duration-300"
-                                    onClick={handleCloseModal}
-                                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.4)' }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Cancel
-                                </motion.button>
-                                <motion.button
-                                    className="px-6 py-2.5 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300"
-                                    onClick={handleBuy}
-                                    whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Confirm Purchase
-                                </motion.button>
-                            </div>
+
                         </div>
                         <div className="divider lg:divider-horizontal"></div>
                         <div className='w-1/2'>

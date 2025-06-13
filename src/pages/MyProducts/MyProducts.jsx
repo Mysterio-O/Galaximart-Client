@@ -34,11 +34,11 @@ const MyProducts = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-[#1a1a2e] min-h-[calc(100vh-432px)] py-12 relative overflow-hidden"
+            className="bg-[#1a1a2e] min-h-[calc(100vh-432px)] py-12 relative overflow-hidden mx-4 my-3 md:my-30 md:mx-20 rounded-2xl"
         >
             {/* Background glow effect */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute w-96 h-96 bg-cyan-500/20 rounded-full filter blur-3xl opacity-20 top-[-100px] left-[-100px] animate-pulse-slow"></div>
+                <div className="absolute w-96 h-96 bg-cyan-500/20 rounded-full filter blur-3xl opacity-100 top-[-100px] left-[-100px] animate-pulse-slow"></div>
                 <div className="absolute w-96 h-96 bg-indigo-500/20 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
             </div>
             <div className="container mx-auto px-4 max-w-5xl relative z-10">

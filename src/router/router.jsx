@@ -11,11 +11,13 @@ import MyProducts from '../pages/MyProducts/MyProducts';
 import ProductDetails from '../pages/ProductDetials/ProductDetails';
 import PrivateRoute from '../Provider/PrivateRoute';
 import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
+import ErrorPage from '../components/common/shared/ErrorPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
+        errorElement:<ErrorPage/>,
         children: [
             {
                 index: true,
