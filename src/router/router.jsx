@@ -12,6 +12,7 @@ import ProductDetails from '../pages/ProductDetials/ProductDetails';
 import PrivateRoute from '../Provider/PrivateRoute';
 import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
 import ErrorPage from '../components/common/shared/ErrorPage';
+import Cart from '../pages/Cart/Cart';
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,12 @@ const router = createBrowserRouter([
                 path:'/product/update/:id',
                 element:<PrivateRoute>
                     <UpdateProduct/>
+                </PrivateRoute>
+            },
+            {
+                path:'/cart',
+                element:<PrivateRoute>
+                    <Cart/>
                 </PrivateRoute>
             }
         ]

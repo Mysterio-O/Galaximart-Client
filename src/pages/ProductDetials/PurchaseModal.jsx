@@ -50,6 +50,26 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                 }
             });;
         }
+
+
+        if (product?.stock < quantity) {
+            return Swal.fire({
+                title: 'Product stock limit reached',
+                text: `You need to purchase less than the stock- ${product?.stock}`,
+                icon: 'warning',
+                confirmButtonText: 'OK',
+                background: '#1a1a2e',
+                color: '#e0f7ff',
+                confirmButtonColor: '#22d3ee',
+                customClass: {
+                    popup: 'rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5)]',
+                    title: 'orbitron text-2xl',
+                    confirmButton: 'px-6 py-2 rounded-lg hover:bg-cyan-400 transition-all duration-300'
+                }
+            });;
+        }
+
+
         if (!paymentOption) {
             return Swal.fire({
                 title: 'Payment Option Required',
@@ -67,7 +87,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
             });
         }
 
-        const { brand, category, description, image, name, minQuantity, rating } = product;
+        const { brand, category, description, image, name, minQuantity, rating, stock } = product;
 
         const now = new Date();
         // console.log(now)
@@ -88,7 +108,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
         console.log(buyingDate)
 
         const orderedProducts = {
-            brand, category, description, image, name, minQuantity, rating, quantity, buyingDate, address, paymentOption, userName, email
+            brand, category, description, image, name, minQuantity, rating, quantity, buyingDate, address, paymentOption, userName, email, stock
         }
 
 

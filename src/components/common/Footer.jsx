@@ -36,8 +36,8 @@ const Footer = () => {
     const links = [
         { name: 'Home', to: '/' },
         { name: 'Categories', to: '/categories' },
-        { name: 'Sign In', to: '/auth/signin' },
-        { name: 'Sign Up', to: '/auth/signup' }
+        { name: 'About Us', to: '/about-us' },
+        { name: 'Contact Us', to: '/contact-us' }
     ];
 
     const customStyles = `
