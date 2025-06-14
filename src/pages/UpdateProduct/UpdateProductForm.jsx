@@ -2,12 +2,16 @@ import React, { use, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import axios from 'axios';
 
 const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
     const [extraInput, setExtraInput] = useState([]);
+    const [extraDetails, setExtraDetails] = useState([]);
+
 
     const product = use(productPromise);
+    // console.log(product)
 
     const inputVariants = {
         initial: { opacity: 0, y: 10 },
@@ -26,17 +30,43 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
         const form = e.target;
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries());
-        // console.log(data);
+        // console.log('data->',data);
+
+        const { mainQuantity, brand, category, description, minQuantity, name, rating } = data;
 
         const images = Object.keys(data).filter(key => key.startsWith('image-') || key.startsWith('newImage-'))
             .map(key => data[key])
             .filter(url => url.trim() !== '');
 
+        const details = Object.keys(data)
+            .filter((key) => key.startsWith('title-'))
+            .map((key, index) => ({
+                title: data[`title-${index}`] || '',
+                details: data[`details-${index}`] || '',
+            }))
+            .filter((detail) => detail.title.trim() !== '' || detail.details.trim() !== '');
+
+        // console.log(details);
+
         const updatedProduct = {
-            ...data, images
+            name,
+            image: images,
+            features: details,
+            stock: parseInt(mainQuantity),
+            brand,
+            category,
+            description,
+            minQuantity: parseInt(minQuantity),
+            rating:parseInt(rating)
         }
 
         console.log(updatedProduct)
+
+        if(updatedProduct){
+            axios.patch(`http://localhost:3000/update/product/${product?._id}`,{updatedProduct})
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        }
 
     }
 
@@ -55,6 +85,24 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
     const fnRemoveInput = (id) => {
         setExtraInput(extraInput.filter(input => input !== id))
+    }
+
+    const detailsVariants = {
+        initial: { opacity: 0, scale: 0.7 },
+        animate: {
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.3, ease: 'easeOut' }
+        },
+        exit: { opacity: 0, scale: 0.7, transition: { duration: 0.3 } }
+    }
+
+    const addDetailsInput = () => {
+        setExtraDetails([...extraDetails, Date.now()])
+    }
+
+    const removeDetailsInput = (id) => {
+        setExtraDetails(extraDetails.filter(details => details !== id));
     }
 
     return (
@@ -97,7 +145,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     <AnimatePresence>
                         {extraInput.length >= 0 && extraInput.map((inputId, index) => (
                             <motion.div
-                            className='flex gap-1 items-center'
+                                className='flex gap-1 items-center'
                                 key={inputId}
                                 initial={{ scale: 0.7, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
@@ -218,6 +266,98 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                 />
             </motion.div>
 
+
+
+            {/* product features */}
+            <motion.div variants={inputVariants} className="relative z-10 md:col-span-2">
+                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">
+                    Product Features
+                    <motion.span
+                        className="cursor-pointer"
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.2, rotate: 90, color: '#22d3ee' }}
+                        whileTap={{ scale: 1 }}
+                        onClick={addDetailsInput}
+                    >
+                        <IoMdAddCircleOutline size={26} />
+                    </motion.span>
+                </label>
+
+
+                <motion.div
+                    variants={inputVariants}
+                    className="flex flex-col gap-4 mb-4"
+                >
+                    {product?.features.map((feature, index) => (
+                        <div key={index} className="relative flex flex-row items-start gap-4">
+                            <div className="w-1/3">
+                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                                <input
+                                    type="text"
+                                    name={`title-${index}`}
+                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    placeholder="Enter Title"
+                                    defaultValue={feature?.title}
+                                    required
+                                />
+                            </div>
+                            <div className="w-2/3">
+                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                                <textarea
+                                    name={`details-${index}`}
+                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                                    placeholder="Enter Details"
+                                    defaultValue={feature?.details}
+                                    required
+                                />
+                            </div>
+                            <span className="absolute right-4 top-4 opacity-0 cursor-default text-cyan-100">
+                                <RxCross2 size={24} />
+                            </span>
+                        </div>
+                    ))}
+                </motion.div>
+                <AnimatePresence>
+                    {extraDetails.map((detailsId, index) => (
+                        <motion.div
+                            key={detailsId}
+                            variants={detailsVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className="flex flex-row items-start gap-4 mb-4 relative"
+                        >
+                            <div className="w-1/3">
+                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                                <input
+                                    type="text"
+                                    name={`title-${index + 3}`}
+                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    placeholder="Enter Title"
+                                    required
+                                />
+                            </div>
+                            <div className="w-2/3">
+                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                                <textarea
+                                    name={`details-${index + 3}`}
+                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                                    placeholder="Enter Details"
+                                    required
+                                />
+                            </div>
+                            <span
+                                onClick={() => removeDetailsInput(detailsId)}
+                                className="absolute right-4 top-12 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-cyan-100"
+                            >
+                                <RxCross2 size={24} />
+                            </span>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+
+            </motion.div>
+
             {/* Submit Button */}
             <motion.div
                 variants={inputVariants}
@@ -232,6 +372,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     Update Product
                 </motion.button>
             </motion.div>
+
         </motion.form>
     );
 };

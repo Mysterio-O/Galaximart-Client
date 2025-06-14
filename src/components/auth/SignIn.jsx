@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -10,6 +10,9 @@ const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const {signInUser} = useContext(AuthContext);
+
+    const location = useLocation();
+    console.log(location);
 
     const navigate = useNavigate();
 
@@ -46,7 +49,7 @@ const SignIn = () => {
         signInUser(email, password)
         .then(result => {
             console.log('user signed in', result);
-            navigate('/')
+            navigate(`${location?.state ? location?.state : '/'}`)
         }).catch(err => console.log(err));
     }
 

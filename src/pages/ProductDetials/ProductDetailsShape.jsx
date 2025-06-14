@@ -72,7 +72,7 @@ const ProductDetailsShape = ({ productPromise }) => {
 
 
     return (
-        <div className="mx-auto md:px-8 md:py-12 bg-[#1a1a2e] text-white">
+        <div className="mx-auto md:px-8 md:py-12 bg-[#1a1a2e] text-white ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 {/* Left side - Image gallery */}
                 <div className="space-y-4">

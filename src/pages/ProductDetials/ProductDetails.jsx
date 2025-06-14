@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
 
     return (
-        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 m-4 p-4 rounded-2xl mt-32'>
+        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 m-4 p-4 rounded-2xl my-10 md:my-32'>
 
             {/* <h2 className="text-4xl font-bold">{productTags.name}{productTags.brand}</h2> */}
             <Suspense fallback={<Loader/>}>
