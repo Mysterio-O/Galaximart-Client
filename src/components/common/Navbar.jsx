@@ -5,6 +5,7 @@ import { IoCartOutline } from 'react-icons/io5';
 import './nav.css';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Tooltip } from 'react-tooltip';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -107,7 +108,44 @@ const Navbar = () => {
     `
 
     const handleSignOut = () => {
-        signOutUser().then(() => console.log('user signed out')).catch(err => console.log(err));
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will be logged out!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sign Out',
+            cancelButtonText: 'Cancel',
+            customClass: {
+                popup: 'swal-dark',
+                title: 'swal-title',
+                content: 'swal-content',
+                confirmButton: 'swal-confirm-button',
+                cancelButton: 'swal-cancel-button',
+            },
+            buttonsStyling: false,
+        }).then(result => {
+            if (result.isConfirmed) {
+                signOutUser().then(() => {
+                    console.log('user signed out')
+                    Swal.fire({
+                        title: 'Signed Out',
+                        text: 'User has been signed out successfully.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal-dark',
+                            title: 'swal-title',
+                            content: 'swal-content',
+                            confirmButton: 'swal-confirm-button',
+                        },
+                        buttonsStyling: false,
+                    });
+                }).catch(err => console.log(err));
+            }
+        })
+
+
     }
 
 
@@ -207,7 +245,7 @@ const Navbar = () => {
                                             textShadow: '0 0 5px rgba(0,0,0,0.7)',
                                             padding: '10px',
                                             zIndex: 9999,
-                                            borderRadius:'30px'
+                                            borderRadius: '30px'
 
                                         }}>
                                         <div className='flex flex-col gap-3 bg-[#1a1a2e] text-white px-3 py-2 rounded-[20px_18px_14px_16px] shadow-lg hover:shadow-[0_0_15px_rgba(34,211,238,0.4),0_0_20px_rgba(79,70,229,0.3)]'>

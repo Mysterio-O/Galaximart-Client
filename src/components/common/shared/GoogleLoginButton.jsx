@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 const GoogleLoginButton = () => {
 
     const { googleLogin } = useContext(AuthContext);
@@ -10,9 +11,63 @@ const GoogleLoginButton = () => {
 
     const onGoogleLogin = () => {
         googleLogin().then(result => {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Signed in with Google successfully.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button',
+                },
+                buttonsStyling: false,
+            })
             console.log('user signed in using google', result)
             navigate(`${location?.state ? location?.state : '/'}`)
-        }).catch(err => console.log(err));
+        }).catch((err) => {
+            console.error('Google sign-in error:', { code: err.code, message: err.message }); // Debug log
+            let errorMessage = 'An error occurred during Google sign-in. Please try again.';
+            switch (err.code) {
+                case 'auth/popup-closed-by-user':
+                    errorMessage = 'Sign-in popup was closed. Please try again.';
+                    break;
+                case 'auth/popup-blocked':
+                    errorMessage = 'Popup was blocked by your browser. Please allow popups and try again.';
+                    break;
+                case 'auth/account-exists-with-different-credential':
+                    errorMessage = 'An account already exists with this email using a different sign-in method. Try another method or link accounts.';
+                    break;
+                case 'auth/invalid-credential':
+                    errorMessage = 'Invalid Google credentials. Please try again or contact support.';
+                    break;
+                case 'auth/auth-domain-config-required':
+                    errorMessage = 'Authentication domain is not configured. Contact support.';
+                    break;
+                case 'auth/too-many-requests':
+                    errorMessage = 'Too many attempts. Please try again later.';
+                    break;
+                case 'auth/user-disabled':
+                    errorMessage = 'This Google account has been disabled. Contact support.';
+                    break;
+                default:
+                    errorMessage = `Google sign-in failed: ${err.message || 'Unknown error'}`;
+            }
+            Swal.fire({
+                title: 'Error!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    content: 'swal-content',
+                    confirmButton: 'swal-confirm-button',
+                },
+                buttonsStyling: false,
+            });
+        });
     }
     return (
         <button

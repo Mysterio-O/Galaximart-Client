@@ -4,12 +4,13 @@ import { motion } from 'motion/react';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { AuthContext } from '../../Provider/AuthProvider';
 import GoogleLoginButton from '../common/shared/GoogleLoginButton';
+import Swal from 'sweetalert2';
 
 const SignIn = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const {signInUser} = useContext(AuthContext);
+    const { signInUser } = useContext(AuthContext);
 
     const location = useLocation();
     console.log(location);
@@ -47,10 +48,62 @@ const SignIn = () => {
         const password = form.password.value;
 
         signInUser(email, password)
-        .then(result => {
-            console.log('user signed in', result);
-            navigate(`${location?.state ? location?.state : '/'}`)
-        }).catch(err => console.log(err));
+            .then(result => {
+                console.log('user signed in', result);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'You have signed in successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal-dark',
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button',
+                    },
+                    buttonsStyling: false,
+                })
+                navigate(`${location?.state ? location?.state : '/'}`)
+            })
+            .catch((err) => {
+                console.error('Sign-in error:', { code: err.code, message: err.message }); // Debug log
+                let errorMessage = 'An error occurred during sign-in. Please try again.';
+                switch (err.code) {
+                    case 'auth/invalid-email':
+                        errorMessage = 'Invalid email format. Please enter a valid email address.';
+                        break;
+                    case 'auth/invalid-credential':
+                        errorMessage = 'Invalid email or password. Please check your credentials.';
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = 'No account found with this email. Please sign up.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Incorrect password. Please try again.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Too many attempts. Please try again later.';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'This account has been disabled. Contact support.';
+                        break;
+                    default:
+                        errorMessage = `Sign-in failed: ${err.message || 'Unknown error'}`;
+                }
+                Swal.fire({
+                    title: 'Error!',
+                    text: errorMessage,
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal-dark',
+                        title: 'swal-title',
+                        content: 'swal-content',
+                        confirmButton: 'swal-confirm-button',
+                    },
+                    buttonsStyling: false,
+                });
+            });
     }
 
     const customStyles = `
@@ -81,9 +134,9 @@ const SignIn = () => {
                 <h2 className="orbitron text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">
                     Sign In
                 </h2>
-                <form 
-                onSubmit={handleSignIn}
-                className="space-y-6">
+                <form
+                    onSubmit={handleSignIn}
+                    className="space-y-6">
                     <div className="form-control">
                         <label className="label">
                             <span className="font-inter label-text font-semibold text-gray-100">Email</span>
@@ -135,7 +188,7 @@ const SignIn = () => {
                     </p>
                 </form>
                 <div className="divider divider-info text-white">Or Login With</div>
-                <GoogleLoginButton/>
+                <GoogleLoginButton />
             </motion.div>
         </div>
     );
