@@ -8,10 +8,6 @@ const ProductDetailsShape = ({ productPromise }) => {
 
     const product = use(productPromise)
     const ratingNumber = Math.floor(product.rating);
-    useEffect(() => {
-        console.log(product)
-    }
-        , [product])
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);

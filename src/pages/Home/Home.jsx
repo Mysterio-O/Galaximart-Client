@@ -6,7 +6,7 @@ import { useLocation } from 'react-router';
 const Home = () => {
 
     const location = useLocation();
-    console.log(location)
+    // console.log(location)
 
     useEffect(() => {
         if (location.hash === '#categories') {

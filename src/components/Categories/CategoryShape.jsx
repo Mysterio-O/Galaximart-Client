@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { useInView } from 'react-intersection-observer';
 
 const CategoryShape = ({ product, index }) => {
-    console.log(product)
+    // console.log(product)
 
     const controls = useAnimationControls();
 

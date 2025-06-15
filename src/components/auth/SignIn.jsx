@@ -66,7 +66,7 @@ const SignIn = () => {
                 navigate(`${location?.state ? location?.state : '/'}`)
             })
             .catch((err) => {
-                console.error('Sign-in error:', { code: err.code, message: err.message }); // Debug log
+                console.error('Sign-in error:', { code: err.code, message: err.message });
                 let errorMessage = 'An error occurred during sign-in. Please try again.';
                 switch (err.code) {
                     case 'auth/invalid-email':

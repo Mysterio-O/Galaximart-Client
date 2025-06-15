@@ -10,7 +10,7 @@ const Products = () => {
     const [loading, setLoading] = useState(true);
 
     const param = useParams();
-    console.log(param?.product_name)
+    // console.log(param?.product_name)
 
     useEffect(() => {
         fetch(`http://localhost:3000/products/category/${param?.product_name}`)
@@ -22,7 +22,7 @@ const Products = () => {
             .catch(err => console.log('error fetching product data in Products Component', err))
     }, [param])
 
-    console.log(allProducts);
+    // console.log(allProducts);
 
     return (
         <section>

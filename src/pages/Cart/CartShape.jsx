@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { IoRocketOutline } from 'react-icons/io5';
@@ -10,6 +10,7 @@ const CartShape = ({ orderedProductsPromise }) => {
     const orderedProducts = use(orderedProductsPromise);
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setProducts(orderedProducts?.data)
@@ -84,9 +85,9 @@ const CartShape = ({ orderedProductsPromise }) => {
                 if (response.data.acknowledged && response.data.deletedCount > 0) {
                     setProducts(products.filter((product) => product._id !== productId));
 
-                   await axios.patch(`http://localhost:3000/ordered/products/${productName}`, { quantity })
-                    .then(res => console.log(res.data))
-                    .catch(err => console.log(err));
+                    await axios.patch(`http://localhost:3000/ordered/products/${productName}`, { quantity })
+                        .then(res => console.log(res.data))
+                        .catch(err => console.log(err));
 
                     Swal.fire({
                         title: 'Removed!',
@@ -124,6 +125,27 @@ const CartShape = ({ orderedProductsPromise }) => {
 
     console.log(products)
 
+    const handleCategories = () => {
+        // console.log('clicked');
+        if (window.location.pathname === '/') {
+            const element = document.getElementById('categories');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' })
+            } else {
+                setTimeout(() => {
+                    const retryElement = document.getElementById('categories');
+                    if (retryElement) {
+                        retryElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 500);
+            }
+        }
+        else {
+            navigate('/#categories');
+        }
+
+    }
+
     return (
         <div className="container mx-auto px-4 max-w-5xl">
             {products.length === 0 ? (
@@ -150,16 +172,15 @@ const CartShape = ({ orderedProductsPromise }) => {
                         You haven’t purchased any products yet. Explore GalaxyMart and add something amazing!
                     </motion.p>
                     <motion.div variants={emptyItemVariants}>
-                        <Link to="/all-product">
-                            <motion.button
-                                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(34,211,238,0.7)' }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl orbitron font-semibold shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-500 hover:to-indigo-500"
-                            >
-                                <IoRocketOutline size={24} />
-                                Shop Now
-                            </motion.button>
-                        </Link>
+                        <motion.button
+                            onClick={handleCategories}
+                            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(34,211,238,0.7)' }}
+                            whileTap={{ scale: 0.95 }}
+                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl orbitron font-semibold shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-500 hover:to-indigo-500 cursor-pointer"
+                        >
+                            <IoRocketOutline size={24} />
+                            Shop Now
+                        </motion.button>
                     </motion.div>
                 </motion.div>
             ) : (

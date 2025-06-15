@@ -12,7 +12,7 @@ const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext);
 
-    console.log(user);
+    // console.log(user);
 
 
     const navigate = useNavigate();
@@ -52,7 +52,7 @@ const Navbar = () => {
 
 
     const handleCategories = () => {
-        console.log('clicked');
+        // console.log('clicked');
         if (window.location.pathname === '/') {
             const element = document.getElementById('categories');
             if (element) {
@@ -278,8 +278,8 @@ const Navbar = () => {
                                             initial='initial'
                                             whileHover='whileHover'
                                             transition='transition'
-                                            className='w-16 h-16 rounded-full mx-auto cursor-pointer p-1'>
-                                            <img className='rounded-full' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
+                                            className='w-16 h-16 rounded-full mx-auto cursor-pointer p-1 flex'>
+                                            <img className='rounded-full justify-center items-center' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
                                                 : user?.email}'s photo`} />
                                         </motion.div>
                                     }

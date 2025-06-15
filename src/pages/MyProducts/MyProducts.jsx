@@ -10,7 +10,11 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
 
     const productsPromise = axios
-        .get(`http://localhost:3000/products?email=${user?.email}`)
+        .get(`http://localhost:3000/products?email=${user?.email}`,{
+            headers:{
+                authorization:`Bearer ${user?.accessToken}`
+            }
+        })
         .catch((err) => {
             Swal.fire({
                 title: 'Error!',

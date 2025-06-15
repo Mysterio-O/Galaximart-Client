@@ -7,6 +7,7 @@ import Loader from '../../Loaders/Product_Loader/Loader';
 const Categories = () => {
 
     const productsPromise = getCategories();
+    // console.log(productsPromise)
 
     return (
         <div>

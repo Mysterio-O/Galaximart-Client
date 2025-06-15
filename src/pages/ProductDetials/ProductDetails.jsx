@@ -1,15 +1,22 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { useParams } from 'react-router';
 import ProductDetailsShape from './ProductDetailsShape';
 import Loader from '../../Loaders/Product_Loader/Loader';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const ProductDetails = () => {
     const id = useParams();
-    console.log('id=',id)
+    // console.log('id=',id)
+
+    const {user}=useContext(AuthContext);
 
 
 
-    const productPromise = fetch(`http://localhost:3000/product/${id?.id}`).then(res => res.json())
+    const productPromise = fetch(`http://localhost:3000/product/${id?.id}`,{
+        headers:{
+            authorization:`Bearer ${user?.accessToken}`
+        }
+    }).then(res => res.json())
 
 
     return (
