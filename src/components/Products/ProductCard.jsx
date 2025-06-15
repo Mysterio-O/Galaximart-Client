@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
-// import ProductRating from '../Rating/ProductRating';
+import ProductRating from '../Rating/ProductRating';
+
 
 const ProductCard = ({ product, index }) => {
+
+const ratingNumber = product?.rating;
 
     return (
         <>
@@ -34,15 +37,17 @@ const ProductCard = ({ product, index }) => {
                     <h3>{product?.category}</h3>
                     <p
                         className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold`}
-                    >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` :'Out of Stock'}`}</p>
+                    >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` : 'Out of Stock'}`}</p>
                     <p className="text-gray-300 text-sm md:text-base mt-3 line-clamp-2">
                         {product?.description}
                     </p>
                     <p className='text-lg md:text-xl font-semibold text-cyan-300 mt-2'>Minimum Quantity: {product?.minQuantity}</p>
                     <p className='text-base md:text-lg font-medium text-gray-200'>Price: {product?.price}$</p>
-                    {/* <div id='rating'>
-                            <ProductRating/>
-                        </div> */}
+
+                    <div id='rating' className='flex'>
+                        <ProductRating ratingNumber={ratingNumber}/>
+                    </div>
+
                     <div className="card-actions mt-4">
                         <motion.div
                             whileHover={{ scale: 1.1 }}

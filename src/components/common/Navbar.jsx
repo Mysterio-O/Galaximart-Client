@@ -278,7 +278,7 @@ const Navbar = () => {
                                             initial='initial'
                                             whileHover='whileHover'
                                             transition='transition'
-                                            className='w-16 h-16 rounded-full mx-auto cursor-pointer p-1 flex'>
+                                            className='w-16 h-16 rounded-full mx-auto cursor-pointer md:p-1 flex'>
                                             <img className='rounded-full justify-center items-center' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
                                                 : user?.email}'s photo`} />
                                         </motion.div>

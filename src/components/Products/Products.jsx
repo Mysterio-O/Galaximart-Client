@@ -36,7 +36,7 @@ const Products = () => {
             </motion.h2>
             {
                 loading ? <Loader />
-                    : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+                    : <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8'>
                         {
                             allProducts.map((product, index) => <ProductCard
                                 key={product._id}
