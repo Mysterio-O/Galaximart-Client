@@ -1,15 +1,22 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useContext, useState } from 'react';
 import { useParams } from 'react-router';
 import UpdateProductForm from './UpdateProductForm';
 import Loader from '../../Loaders/Default_Loader/Loader';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const UpdateProduct = () => {
+
+    const { user } = useContext(AuthContext);
 
     const [productName, setProductName] = useState('');
 
     const id = useParams();
     console.log(id.id)
-    const productPromise = fetch(`http://localhost:3000/product/${id.id}`).then(res => res.json()).catch(err => console.log(err));
+    const productPromise = fetch(`https://galaxia-mart-server.vercel.app/product/${id.id}`, {
+        headers: {
+            authorization: `Bearer ${user?.accessToken}`
+        }
+    }).then(res => res.json()).catch(err => console.log(err));
     console.log(productPromise)
 
     const fnProductName = (name) => {

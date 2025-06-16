@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import Scroll from '../pages/Scroll/Scroll'
+import GalaxiParalax from '../components/GalaxiParalax/GalaxiParalax';
 
 const RootLayout = () => {
     return (
@@ -10,6 +11,8 @@ const RootLayout = () => {
             <Scroll/>
             <Navbar/>
             <Outlet/>
+            <GalaxiParalax/>
+            <div className="min-h-screen"></div>
             <Footer/>
         </div>
     );

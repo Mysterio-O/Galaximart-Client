@@ -13,12 +13,13 @@ import PrivateRoute from '../Provider/PrivateRoute';
 import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
 import ErrorPage from '../components/common/shared/ErrorPage';
 import Cart from '../pages/Cart/Cart';
+import Paralax from '../components/GalaxiParalax/Paralax';
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
-        errorElement:<ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -33,44 +34,48 @@ const router = createBrowserRouter([
                 Component: SignUp
             },
             {
-                path:'/products/:product_name',
-                Component:Products
+                path: '/products/:product_name',
+                Component: Products
             },
             {
-                path:'/all-product',
-                element:<PrivateRoute>
-                    <AllProducts/>
+                path: '/all-product',
+                element: <PrivateRoute>
+                    <AllProducts />
                 </PrivateRoute>
             },
             {
-                path:'/add-product',
-                element:<PrivateRoute>
-                    <AddProduct/>
+                path: '/add-product',
+                element: <PrivateRoute>
+                    <AddProduct />
                 </PrivateRoute>
             },
             {
-                path:'/my-product',
-                element:<MyProducts/>
+                path: '/my-product',
+                element: <MyProducts />
             },
             {
-                path:'/product/details/:id',
-                element:<PrivateRoute>
-                    <ProductDetails/>
+                path: '/product/details/:id',
+                element: <PrivateRoute>
+                    <ProductDetails />
                 </PrivateRoute>
             },
             {
-                path:'/product/update/:id',
-                element:<PrivateRoute>
-                    <UpdateProduct/>
+                path: '/product/update/:id',
+                element: <PrivateRoute>
+                    <UpdateProduct />
                 </PrivateRoute>
             },
             {
-                path:'/cart',
-                element:<PrivateRoute>
-                    <Cart/>
+                path: '/cart',
+                element: <PrivateRoute>
+                    <Cart />
                 </PrivateRoute>
             }
         ]
+    },
+    {
+        path: '/explore_paralax',
+        Component: Paralax
     }
 ])
 

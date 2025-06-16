@@ -3,11 +3,15 @@ import { AnimatePresence, motion } from 'motion/react';
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
     const [extraInput, setExtraInput] = useState([]);
     const [extraDetails, setExtraDetails] = useState([]);
+
+    const navigate = useNavigate();
 
 
     const product = use(productPromise);
@@ -57,15 +61,48 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
             category,
             description,
             minQuantity: parseInt(minQuantity),
-            rating:parseInt(rating)
+            rating: parseInt(rating)
         }
 
         console.log(updatedProduct)
 
-        if(updatedProduct){
-            axios.patch(`http://localhost:3000/update/product/${product?._id}`,{updatedProduct})
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+        if (updatedProduct) {
+            axios.patch(`https://galaxia-mart-server.vercel.app/update/product/${product?._id}`, { updatedProduct })
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data?.acknowledged || res.data.matchedCount > 0) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Product updated successfully!',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            customClass: {
+                                popup: 'swal-dark',
+                                title: 'swal-title',
+                                content: 'swal-content',
+                                confirmButton: 'swal-confirm-button',
+                            },
+                            buttonsStyling: false,
+                        });
+                        navigate('/all-product')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Failed to update product. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal-dark',
+                            title: 'swal-title',
+                            content: 'swal-content',
+                            confirmButton: 'swal-confirm-button',
+                        },
+                        buttonsStyling: false,
+                    });
+                });
         }
 
     }
@@ -365,7 +402,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
             >
                 <motion.button
                     type="submit"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300 orbitron font-semibold"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300 orbitron font-semibold cursor-pointer"
                     whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
                     whileTap={{ scale: 0.95 }}
                 >

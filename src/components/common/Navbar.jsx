@@ -122,6 +122,7 @@ const Navbar = () => {
                 content: 'swal-content',
                 confirmButton: 'swal-confirm-button',
                 cancelButton: 'swal-cancel-button',
+                actions:'flex gap-4'
             },
             buttonsStyling: false,
         }).then(result => {
@@ -141,6 +142,7 @@ const Navbar = () => {
                         },
                         buttonsStyling: false,
                     });
+                    navigate('/auth/signin');
                 }).catch(err => console.log(err));
             }
         })
@@ -279,7 +281,7 @@ const Navbar = () => {
                                             whileHover='whileHover'
                                             transition='transition'
                                             className='w-16 h-16 rounded-full mx-auto cursor-pointer md:p-1 flex'>
-                                            <img className='rounded-full justify-center items-center' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
+                                            <img className='rounded-full justify-center w-14 h-14 items-center' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
                                                 : user?.email}'s photo`} />
                                         </motion.div>
                                     }

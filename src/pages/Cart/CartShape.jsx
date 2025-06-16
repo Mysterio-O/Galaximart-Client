@@ -58,6 +58,7 @@ const CartShape = ({ orderedProductsPromise }) => {
                 content: 'swal-content',
                 confirmButton: 'swal-confirm-button',
                 cancelButton: 'swal-cancel-button',
+                actions: 'flex gap-4'
             },
             buttonsStyling: false,
         });
@@ -80,12 +81,12 @@ const CartShape = ({ orderedProductsPromise }) => {
                     },
                 });
 
-                const response = await axios.delete(`http://localhost:3000/ordered/product/${productId}`);
+                const response = await axios.delete(`https://galaxia-mart-server.vercel.app/ordered/product/${productId}`);
 
                 if (response.data.acknowledged && response.data.deletedCount > 0) {
                     setProducts(products.filter((product) => product._id !== productId));
 
-                    await axios.patch(`http://localhost:3000/ordered/products/${productName}`, { quantity })
+                    await axios.patch(`https://galaxia-mart-server.vercel.app/ordered/products/${productName}`, { quantity })
                         .then(res => console.log(res.data))
                         .catch(err => console.log(err));
 
@@ -123,7 +124,7 @@ const CartShape = ({ orderedProductsPromise }) => {
         }
     };
 
-    console.log(products)
+    // console.log(products)
 
     const handleCategories = () => {
         // console.log('clicked');
@@ -245,7 +246,7 @@ const CartShape = ({ orderedProductsPromise }) => {
                                     onClick={() => handleRemove(product?._id, product?.name, product?.quantity)}
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="mt-4 w-full bg-gradient-to-r from-red-600/50 to-red-800/50 text-white py-2.5 rounded-lg font-medium orbitron hover:from-red-500 hover:to-red-700 shadow-[0_0_10px_rgba(239,68,68,0.3)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)]"
+                                    className="mt-4 w-full bg-gradient-to-r from-red-600/50 to-red-800/50 text-white py-2.5 rounded-lg font-medium orbitron hover:from-red-500 hover:to-red-700 shadow-[0_0_10px_rgba(239,68,68,0.3)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)] cursor-pointer"
                                 >
                                     Cancel Order
                                 </motion.button>
