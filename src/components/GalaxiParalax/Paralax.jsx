@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import LetterGlitch from './LetterGlitch';
+import ParalaxContainer from './ParalaxContainer';
 
 const Paralax = () => {
+
+    const [isGlitch, setIsGlitch] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsGlitch(false);
+        }, 3000);
+    }, [])
+
     return (
-        <div className='min-h-screen bg-neutral-900 flex justify-center items-center'>
-            <h2 className='text-5xl text-accent-content'>Welcome to Paralax</h2>
+
+
+
+        <div>
+            {
+                isGlitch ? <div className="min-h-screen">
+                    <LetterGlitch
+                        glitchSpeed={50}
+                        centerVignette={true}
+                        outerVignette={false}
+                        smooth={true}
+
+                    />
+                </div>
+                    : <ParalaxContainer />
+            }
         </div>
+
+
+
     );
 };
 

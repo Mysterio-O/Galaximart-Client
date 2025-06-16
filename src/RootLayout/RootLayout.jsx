@@ -12,7 +12,6 @@ const RootLayout = () => {
             <Navbar/>
             <Outlet/>
             <GalaxiParalax/>
-            <div className="min-h-screen"></div>
             <Footer/>
         </div>
     );

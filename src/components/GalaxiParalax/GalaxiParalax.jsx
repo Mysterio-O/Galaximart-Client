@@ -14,7 +14,7 @@ const GalaxiParalax = () => {
     })
 
     // useMotionValueEvent(scrollYProgress, "change", (latest)=> {
-    //     // console.log("changed value",latest)
+    //     console.log("changed value",latest)
     // })
 
     const translateContent = useTransform(scrollYProgress, [0, 1], [50, 0])
@@ -36,7 +36,7 @@ const GalaxiParalax = () => {
                         y: translateContent,
                         opacity: opacityContent
                     }}
-                    className="relative z-10 max-w-6xl mx-auto px-4">
+                    className="z-10 max-w-6xl mx-auto px-4 mb-64">
                     <h2 className="text-4xl md:text-5xl font-bold orbitron text-center mb-4 text-cyan-100">
                         <GradientText
                             colors={["#22D3EE", "#A5F3FC", "#6366F1", "#EC4899", "#22D3EE"]}
