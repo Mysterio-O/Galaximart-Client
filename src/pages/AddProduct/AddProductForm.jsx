@@ -73,7 +73,7 @@ const AddProductForm = () => {
             email: user?.email
         }
 
-        console.log(newProduct);
+        // console.log(newProduct);
 
         Swal.fire({
             title: 'Adding Product...',
@@ -91,7 +91,7 @@ const AddProductForm = () => {
             },
         });
 
-        fetch('http://localhost:3000/products', {
+        fetch('https://galaxia-mart-server.vercel.app/products', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -114,7 +114,7 @@ const AddProductForm = () => {
                         },
                         buttonsStyling: false,
                     });
-                    console.log('Product added:', data);
+                    // console.log('Product added:', data);
                 }
             })
             .catch(err => {

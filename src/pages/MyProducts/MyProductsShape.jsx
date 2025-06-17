@@ -32,7 +32,7 @@ const MyProductsShape = ({ productsPromise }) => {
 
         const product = myProducts.find(product => product._id === id);
         const productName = product.name
-        console.log(product);
+        // console.log(product);
 
         Swal.fire({
             title: 'Are you sure?',
@@ -51,9 +51,9 @@ const MyProductsShape = ({ productsPromise }) => {
             buttonsStyling: false,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3000/products/delete/${id}`)
+                axios.delete(`https://galaxia-mart-server.vercel.app/products/delete/${id}`)
                     .then(res => {
-                        console.log(res)
+                        // console.log(res)
                         Swal.fire({
                             title: 'Deleted!',
                             text: 'Product has been deleted successfully.',

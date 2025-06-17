@@ -13,7 +13,7 @@ const Products = () => {
     // console.log(param?.product_name)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/category/${param?.product_name}`)
+        fetch(`https://galaxia-mart-server.vercel.app/products/category/${param?.product_name}`)
             .then(res => res.json())
             .then(data => {
                 setAllProducts(data)

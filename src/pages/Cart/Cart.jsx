@@ -13,8 +13,9 @@ const Cart = () => {
         let title = "";
         if (user && user?.displayName) {
             title = `${user?.displayName}'s Cart`
-        } else {
-            title: "My Cart"
+        }
+        else{
+            title="My Cart"
         }
         document.title = title
     }, [user])
@@ -28,7 +29,7 @@ const Cart = () => {
     }
 
     const orderedProductsPromise = axios
-        .get(`http://localhost:3000/ordered/products?email=${user?.email}`, {
+        .get(`https://galaxia-mart-server.vercel.app/ordered/products?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${user?.accessToken}`
             }

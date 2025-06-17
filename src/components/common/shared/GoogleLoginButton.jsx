@@ -24,7 +24,7 @@ const GoogleLoginButton = () => {
                 },
                 buttonsStyling: false,
             })
-            console.log('user signed in using google', result)
+            // console.log('user signed in using google', result)
             navigate(`${location?.state ? location?.state : '/'}`)
         }).catch((err) => {
             console.error('Google sign-in error:', { code: err.code, message: err.message }); // Debug log

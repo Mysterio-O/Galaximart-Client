@@ -54,7 +54,7 @@ const GalaxiParalax = () => {
                     <div className="mt-16 text-center">
                         <StarBorder>
                             <Link to="/explore_paralax">
-                                <button className="relative px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-cyan-100 orbitron font-semibold rounded-full border-2 border-cyan-300/30 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-500 hover:to-indigo-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 overflow-hidden group cursor-pointer">
+                                <span className="relative btn px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-cyan-100 orbitron font-semibold rounded-full border-2 border-cyan-300/30 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-500 hover:to-indigo-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 overflow-hidden group cursor-pointer">
                                     <span className="relative z-10 flex items-center gap-2">
                                         Explore
                                         <svg
@@ -69,7 +69,7 @@ const GalaxiParalax = () => {
                                         </svg>
                                     </span>
                                     <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-indigo-400/20 scale-0 group-hover:scale-150 transition-transform duration-700 rounded-full"></span>
-                                </button>
+                                </span>
                             </Link>
                         </StarBorder>
                     </div>

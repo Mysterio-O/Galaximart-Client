@@ -13,7 +13,7 @@ const SignIn = () => {
     const { signInUser } = useContext(AuthContext);
 
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
 
     const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const SignIn = () => {
 
         signInUser(email, password)
             .then(result => {
-                console.log('user signed in', result);
+                // console.log('user signed in', result);
                 Swal.fire({
                     title: 'Success!',
                     text: 'You have signed in successfully.',
@@ -67,6 +67,7 @@ const SignIn = () => {
             })
             .catch((err) => {
                 console.error('Sign-in error:', { code: err.code, message: err.message });
+
                 let errorMessage = 'An error occurred during sign-in. Please try again.';
                 switch (err.code) {
                     case 'auth/invalid-email':
@@ -164,7 +165,7 @@ const SignIn = () => {
                         />
                         <span
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-9 top-[59%] transform -translate-y-1/2 cursor-pointer text-gray-400 hover:text-cyan-400"
+                            className="absolute right-10 top-58 transform -translate-y-1/2 cursor-pointer text-gray-400 hover:text-cyan-400"
                         >
                             {!showPassword ? <VscEyeClosed size={24} /> : <VscEye size={24} />}
                         </span>

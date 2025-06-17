@@ -7,7 +7,7 @@ const ProductCardShape = ({ product, index }) => {
 
 
     const handleUpdateProduct = (id)=> {
-        console.log(id);
+        // console.log(id);
         navigate(`/product/update/${id}`)
     }
 

@@ -15,7 +15,7 @@ const MyProducts = () => {
     useEffect(() => {
         if (!loading && user && user?.accessToken) {
             const fetchProducts = axios
-                .get(`http://localhost:3000/products?email=${user?.email}`, {
+                .get(`https://galaxia-mart-server.vercel.app/products?email=${user?.email}`, {
                     headers: {
                         authorization: `Bearer ${user?.accessToken}`
                     }
@@ -41,7 +41,7 @@ const MyProducts = () => {
         }
 
         let title = "";
-        if (user) {
+        if (user && user?.displayName) {
             title = `${user?.displayName}'s Products`
         } else {
             title = "My Products"

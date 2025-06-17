@@ -72,7 +72,7 @@ const Content = () => {
     useMotionValueEvent(scrollYProgress, 'change', (latest) => {
         const finalValue = Math.floor(latest * backgrounds.length);
         setBackground(backgrounds[finalValue]);
-        console.log(`Scroll progress for containerRef->`, latest, 'finalValue->', finalValue);
+        // console.log(`Scroll progress for containerRef->`, latest, 'finalValue->', finalValue);
     });
 
     const contents = [

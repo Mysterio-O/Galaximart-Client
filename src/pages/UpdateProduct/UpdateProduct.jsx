@@ -11,16 +11,16 @@ const UpdateProduct = () => {
     const [productName, setProductName] = useState('');
 
     const id = useParams();
-    console.log(id.id)
-    const productPromise = fetch(`http://localhost:3000/product/${id.id}`, {
+    // console.log(id.id)
+    const productPromise = fetch(`https://galaxia-mart-server.vercel.app/product/${id.id}`, {
         headers: {
             authorization: `Bearer ${user?.accessToken}`
         }
     }).then(res => res.json()).catch(err => console.log(err));
-    console.log(productPromise)
+    // console.log(productPromise)
 
     const fnProductName = (name) => {
-        console.log(name);
+        // console.log(name);
         setProductName(name);
     }
     return (

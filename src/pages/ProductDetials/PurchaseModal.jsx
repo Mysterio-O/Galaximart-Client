@@ -28,7 +28,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
-        console.log(data);
+        // console.log(data);
 
         const { address, paymentOption, userName, email } = data;
 
@@ -105,19 +105,19 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
         const buyingDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 
-        console.log(buyingDate)
+        // console.log(buyingDate)
 
         const orderedProducts = {
             brand, category, description, image, name, minQuantity, rating, quantity, buyingDate, address, paymentOption, userName, email, stock
         }
 
 
-        axios.post(`http://localhost:3000/ordered/products`, { orderedProducts })
+        axios.post(`https://galaxia-mart-server.vercel.app/ordered/products`, { orderedProducts })
             .then(res => {
                 if (res.data.acknowledged || res.data.insertedId) {
-                    axios.patch(`http://localhost:3000/purchase/product/${product?._id}`, { quantity })
+                    axios.patch(`https://galaxia-mart-server.vercel.app/purchase/product/${product?._id}`, { quantity })
                         .then(res => {
-                            console.log('Purchase successful', res.data);
+                            // console.log('Purchase successful', res.data);
                             Swal.fire({
                                 title: 'Purchase Successful',
                                 text: 'Product Purchased successfully!',

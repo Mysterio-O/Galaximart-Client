@@ -90,7 +90,7 @@ const SignUp = () => {
         signUpNewUser(email, password).then(result => {
             setProfileInfo({ photoURL: photo, displayName: name })
                 .then(() => {
-                    console.log('user created and profile updated', result);
+                    // console.log('user created and profile updated', result);
                     Swal.fire({
                         title: 'Success!',
                         text: 'Account created successfully!',

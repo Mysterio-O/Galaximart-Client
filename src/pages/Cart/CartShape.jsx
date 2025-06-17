@@ -81,12 +81,12 @@ const CartShape = ({ orderedProductsPromise }) => {
                     },
                 });
 
-                const response = await axios.delete(`http://localhost:3000/ordered/product/${productId}`);
+                const response = await axios.delete(`https://galaxia-mart-server.vercel.app/ordered/product/${productId}`);
 
                 if (response.data.acknowledged && response.data.deletedCount > 0) {
                     setProducts(products.filter((product) => product._id !== productId));
 
-                    await axios.patch(`http://localhost:3000/ordered/products/${productName}`, { quantity })
+                    await axios.patch(`https://galaxia-mart-server.vercel.app/ordered/products/${productName}`, { quantity })
                         .then(res => console.log(res.data))
                         .catch(err => console.log(err));
 

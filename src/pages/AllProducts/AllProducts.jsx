@@ -26,25 +26,25 @@ const AllProducts = () => {
             newTitle = "All Products "
         }
         newTitle += isTable ? "Table View" : "Card View";
-        newTitle+="- Galactic"
+        newTitle += "- Galactic"
         setTitle(newTitle);
         document.title = title
-    }, [sortValue, isTable,title])
+    }, [sortValue, isTable, title])
 
 
 
     const token = user?.accessToken
     // console.log("user->",user,"token->",token)
 
-    
+
 
     const handleSortChange = (e) => {
         const value = e.target.value
         setSortValue(value === '' ? '' : value);
-        console.log('Selected sort value:', value);
+        // console.log('Selected sort value:', value);
     }
 
-    const productsPromise = axios.get(`http://localhost:3000/allProducts?sortParam=${sortValue}`, {
+    const productsPromise = axios.get(`https://galaxia-mart-server.vercel.app/allProducts?sortParam=${sortValue}`, {
         headers: {
             authorization: `Bearer ${token}`
         }
@@ -59,8 +59,8 @@ const AllProducts = () => {
 
     // console.log(sortValue)
 
-    const handleScroll = ()=> {
-        window.scrollTo({top:0,behavior:'smooth'})
+    const handleScroll = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     return (
@@ -150,13 +150,13 @@ const AllProducts = () => {
                 }
             </Suspense>
 
-<motion.span
+            <motion.span
                 onClick={handleScroll}
                 className="fixed z-50 bottom-10 right-10 cursor-pointer bg-indigo-300 text-white p-3 rounded-full shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all duration-300"
                 role="button"
                 aria-label="Scroll to top"
-                whileHover={{ translateY:-10}}
-                transition={{duration:0.3}}
+                whileHover={{ translateY: -10 }}
+                transition={{ duration: 0.3 }}
             >
                 <FaAnglesUp size={24} />
             </motion.span>
