@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import CartShape from './CartShape';
@@ -8,6 +8,16 @@ import Swal from 'sweetalert2';
 
 const Cart = () => {
     const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        let title = "";
+        if (user && user?.displayName) {
+            title = `${user?.displayName}'s Cart`
+        } else {
+            title: "My Cart"
+        }
+        document.title = title
+    }, [user])
 
     if (!user?.email) {
         return (

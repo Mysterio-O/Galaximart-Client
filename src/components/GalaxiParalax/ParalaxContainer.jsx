@@ -9,6 +9,7 @@ const ParalaxContainer = () => {
     const [contentOnTheScreen, setContentOnTheScreen] = useState(false);
 
     useEffect(() => {
+        document.title = "Galactic Parallax"
         setTimeout(() => {
             setIsOnTheScreen(false);
         }, 5000);
@@ -48,7 +49,7 @@ const ParalaxContainer = () => {
                             rootMargin="-100px"
                             textAlign="center"
                         />
-                        </motion.h2>
+                    </motion.h2>
                 }
             </AnimatePresence>
 

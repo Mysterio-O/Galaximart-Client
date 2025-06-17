@@ -9,6 +9,14 @@ const ProductDetailsShape = ({ productPromise }) => {
     const product = use(productPromise)
     const ratingNumber = Math.floor(product.rating);
 
+    const [isStocked, setIsStocked] = useState(true);
+
+    useEffect(() => {
+        if (product?.stock < product?.minQuantity) {
+            setIsStocked(false);
+        }
+    }, [product])
+
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,6 +29,10 @@ const ProductDetailsShape = ({ productPromise }) => {
         minutes: 45,
         seconds: 5,
     });
+
+    useEffect(() => {
+        document.title = `${product?.name}'s Details`
+    }, [product])
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -156,6 +168,10 @@ const ProductDetailsShape = ({ productPromise }) => {
 
                     <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-cyan-100 tracking-wide">{product.name}</h1>
 
+                    {
+                        !isStocked && <p className="text-red-400 font-semibold">(Out Of Stock)</p>
+                    }
+
                     <p className="text-cyan-200/80 text-[0.9rem] leading-relaxed">
                         {product.description ||
                             "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks."}
@@ -236,30 +252,32 @@ const ProductDetailsShape = ({ productPromise }) => {
                         </motion.button>
                     </div>
 
-                    <div className="flex gap-5">
-                        <motion.button
-                            onClick={handleAddToCart}
-                            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            Add to Cart
-                        </motion.button>
-                        <motion.button
-                            onClick={handleBuyNow}
-                            className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            Buy Now
-                        </motion.button>
-                    </div>
+                    {
+                        isStocked && <div className="flex gap-5">
+                            <motion.button
+                                onClick={handleAddToCart}
+                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                Add to Cart
+                            </motion.button>
+                            <motion.button
+                                onClick={handleBuyNow}
+                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                Buy Now
+                            </motion.button>
+                        </div>
+                    }
                 </div>
             </div>
 
 
             <AnimatePresence>
-                {isModalOpen && <PurchaseModal product={product} handleCloseModal={handleCloseModal} quantity={quantity} setIsModalOpen={setIsModalOpen}/>}
+                {isModalOpen && <PurchaseModal product={product} handleCloseModal={handleCloseModal} quantity={quantity} setIsModalOpen={setIsModalOpen} />}
             </AnimatePresence>
 
 

@@ -10,7 +10,11 @@ const Paralax = () => {
         setTimeout(() => {
             setIsGlitch(false);
         }, 3000);
+
+        document.title="Entering Parallax.."
     }, [])
+
+
 
     return (
 

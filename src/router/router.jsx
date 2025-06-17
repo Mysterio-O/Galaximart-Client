@@ -14,6 +14,8 @@ import UpdateProduct from '../pages/UpdateProduct/UpdateProduct';
 import ErrorPage from '../components/common/shared/ErrorPage';
 import Cart from '../pages/Cart/Cart';
 import Paralax from '../components/GalaxiParalax/Paralax';
+import AboutUs from '../pages/AboutUs/AboutUs';
+import ContactUs from '../pages/ContactUs/ContactUs';
 
 const router = createBrowserRouter([
     {
@@ -70,6 +72,13 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <Cart />
                 </PrivateRoute>
+            },
+            {
+                path: 'about-us',
+                Component: AboutUs
+            }, {
+                path: 'contact-us',
+                Component: ContactUs
             }
         ]
     },

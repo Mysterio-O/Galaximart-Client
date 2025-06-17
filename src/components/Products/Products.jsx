@@ -24,6 +24,10 @@ const Products = () => {
 
     // console.log(allProducts);
 
+    useEffect(() => {
+        document.title = allProducts[0]?.category
+    }, [allProducts])
+
     return (
         <section>
             <motion.h2

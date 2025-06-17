@@ -14,6 +14,10 @@ const Home = () => {
     const location = useLocation();
     // console.log(location)
 
+    useEffect(()=>{
+        document.title='Home | GalaxiMart'
+    },[])
+
     useEffect(() => {
         if (location.hash === '#categories') {
             const element = document.getElementById('categories');
