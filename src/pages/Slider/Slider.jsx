@@ -27,9 +27,8 @@ const videoSlides = [
       text: 'Discover Vision',
       className: 'btn btn-primary bg-purple-600 hover:bg-purple-700 text-white border-none px-8 py-3 flex items-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.5)]',
       icon: <FaEye />,
-      href: '/shop/holosmart-glasses',
     },
-  },
+},
   {
     src: hoverBoard,
     title: 'Quantum Hoverboards',
@@ -43,7 +42,6 @@ const videoSlides = [
       text: 'Ride Now',
       className: 'btn btn-accent bg-yellow-500 hover:bg-yellow-600 text-black rounded-full px-6 py-2 flex items-center gap-2',
       icon: <FaArrowRight />,
-      href: '/shop/quantum-hoverboards',
     },
   },
   {
@@ -59,7 +57,6 @@ const videoSlides = [
       text: 'Connect Now',
       className: 'btn btn-ghost text-white border-white hover:bg-white/20 px-6 py-2 flex items-center gap-2',
       icon: <FaHome />,
-      href: '/shop/smart-home-hub',
     },
   },
 ];
