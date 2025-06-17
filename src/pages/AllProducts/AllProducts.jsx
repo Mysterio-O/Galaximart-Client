@@ -17,6 +17,16 @@ const AllProducts = () => {
 
     return (
         <div className='min-h-screen mt-32 max-w-6xl mx-auto'>
+
+            <form>
+                <label>Sort Items:</label>
+                <select name="sortOptions">
+                    <option value="" selected>Select Sort Param</option>
+                    <option value="50">Min Buy 50</option>
+                    <option value="100">Min Buy 100</option>
+                </select>
+            </form>
+
             <Suspense fallback={<Loader />}>
                 <Products productsPromise={productsPromise}></Products>
             </Suspense>

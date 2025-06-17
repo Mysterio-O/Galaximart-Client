@@ -1,0 +1,60 @@
+brand
+: 
+"Weber"
+category
+: 
+"Sports & Outdoors"
+description
+: 
+"High-quality and durable portable grill, perfect for picnics and camping trips."
+features
+: 
+Array(3)
+0
+: 
+{title: 'Cooking Area', details: ' Offers 145–280 square inches of cooking space (e.…ng burgers, steaks, or vegetables for 4–6 people.'}
+1
+: 
+{title: 'Portability', details: ' Lightweight (14–30 pounds) with foldable legs and…, ideal for camping, tailgating, or backyard use.'}
+2
+: 
+{title: 'Fuel Efficiency', details: ' Uses disposable propane canisters or adapters for…electronic ignition for quick, reliable startups.'}
+length
+: 
+3
+[[Prototype]]
+: 
+Array(0)
+id
+: 
+"6700072d-e271-4104-9038-bc79e70d2f9f"
+image
+: 
+Array(2)
+0
+: 
+"https://i.ibb.co/3yHG8Vh6/download.jpg"
+1
+: 
+"https://i.ibb.co/Z6F3vhWD/download.jpg"
+length
+: 
+2
+[[Prototype]]
+: 
+Array(0)
+minQuantity
+: 
+30
+name
+: 
+"Portable Grill"
+price
+: 
+399.76
+rating
+: 
+4.1
+stock
+: 
+1910

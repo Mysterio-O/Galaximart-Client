@@ -1,0 +1,209 @@
+[
+    {
+        "id": "e7a90199-da0f-4835-95e4-feda813d17cb",
+        "name": "Water Bottle",
+        "brand": "Apple",
+        "category": "Electronics",
+        "minQuantity": 20,
+        "description": "Perfect for everyday use.",
+        "price": 495.1,
+        "rating": 4.3,
+        "image": [
+            "https://i.ibb.co/0VfYjZfb/the-bottles-come-with-a-protective-spout-cover-and-lock-that-helps-keep-out-dirt-and-germs-and-also.webp",
+            "https://i.ibb.co/HLbB2P23/images.jpg",
+            "https://i.ibb.co/kgSJyTWq/images.jpg"
+        ],
+        "features": [
+            {
+                "title": "Material",
+                "details": "Typically made from stainless steel or BPA-free plastic, ensuring durability and safety for hot or cold beverages."
+            },
+            {
+                "title": "Capacity",
+                "details": "Ranges from 500ml to 1 liter, ideal for daily hydration needs during travel, work, or exercise."
+            },
+            {
+                "title": "Insulation",
+                "details": "Often double-walled with vacuum insulation, keeping drinks cold for 24 hours or hot for 12 hours."
+            }
+        ],
+        "stock": 500
+    },
+    {
+        "id": "99d0a5c6-2af4-43a9-860d-c20eead8fff3",
+        "name": "World Atlas",
+        "brand": "National Geographic",
+        "category": "Books & Stationery",
+        "minQuantity": 10,
+        "description": "A beautifully illustrated world atlas with detailed maps and geographical information.",
+        "price": 18.18,
+        "rating": 3.1,
+        "image": [
+            "https://i.ibb.co/VcH82Tm2/NG-WA-2016-world-atlas-85620-93964.jpg",
+            "https://i.ibb.co/hR710HH9/images.jpg"
+        ],
+        "features": [
+            {
+                "title": "Comprehensive Maps",
+                "details": "Features detailed political, physical, and thematic maps of the world, updated with the latest geographic and political data."
+            },
+            {
+                "title": "Educational Content",
+                "details": "Includes facts on countries, climates, and ecosystems, with high-quality visuals and charts for students and enthusiasts."
+            },
+            {
+                "title": "Durable Format",
+                "details": "Available in hardcover or paperback, typically 300+ pages, with a large format (e.g., 10 x 13 inches) for easy reading."
+            }
+        ],
+        "stock": 400
+    },
+    {
+        "id": "f58c60d2-74c5-4e60-a06d-b52283dd75ac",
+        "name": "Running Shoes",
+        "brand": "Nike",
+        "category": "Sports & Outdoors",
+        "minQuantity": 30,
+        "description": "Experience superior comfort and performance with these limited edition running shoes, engineered for all terrains.",
+        "price": 192.47,
+        "rating": 4.0,
+        "image": [
+            "https://i.ibb.co/9kSscrYs/download.jpg",
+            "https://i.ibb.co/d4FSmp0h/download.jpg"
+        ],
+        "features": [
+            {
+                "title": "Cushioning Technology",
+                "details": " Features Zoom Air or React foam for responsive cushioning, providing comfort and energy return for long-distance running or sprints."
+            },
+            {
+                "title": "Breathable Upper",
+                "details": " Constructed with Flyknit or mesh uppers for enhanced airflow, reducing sweat and keeping feet cool during intense runs."
+            },
+            {
+                "title": "Traction and Durability",
+                "details": " Equipped with a durable rubber outsole with waffle or lug patterns for superior grip on roads, tracks, or light trails."
+            }
+        ],
+        "stock": 990
+    },
+    {
+        "id": "d27e8c79-512c-4a22-8dc8-f535cae83e96",
+        "name": "Yoga Mat",
+        "brand": "Manduka",
+        "category": "Sports & Outdoors",
+        "minQuantity": 20,
+        "description": "A top-rated yoga mat providing excellent grip and cushioning for all your fitness routines.",
+        "price": 356.36,
+        "rating": 4.8,
+        "image": [
+            "https://i.ibb.co/8tkVDxN/images.jpg",
+            "https://i.ibb.co/RTdWJH7N/images.jpg",
+            "https://i.ibb.co/4wMrCfPV/download.jpg"
+        ],
+        "features": [
+            {
+                "title": "Material and Grip",
+                "details": " Made from eco-friendly PVC (e.g., PRO series) or natural rubber, offering superior grip even when wet, ideal for hot yoga or intense sessions."
+            },
+            {
+                "title": "Thickness and Comfort",
+                "details": " Available in 5–6mm thickness for cushioning joints, with a dense structure to support balance during poses."
+            },
+            {
+                "title": "Durability",
+                "details": " Features a closed-cell surface to prevent sweat absorption and a lifetime guarantee on select models like the PRO, ensuring long-term use."
+            }
+        ],
+        "stock": 1200
+    },
+    {
+        "id": "e6ec91ee-5037-408e-a3f0-87baf25c47f6",
+        "name": "Camping Lantern",
+        "brand": "Black Diamond",
+        "category": "Sports & Outdoors",
+        "minQuantity": 50,
+        "description": "An affordable and reliable camping lantern providing bright and long-lasting illumination.",
+        "price": 337.27,
+        "rating": 4.9,
+        "image": [
+            "https://i.ibb.co/Cs27myzt/download.jpg",
+            "https://i.ibb.co/1G2Vtnjd/images.jpg"
+        ],
+        "features": [
+            {
+                "title": "Brightness",
+                "details": " Provides up to 250–400 lumens (e.g., Black Diamond Moji), with adjustable settings for dimming or strobe modes, illuminating campsites effectively."
+            },
+            {
+                "title": "Portability",
+                "details": " Lightweight (3–5 oz) with a collapsible hook or base for hanging or standing, powered by AAA batteries or USB-rechargeable options."
+            },
+            {
+                "title": "Durability",
+                "details": " IPX4 water-resistant rating ensures functionality in rain, with a frosted globe for even light distribution."
+            }
+        ],
+        "stock": 1200
+    },
+    {
+        "id": "52f7b45c-ff56-4350-90ff-19cb822c290c",
+        "name": "Portable Camping Chair",
+        "brand": "Helinox",
+        "category": "Sports & Outdoors",
+        "minQuantity": 20,
+        "description": "An ultra-lightweight and compact portable camping chair made with eco-friendly materials.",
+        "price": 454.13,
+        "rating": 5.0,
+        "image": [
+            "https://i.ibb.co/TDrVZzkf/download.jpg",
+            "https://i.ibb.co/yFqHs7pR/download.jpg"
+        ],
+        "features": [
+            {
+                "title": "Lightweight Design",
+                "details": " Weighs 1–2 pounds (e.g., Helinox Chair One), with a collapsible aluminum frame for easy transport in a carry bag."
+            },
+            {
+                "title": "Comfort and Support",
+                "details": " Supports up to 320 pounds with a breathable polyester seat, offering ergonomic seating for extended campsite relaxation."
+            },
+            {
+                "title": "Durability",
+                "details": " Features DAC aluminum poles and ripstop fabric, with weather-resistant construction for use in various outdoor conditions."
+            }
+        ],
+        "stock": 997
+    },
+    {
+        "id": "1fd306ee-9817-427c-8a39-87c8d7abca87",
+        "name": "Board Game: Catan",
+        "brand": "Catan Studio",
+        "category": "Toys & Games",
+        "minQuantity": 50,
+        "description": "A top-rated strategy board game where players collect resources and build settlements.",
+        "price": 19.08,
+        "rating": 3.7,
+        "image": [
+            "https://i.ibb.co/7t97jGk1/images.jpg",
+            "https://i.ibb.co/RG8BCPJK/download.jpg"
+        ],
+        "features": [
+            {
+                "title": "Gameplay",
+                "details": " A strategy game for 3–4 players (ages 10+), involving resource management (wood, wheat, ore, etc.) to build settlements, roads, and cities, with games lasting 60–90 minutes."
+            },
+            {
+                "title": "Replayability",
+                "details": " Features a modular board with variable setups, ensuring unique gameplay each time, with expansions available for added complexity."
+            },
+            {
+                "title": "Educational Benefits",
+                "details": " Promotes critical thinking, negotiation, and planning skills, making it a favorite for family game nights and educational settings."
+            }
+        ],
+        "stock": 1200
+    }
+]
+
+
