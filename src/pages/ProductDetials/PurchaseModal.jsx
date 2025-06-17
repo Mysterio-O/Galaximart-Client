@@ -112,10 +112,10 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
         }
 
 
-        axios.post(`https://galaxia-mart-server.vercel.app/ordered/products`, { orderedProducts })
+        axios.post(`http://localhost:3000/ordered/products`, { orderedProducts })
             .then(res => {
                 if (res.data.acknowledged || res.data.insertedId) {
-                    axios.patch(`https://galaxia-mart-server.vercel.app/purchase/product/${product?._id}`, { quantity })
+                    axios.patch(`http://localhost:3000/purchase/product/${product?._id}`, { quantity })
                         .then(res => {
                             console.log('Purchase successful', res.data);
                             Swal.fire({

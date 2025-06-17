@@ -51,7 +51,7 @@ const MyProductsShape = ({ productsPromise }) => {
             buttonsStyling: false,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://galaxia-mart-server.vercel.app/products/delete/${id}`)
+                axios.delete(`http://localhost:3000/products/delete/${id}`)
                     .then(res => {
                         console.log(res)
                         Swal.fire({

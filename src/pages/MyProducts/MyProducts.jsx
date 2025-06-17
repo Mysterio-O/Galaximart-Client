@@ -10,7 +10,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
 
     const productsPromise = axios
-        .get(`https://galaxia-mart-server.vercel.app/products?email=${user?.email}`, {
+        .get(`http://localhost:3000/products?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${user?.accessToken}`
             }

@@ -67,7 +67,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
         console.log(updatedProduct)
 
         if (updatedProduct) {
-            axios.patch(`https://galaxia-mart-server.vercel.app/update/product/${product?._id}`, { updatedProduct })
+            axios.patch(`http://localhost:3000/update/product/${product?._id}`, { updatedProduct })
                 .then(res => {
                     console.log(res.data)
                     if (res.data?.acknowledged || res.data.matchedCount > 0) {

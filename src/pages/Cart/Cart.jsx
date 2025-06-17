@@ -18,7 +18,7 @@ const Cart = () => {
     }
 
     const orderedProductsPromise = axios
-        .get(`https://galaxia-mart-server.vercel.app/ordered/products?email=${user?.email}`, {
+        .get(`http://localhost:3000/ordered/products?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${user?.accessToken}`
             }

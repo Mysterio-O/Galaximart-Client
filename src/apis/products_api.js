@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getProducts = (token) => {
-    return axios.get('https://galaxia-mart-server.vercel.app/products', {
+    return axios.get('http://localhost:3000/products', {
         headers: {
             authorization: `Bearer ${token}`
         }
