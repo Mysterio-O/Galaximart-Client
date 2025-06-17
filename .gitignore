@@ -22,5 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-rest_data.json
-data_template.json
