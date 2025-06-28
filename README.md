@@ -5,6 +5,10 @@ GaalxiMart is an online wholesale web platform where users can browse a wide ran
 ## Live Link
 [GaalxiMart](https://galaxi-mart.netlify.app)
 
+---
+## Server side repository
+[Server](https://github.com/Mysterio-O/Galaximart-server)
+
 ## Key Features
 
 ### Navbar
