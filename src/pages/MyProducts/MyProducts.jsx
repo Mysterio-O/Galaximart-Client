@@ -48,8 +48,7 @@ const MyProducts = () => {
         }
         document.title = title;
 
-    }, [loading, user])
-
+    }, [loading, user]);
     return (
         <>
             {
