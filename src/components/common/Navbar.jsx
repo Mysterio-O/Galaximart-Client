@@ -7,9 +7,12 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
 import { FaCircleUser } from "react-icons/fa6";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const [dropDown, setDropDown] = useState(false);
 
     const { user, signOutUser } = useContext(AuthContext);
 
@@ -75,13 +78,31 @@ const Navbar = () => {
     }
 
 
-    const links = [
+    const userLinks = [
         { name: 'Home', to: '/', active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]' },
         {
             name: 'Categories',
             to: '/#categories',
             click: () => handleCategories(),
         },
+        {
+            name: "About Us",
+            to: "/about-us",
+            active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
+        },
+        {
+            name: "Contact Us",
+            to: '/contact-us',
+            active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
+        },
+        {
+            name: "Galaxy Parallax",
+            to: "/#galaxy",
+            click: () => handleCategories(),
+        }
+    ];
+
+    const authenticatedLinks = [
         {
             name: 'All Product',
             to: '/all-product',
@@ -98,6 +119,7 @@ const Navbar = () => {
             active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
         },
     ];
+
 
     const customStyle = `
     @keyframes pulse-slow {
@@ -124,7 +146,7 @@ const Navbar = () => {
                 content: 'swal-content',
                 confirmButton: 'swal-confirm-button',
                 cancelButton: 'swal-cancel-button',
-                actions:'flex gap-4'
+                actions: 'flex gap-4'
             },
             buttonsStyling: false,
         }).then(result => {
@@ -185,28 +207,83 @@ const Navbar = () => {
                         </motion.div>
 
                         {/* Desktop Menu */}
-                        <div className="hidden md:flex items-center space-x-6">
+                        <div className="hidden md:flex items-center space-x-6 relative">
                             <ul className="flex items-center space-x-6">
-                                {links.map((link) => (
-                                    <motion.li
-                                        key={link.name}
-                                        onClick={link?.click}
-                                        className="relative text-gray-100 text-sm font-semibold tracking-wide uppercase group"
-                                        whileHover={{ scale: 1.15, y: -3 }}
-                                        whileTap={{ scale: 0.95 }}
+                                {
+                                    userLinks.map(link => {
+                                        return (
+                                            <motion.li
+                                                key={link.name}
+                                                onClick={link?.click}
+                                                className="relative text-gray-100 text-sm font-semibold tracking-wide uppercase group"
+                                                whileHover={{ scale: 1.15, y: -3 }}
+                                                whileTap={{ scale: 0.95 }}
+                                            >
+                                                <NavLink
+                                                    to={link?.to}
+                                                    className={({ isActive }) =>
+                                                        `px-4 py-2 rounded-lg transition-all duration-300 relative z-10 ${isActive ? link.active : ''}`
+                                                    }
+                                                >
+                                                    {link.name}
+                                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-magenta-500 transition-all duration-500 group-hover:w-full"></span>
+                                                </NavLink>
+                                            </motion.li>
+                                        )
+                                    })
+                                }
+
+                                {/* user links dropdown */}
+                                {
+                                    user && <motion.span
+                                        className='cursor-pointer'
+                                        onClick={() => setDropDown(!dropDown)}
+                                        initial={{ scale: 1 }}
+                                        whileHover={{ scale: 1.25 }}
+                                        transition={{ duration: 0.3, ease: 'easeInOut' }}
                                     >
-                                        <NavLink
-                                            to={link?.to}
-                                            className={({ isActive }) =>
-                                                `px-4 py-2 rounded-lg transition-all duration-300 relative z-10 ${isActive ? link.active : ''}`
-                                            }
-                                        >
-                                            {link.name}
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-magenta-500 transition-all duration-500 group-hover:w-full"></span>
-                                        </NavLink>
-                                    </motion.li>
-                                ))}
+                                        <RiArrowDropDownLine size={40} className={`text-gray-100 ${dropDown ? 'rotate-180' : 'rotate-0'} transition-all duration-300`} />
+                                    </motion.span>
+                                }
                             </ul>
+                            <AnimatePresence>
+                                {
+                                    dropDown && <motion.div
+                                        initial={{ y: -50 }}
+                                        animate={{ y: 0 }}
+                                        exit={{ y: -50 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    >
+                                        <ul
+                                            onClick={() => setDropDown(false)}
+                                            className='absolute top-20 right-20 flex items-center justify-between bg-black p-6 rounded-xl'>
+                                            {
+                                                authenticatedLinks.map(link => {
+                                                    return (
+                                                        <motion.li
+                                                            key={link.name}
+                                                            onClick={link?.click}
+                                                            className="relative text-gray-100 text-sm font-semibold tracking-wide uppercase group"
+                                                            whileHover={{ scale: 1.15, y: -3 }}
+                                                            whileTap={{ scale: 0.95 }}
+                                                        >
+                                                            <NavLink
+                                                                to={link?.to}
+                                                                className={({ isActive }) =>
+                                                                    `px-4 py-2 rounded-lg transition-all duration-300 relative z-10 ${isActive ? link.active : ''}`
+                                                                }
+                                                            >
+                                                                {link.name}
+                                                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-magenta-500 transition-all duration-500 group-hover:w-full"></span>
+                                                            </NavLink>
+                                                        </motion.li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    </motion.div>
+                                }
+                            </AnimatePresence>
                             <div className="flex items-center space-x-4">
                                 {/* Cart */}
                                 <motion.div
@@ -285,8 +362,8 @@ const Navbar = () => {
                                             className='w-16 h-16 rounded-full mx-auto cursor-pointer md:p-1 flex'>
                                             {
                                                 user?.photoURL ? <img className='rounded-full justify-center w-14 h-14 items-center' src={user?.photoURL} alt={`${user?.displayName ? user.displayName
-                                                : user?.email}'s photo`} />
-                                                : <FaCircleUser />
+                                                    : user?.email}'s photo`} />
+                                                    : <FaCircleUser />
                                             }
                                         </motion.div>
                                     }
@@ -302,11 +379,14 @@ const Navbar = () => {
                         {/* Mobile Menu Button */}
 
                         {
-                            user && user.photoURL ? <div
+                            user && <div
                                 className='w-12 h-12 rounded-full p-2 bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95 md:hidden'>
-                                <img className='rounded-full' src={user?.photoURL} alt="" />
+
+                                {
+                                    user?.photoURL ? <img className='rounded-full' src={user?.photoURL} alt="" />
+                                        : <FaCircleUser />
+                                }
                             </div>
-                            : <FaCircleUser />
                         }
 
                         <div className="md:hidden flex items-center">
@@ -349,7 +429,7 @@ const Navbar = () => {
                                 <p
                                     className='block px-4 py-3 rounded-xl text-base  uppercase tracking-wide transition-all duration-300 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]'
                                 >{user?.displayName}</p>
-                                {links.map((link) => (
+                                {userLinks.map((link) => (
                                     <motion.div
                                         key={link.name}
                                         variants={itemVariants}
@@ -369,6 +449,30 @@ const Navbar = () => {
                                         </NavLink>
                                     </motion.div>
                                 ))}
+                                {
+                                    user && authenticatedLinks.map(link => {
+                                        return (
+                                            <motion.div
+                                                key={link.name}
+                                                variants={itemVariants}
+                                                onClick={() => {
+                                                    setIsOpen(false);
+                                                    if (link.click) link.click();
+                                                }}
+                                            >
+                                                <NavLink
+                                                    to={link.to}
+                                                    className={({ isActive }) =>
+                                                        `block text-gray-100 px-4 py-3 rounded-xl text-base font-semibold uppercase tracking-wide transition-all duration-300 ${isActive ? link.active : ''
+                                                        }`
+                                                    }
+                                                >
+                                                    {link.name}
+                                                </NavLink>
+                                            </motion.div>
+                                        )
+                                    })
+                                }
                                 <motion.div
                                     variants={itemVariants}
                                     className="flex flex-col space-y-4"

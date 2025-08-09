@@ -41,6 +41,13 @@
   font-size: 1.5rem !important;
   margin-bottom: 10px !important;
 }
+.swal-text{
+  font-family: 'Orbitron', sans-serif !important;
+  color: #22d3ee !important;
+  /* cyan-400 */
+  font-size: 1rem !important;
+  margin-bottom: 10px !important;
+}
 
 .swal-content {
   font-family: 'Orbitron', sans-serif !important;
