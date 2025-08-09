@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -14,11 +14,13 @@ const SignUp = () => {
     const [confirmPass, setConfirmPass] = useState('');
     const [confirmPassErr, setConfirmPassErr] = useState(false);
     const [passErr, setPassErr] = useState('');
+    const [loading, setLoading] = useState(false);
 
 
     const { signUpNewUser, setProfileInfo } = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const inputVariants = {
         focus: {
@@ -58,6 +60,7 @@ const SignUp = () => {
 
     const handleSignUp = e => {
         e.preventDefault();
+        setLoading(true);
         const form = e.target;
         const name = form.name.value;
         const photo = form.photo.value;
@@ -72,14 +75,17 @@ const SignUp = () => {
 
         if (!/.{6,}/.test(password)) {
             setPassErr("Password must be at least 6 characters");
+            setLoading(false);
             return;
         }
         else if (!/[a-z]/.test(password)) {
             setPassErr("Password must contain at least 1 lowercase letter");
+            setLoading(false);
             return;
         }
         else if (!/[A-Z]/.test(password)) {
             setPassErr('Password must contain at least one uppercase letter');
+            setLoading(false);
             return;
         }
         else {
@@ -91,6 +97,7 @@ const SignUp = () => {
             setProfileInfo({ photoURL: photo, displayName: name })
                 .then(() => {
                     // console.log('user created and profile updated', result);
+                    setLoading(false);
                     Swal.fire({
                         title: 'Success!',
                         text: 'Account created successfully!',
@@ -104,9 +111,10 @@ const SignUp = () => {
                         },
                         buttonsStyling: false,
                     })
-                    navigate('/')
+                    navigate(`${location?.state ? location.state : '/'}`)
                 }).catch((err) => {
                     console.error('Profile update error:', { code: err.code, message: err.message });
+                    setLoading(false);
                     Swal.fire({
                         title: 'Error!',
                         text: 'Account created, but profile update failed. Please update your profile later.',
@@ -295,7 +303,10 @@ const SignUp = () => {
                         whileHover="hover"
                         whileTap="tap"
                     >
-                        Sign Up
+                        {
+                            loading ? <span className="loading loading-spinner text-info"></span>
+                                : "Sign Up"
+                        }
                     </motion.button>
                     <p className="inter text-center text-gray-300 text-sm">
                         Already have an account?{' '}

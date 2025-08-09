@@ -1,16 +1,19 @@
-import React, { useState, useEffect, use, useContext } from "react";
+import React, { useState, useEffect, use, useContext} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import PurchaseModal from "./PurchaseModal";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation, Navigate  } from "react-router";
 import Swal from "sweetalert2";
 import axios from 'axios';
 
 const ProductDetailsShape = ({ productPromise }) => {
 
+    const location = useLocation();
+
     const { user, loading } = useContext(AuthContext);
+    const [cartLoading,setCartLoading]=useState(false);
     const navigate = useNavigate();
 
     const product = use(productPromise)
@@ -77,7 +80,7 @@ const ProductDetailsShape = ({ productPromise }) => {
         console.log(id);
         console.log(quantity);
         if (user) {
-            // api logic here
+            setCartLoading(true);
             const cartDetails = {
                 productId: id,
                 quantity,
@@ -91,6 +94,7 @@ const ProductDetailsShape = ({ productPromise }) => {
             });
             console.log(result);
             if (result?.data?.result?.insertedId) {
+                setCartLoading(false);
                 Swal.fire({
                     title: "Items added to the cart.",
                     icon: 'success',
@@ -124,7 +128,9 @@ const ProductDetailsShape = ({ productPromise }) => {
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    return navigate('/auth/signin');
+                    return navigate('/auth/signin',{
+                        state: location?.pathname
+                    })
                 }
             })
         }
@@ -362,7 +368,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 whileTap={{ scale: 0.98 }}
                             >
                                 {
-                                    loading ? "Loading.." : "Buy Now"
+                                    loading || cartLoading ? "Loading.." : "Buy Now"
                                 }
                             </motion.button>
                         </div>

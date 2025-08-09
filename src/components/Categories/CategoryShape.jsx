@@ -14,6 +14,7 @@ const CategoryShape = ({ product, index }) => {
         triggerOnce: false,
     });
 
+
     const cardVariants = {
         hidden: { opacity: 0, y: 50 },
         visible: {
@@ -50,7 +51,7 @@ const CategoryShape = ({ product, index }) => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-gray-900/80 backdrop-blur-md rounded-lg p-6 border border-cyan-500/30 shadow-[0_0_10px_rgba(139,92,246,0.3)] overflow-hidden"
+                className="relative place-items-center place-content-center bg-gray-900/80 backdrop-blur-md rounded-lg h-[120px] p-6 border border-cyan-500/30 shadow-[0_0_10px_rgba(139,92,246,0.3)] overflow-hidden"
             >
                 {/* Particle Effect */}
                 <div className="absolute inset-0 pointer-events-none">
@@ -59,7 +60,7 @@ const CategoryShape = ({ product, index }) => {
                 </div>
 
                 {/* Category Name */}
-                <h3 className="relative z-10 text-lg font-bold text-white text-center bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 orbitron">
+                <h3 className="relative z-10 text-base text-balance font-bold text-white text-center bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 orbitron">
                     {product.category}
                 </h3>
 

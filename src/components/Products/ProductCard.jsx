@@ -3,11 +3,12 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import ProductRating from '../Rating/ProductRating';
 import PrimaryButton from '../../shared/PrimaryButton';
+import ProductTitle from '../../shared/ProductTitle';
 
 
 const ProductCard = ({ product, index }) => {
 
-const ratingNumber = product?.rating;
+    const ratingNumber = product?.rating;
 
     return (
         <>
@@ -32,16 +33,14 @@ const ratingNumber = product?.rating;
                     />
                 </figure>
                 <div className="card-body items-center text-center text-gray-100">
-                    <h2 className="card-title text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400 tracking-tight [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)]">
-                        {product?.name} ({product?.brand})
-                    </h2>
+                    <ProductTitle product={product}/>
                     <p
                         className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold text-sm`}
                     >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` : 'Out of Stock'}`}</p>
                     <p className='text-base md:text-lg font-medium text-gray-200'>Price: {product?.price}$</p>
 
                     <div id='rating' className='flex'>
-                        <ProductRating ratingNumber={ratingNumber}/>
+                        <ProductRating ratingNumber={ratingNumber} />
                     </div>
 
                     <div className="card-actions mt-4">
@@ -50,7 +49,7 @@ const ratingNumber = product?.rating;
                             whileTap={{ scale: 0.95 }}
                         >
                             <Link to={`/product/details/${product?._id}`}>
-                                <PrimaryButton text={"View Details"}/>
+                                <PrimaryButton text={"View Details"} />
                             </Link>
                         </motion.div>
                     </div>

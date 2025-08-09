@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({from}) => {
+    console.log('location state from google button->',from);
 
     const { googleLogin } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const onGoogleLogin = () => {
         googleLogin().then(result => {
@@ -25,7 +25,7 @@ const GoogleLoginButton = () => {
                 buttonsStyling: false,
             })
             // console.log('user signed in using google', result)
-            navigate(`${location?.state ? location?.state : '/'}`)
+            navigate(`${from ? from : '/'}`)
         }).catch((err) => {
             console.error('Google sign-in error:', { code: err.code, message: err.message }); // Debug log
             let errorMessage = 'An error occurred during Google sign-in. Please try again.';

@@ -9,11 +9,12 @@ import Swal from 'sweetalert2';
 const SignIn = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [signLoading, setSignLoading] = useState(false);
 
     const { signInUser } = useContext(AuthContext);
 
     const location = useLocation();
-    // console.log(location);
+    console.log(location);
 
     const navigate = useNavigate();
 
@@ -43,6 +44,7 @@ const SignIn = () => {
 
     const handleSignIn = e => {
         e.preventDefault();
+        setSignLoading(true);
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -50,6 +52,7 @@ const SignIn = () => {
         signInUser(email, password)
             .then(result => {
                 // console.log('user signed in', result);
+                setSignLoading(false);
                 Swal.fire({
                     title: 'Success!',
                     text: 'You have signed in successfully.',
@@ -67,6 +70,7 @@ const SignIn = () => {
             })
             .catch((err) => {
                 console.error('Sign-in error:', { code: err.code, message: err.message });
+                setSignLoading(false);
 
                 let errorMessage = 'An error occurred during sign-in. Please try again.';
                 switch (err.code) {
@@ -177,11 +181,14 @@ const SignIn = () => {
                         whileHover="hover"
                         whileTap="tap"
                     >
-                        Sign In
+                        {
+                            signLoading ? <span className="loading loading-spinner text-info"></span>
+                                : "Sign In"
+                        }
                     </motion.button>
                     <p className="font-inter text-center text-gray-300 text-sm">
                         Don't have an account?{' '}
-                        <NavLink to="/auth/signup">
+                        <NavLink state={location?.state} to="/auth/signup">
                             <span className="font-exo text-cyan-400 hover:text-cyan-300 underline transition-all duration-300">
                                 Sign Up
                             </span>
@@ -189,7 +196,7 @@ const SignIn = () => {
                     </p>
                 </form>
                 <div className="divider divider-info text-white">Or Login With</div>
-                <GoogleLoginButton />
+                <GoogleLoginButton from={location?.state} />
             </motion.div>
         </div>
     );

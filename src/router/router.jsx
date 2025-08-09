@@ -16,6 +16,7 @@ import Cart from '../pages/Cart/Cart';
 import Paralax from '../components/GalaxiParalax/Paralax';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
+import MyCart from '../pages/MyCart/MyCart';
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <Cart />
                 </PrivateRoute>
+            },
+            {
+                path: '/my-cart',
+                element: <MyCart />
             },
             {
                 path: 'about-us',
