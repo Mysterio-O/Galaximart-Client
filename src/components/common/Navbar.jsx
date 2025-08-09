@@ -14,7 +14,7 @@ const Navbar = () => {
 
     const [dropDown, setDropDown] = useState(false);
 
-    const { user, signOutUser } = useContext(AuthContext);
+    const { user, signOutUser,loading } = useContext(AuthContext);
 
     // console.log(user);
     // console.log(user?.photoURL);
@@ -116,6 +116,11 @@ const Navbar = () => {
         {
             name: 'My Product',
             to: '/my-product',
+            active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
+        },
+        {
+            name: 'Cart',
+            to: '/my-cart',
             active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
         },
     ];
@@ -286,7 +291,8 @@ const Navbar = () => {
                             </AnimatePresence>
                             <div className="flex items-center space-x-4">
                                 {/* Cart */}
-                                <motion.div
+                                {
+                                    user && !loading && <motion.div
                                     whileHover={{ scale: 1.2, rotate: 10 }}
                                     whileTap={{ scale: 0.9 }}
                                     className="text-gray-100 hover:text-cyan-400 transition-all duration-300"
@@ -295,6 +301,7 @@ const Navbar = () => {
                                         <IoCartOutline size={30} className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
                                     </Link>
                                 </motion.div>
+                                }
 
                                 {
                                     !user && <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>

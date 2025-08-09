@@ -6,6 +6,7 @@ import PurchaseModal from "./PurchaseModal";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import axios from 'axios';
 
 const ProductDetailsShape = ({ productPromise }) => {
 
@@ -21,7 +22,9 @@ const ProductDetailsShape = ({ productPromise }) => {
         if (product?.stock < product?.minQuantity) {
             setIsStocked(false);
         }
+        console.log(product);
     }, [product])
+
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,8 +73,62 @@ const ProductDetailsShape = ({ productPromise }) => {
     const formatNumber = (number) => number.toString().padStart(2, "0");
 
 
-    const handleAddToCart = () => {
-        console.log('clicked add to cart')
+    const handleAddToCart = async (id) => {
+        console.log(id);
+        console.log(quantity);
+        if (user) {
+            // api logic here
+            const cartDetails = {
+                productId: id,
+                quantity,
+                user: user?.email
+            }
+
+            const result = await axios.post('http://localhost:3000/add-to-cart', cartDetails, {
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`
+                }
+            });
+            console.log(result);
+            if (result?.data?.result?.insertedId) {
+                Swal.fire({
+                    title: "Items added to the cart.",
+                    icon: 'success',
+                    confirmButtonText: "OK",
+                    customClass: {
+                        popup: 'swal-dark',
+                        title: 'swal-title',
+                        confirmButton: 'swal-confirm-button',
+                    },
+                    buttonsStyling: false,
+                })
+            }
+        } else {
+            Swal.fire({
+                title: "Sign In Required!",
+                text: "SIGNIN TO ADD TO CART.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: "SignIn",
+                cancelButtonText: "Cancel",
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    cancelButton: 'swal-cancel-button',
+                    icon: "swal2-info",
+                    actions: 'flex gap-4'
+                },
+                buttonsStyling: false,
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return navigate('/auth/signin');
+                }
+            })
+        }
+
     }
 
     const handleBuyNow = () => {
@@ -101,8 +158,6 @@ const ProductDetailsShape = ({ productPromise }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     return navigate('/auth/signin');
-                } else {
-                    return;
                 }
             })
         }
@@ -291,12 +346,14 @@ const ProductDetailsShape = ({ productPromise }) => {
                     {
                         isStocked && <div className="flex gap-5">
                             <motion.button
-                                onClick={handleAddToCart}
+                                onClick={() => handleAddToCart(product?._id)}
                                 className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                Add to Cart
+                                {
+                                    loading ? "Loading.." : "Add to Cart"
+                                }
                             </motion.button>
                             <motion.button
                                 onClick={handleBuyNow}

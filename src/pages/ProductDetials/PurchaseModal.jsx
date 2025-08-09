@@ -7,6 +7,7 @@ import axios from 'axios';
 const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) => {
     const { user } = useContext(AuthContext);
     const [paymentOption, setPaymentOption] = useState('');
+    const [loading, setLoading] = useState(false);
     // console.log(paymentOption)
 
 
@@ -23,6 +24,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
     const handleBuy = (e) => {
         e.preventDefault();
+        setLoading(true);
 
 
 
@@ -35,6 +37,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
 
         if (product?.minQuantity > quantity) {
+            setLoading(false);
             return Swal.fire({
                 title: 'Minimum Quantity Required',
                 text: `You need to purchase a minimum quantity of ${product?.minQuantity}`,
@@ -53,6 +56,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
 
         if (product?.stock < quantity) {
+            setLoading(false);
             return Swal.fire({
                 title: 'Product stock limit reached',
                 text: `You need to purchase less than the stock- ${product?.stock}`,
@@ -71,6 +75,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
 
 
         if (!paymentOption) {
+            setLoading(false);
             return Swal.fire({
                 title: 'Payment Option Required',
                 text: 'Please select a payment option',
@@ -118,6 +123,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                     axios.patch(`https://galaxia-mart-server.vercel.app/purchase/product/${product?._id}`, { quantity })
                         .then(res => {
                             // console.log('Purchase successful', res.data);
+                            setLoading(false);
                             Swal.fire({
                                 title: 'Purchase Successful',
                                 text: 'Product Purchased successfully!',
@@ -131,6 +137,7 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                         })
                         .catch(err => {
                             console.log('error purchasing product', err);
+                            setLoading(false);
                             Swal.fire({
                                 title: 'Purchase Failed',
                                 text: err.response?.data?.error || 'Something went wrong',
@@ -280,10 +287,14 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
                                     <motion.button
                                         className="px-6 py-2.5 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300"
                                         type='submit'
+                                        disabled={loading}
                                         whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
                                         whileTap={{ scale: 0.95 }}
                                     >
-                                        Confirm Purchase
+                                        {
+                                            loading ? <span className="loading loading-spinner text-info"></span>
+                                                : "Confirm Purchase"
+                                        }
                                     </motion.button>
                                 </div>
                             </form>
