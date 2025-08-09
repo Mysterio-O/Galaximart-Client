@@ -31,7 +31,7 @@ const Products = () => {
     return (
         <section>
             <motion.h2
-                className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400 tracking-tight uppercase [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)] my-8"
+                className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] orbitron my-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -40,7 +40,7 @@ const Products = () => {
             </motion.h2>
             {
                 loading ? <Loader />
-                    : <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8'>
+                    : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 p-8'>
                         {
                             allProducts.map((product, index) => <ProductCard
                                 key={product._id}

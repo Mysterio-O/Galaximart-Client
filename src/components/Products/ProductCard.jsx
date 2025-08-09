@@ -28,21 +28,16 @@ const ratingNumber = product?.rating;
                     <img
                         src={product?.image[0]}
                         alt={`${product?.name}'s photo`}
-                        className="rounded-lg object-cover w-full h-48 transition-all duration-300 group-hover:brightness-110"
+                        className="rounded-lg object-cover w-full h-30 transition-all duration-300 group-hover:brightness-110"
                     />
                 </figure>
                 <div className="card-body items-center text-center text-gray-100">
-                    <h2 className="card-title text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400 tracking-tight [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)]">
+                    <h2 className="card-title text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400 tracking-tight [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)]">
                         {product?.name} ({product?.brand})
                     </h2>
-                    <h3>{product?.category}</h3>
                     <p
-                        className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold`}
+                        className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold text-sm`}
                     >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` : 'Out of Stock'}`}</p>
-                    <p className="text-gray-300 text-sm md:text-base mt-3 line-clamp-2">
-                        {product?.description}
-                    </p>
-                    <p className='text-lg md:text-xl font-semibold text-cyan-300 mt-2'>Minimum Quantity: {product?.minQuantity}</p>
                     <p className='text-base md:text-lg font-medium text-gray-200'>Price: {product?.price}$</p>
 
                     <div id='rating' className='flex'>

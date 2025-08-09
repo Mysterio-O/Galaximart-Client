@@ -1,10 +1,16 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, use, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import PurchaseModal from "./PurchaseModal";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const ProductDetailsShape = ({ productPromise }) => {
+
+    const { user, loading } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const product = use(productPromise)
     const ratingNumber = Math.floor(product.rating);
@@ -71,7 +77,37 @@ const ProductDetailsShape = ({ productPromise }) => {
     const handleBuyNow = () => {
         // console.log('clicked buy now')
 
-        setIsModalOpen(true)
+        if (user) {
+            setIsModalOpen(true)
+        } else {
+            Swal.fire({
+                title: "Sign In Required!",
+                text: "SIGNIN TO BUY THIS PRODUCT.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: "SignIn",
+                cancelButtonText: "Cancel",
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    cancelButton: 'swal-cancel-button',
+                    icon: "swal2-info",
+                    actions: 'flex gap-4'
+                },
+                buttonsStyling: false,
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return navigate('/auth/signin');
+                } else {
+                    return;
+                }
+            })
+        }
+
+
     }
 
     const handleCloseModal = () => {
@@ -268,7 +304,9 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                Buy Now
+                                {
+                                    loading ? "Loading.." : "Buy Now"
+                                }
                             </motion.button>
                         </div>
                     }

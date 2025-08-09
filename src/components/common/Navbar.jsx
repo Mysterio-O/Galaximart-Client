@@ -17,7 +17,7 @@ const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
 
     // console.log(user);
-    console.log(user?.photoURL);
+    // console.log(user?.photoURL);
 
 
     const navigate = useNavigate();
@@ -242,7 +242,7 @@ const Navbar = () => {
                                         whileHover={{ scale: 1.25 }}
                                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                                     >
-                                        <RiArrowDropDownLine size={40} className={`text-gray-100 ${dropDown ? 'rotate-180' : 'rotate-0'} transition-all duration-300`} />
+                                        <RiArrowDropDownLine size={40} className={`text-gray-100 ${dropDown ? 'rotate-180' : 'rotate-0'} hover:text-cyan-400 transition-all duration-300`} />
                                     </motion.span>
                                 }
                             </ul>
