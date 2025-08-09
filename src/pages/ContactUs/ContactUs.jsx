@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import PrimaryButton from '../../shared/PrimaryButton';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ContactUs = () => {
 
-    useEffect(()=> {
-        document.title="Contact Us"
-    },[])
+    useEffect(() => {
+        document.title = "Contact Us"
+    }, [])
 
     const [formData, setFormData] = useState({
         name: '',
@@ -18,10 +21,76 @@ const ContactUs = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
         // Add API call or form submission logic here
+
+        const postMessage = await axios.post('http://localhost:3000/send-message', formData);
+        console.log(postMessage?.status);
+
+        if (postMessage?.status === 201) {
+            Swal.fire({
+                title: "Success",
+                text: postMessage?.data?.message,
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    icon: "swal2-success"
+                },
+                buttonsStyling: false,
+            })
+        } else if (postMessage?.status === 400) {
+            Swal.fire({
+                title: "Failed",
+                text: postMessage?.data?.message,
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    icon: 'swal2-error'
+                },
+                buttonsStyling: false,
+            })
+        } else if (postMessage?.status === 404) {
+            Swal.fire({
+                title: "Failed",
+                text: postMessage?.data?.message,
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    icon: 'swal2-error'
+                },
+                buttonsStyling: false,
+            })
+        } else if (postMessage?.status === 500) {
+            Swal.fire({
+                title: "Failed",
+                text: postMessage?.data?.message,
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    text: 'swal-text',
+                    confirmButton: 'swal-confirm-button',
+                    icon: 'swal2-error'
+                },
+                buttonsStyling: false,
+            })
+        }
+
         setFormData({ name: '', email: '', message: '' });
     };
 
@@ -41,10 +110,10 @@ const ContactUs = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
             >
-                <h1 className="text-4xl md:text-5xl font-bold text-orange-400 mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] orbitron mb-4">
                     Contact Galaximart
                 </h1>
-                <p className="text-lg md:text-xl text-neutral-300">
+                <p className="text-lg md:text-xl text-gray-100">
                     Reach out to us for business inquiries, support, or to explore the cosmos of wholesale opportunities.
                 </p>
             </motion.section>
@@ -54,13 +123,13 @@ const ContactUs = () => {
                 {/* Form */}
                 <motion.form
                     onSubmit={handleSubmit}
-                    className="bg-[#2a2a5e]/50 backdrop-blur-sm p-8 rounded-lg border border-orange-500/30"
+                    className="bg-[#2a2a5e]/50 backdrop-blur-sm p-8 rounded-lg shadow-2xl"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
                 >
                     <div className="mb-6">
-                        <label htmlFor="name" className="block text-orange-400 font-semibold mb-2">
+                        <label htmlFor="name" className="block text-gray-100 font-semibold mb-2">
                             Name
                         </label>
                         <input
@@ -69,12 +138,12 @@ const ContactUs = () => {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-600 text-white focus:border-orange-500 focus:outline-none"
+                            className="w-full p-3 rounded-lg  border border-gray-600 text-white focus:border-gray-100 focus:outline-none"
                             required
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="email" className="block text-orange-400 font-semibold mb-2">
+                        <label htmlFor="email" className="block text-gray-100 font-semibold mb-2">
                             Email
                         </label>
                         <input
@@ -83,12 +152,12 @@ const ContactUs = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-600 text-white focus:border-orange-500 focus:outline-none"
+                            className="w-full p-3 rounded-lg border border-gray-600 text-white focus:border-gray-100 focus:outline-none"
                             required
                         />
                     </div>
                     <div className="mb-6">
-                        <label htmlFor="message" className="block text-orange-400 font-semibold mb-2">
+                        <label htmlFor="message" className="block text-gray-100 font-semibold mb-2">
                             Message
                         </label>
                         <textarea
@@ -96,18 +165,11 @@ const ContactUs = () => {
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
-                            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-600 text-white focus:border-orange-500 focus:outline-none h-32"
+                            className="w-full p-3 rounded-lg border border-gray-600 text-white focus:border-gray-100 focus:outline-none h-32"
                             required
                         ></textarea>
                     </div>
-                    <motion.button
-                        type="submit"
-                        className="w-full bg-orange-500 text-white py-3 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 shadow-lg shadow-orange-500/30"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Send Message
-                    </motion.button>
+                    <PrimaryButton text={"Send Message"} />
                 </motion.form>
 
                 {/* Contact Info */}
@@ -118,23 +180,23 @@ const ContactUs = () => {
                     transition={{ duration: 0.5 }}
                 >
                     <div className="flex items-center gap-4">
-                        <FaEnvelope className="text-orange-400 text-2xl" />
+                        <FaEnvelope className="text-white text-2xl" />
                         <div>
-                            <h3 className="text-xl font-semibold text-orange-400">Email Us</h3>
+                            <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">Email Us</h3>
                             <p className="text-neutral-300">support@galaximart.com</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <FaPhone className="text-orange-400 text-2xl" />
+                        <FaPhone className="text-white text-2xl" />
                         <div>
-                            <h3 className="text-xl font-semibold text-orange-400">Call Us</h3>
+                            <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">Call Us</h3>
                             <p className="text-neutral-300">+1 (800) 555-GALAXY</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <FaMapMarkerAlt className="text-orange-400 text-2xl" />
+                        <FaMapMarkerAlt className="text-white text-2xl" />
                         <div>
-                            <h3 className="text-xl font-semibold text-orange-400">Visit Us</h3>
+                            <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]">Visit Us</h3>
                             <p className="text-neutral-300">123 Cosmic Way, Nebula City, NC 12345</p>
                         </div>
                     </div>

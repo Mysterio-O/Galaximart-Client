@@ -29,7 +29,7 @@ const GalaxiParalax = () => {
                 whileInView={{ opacity: 1, translateY: [-100, 0] }}
                 exit={{ opacity: 0, translateY: -200 }}
                 transition={{ duration: 0.7, ease: 'easeInOut' }}
-                className="mt-52">
+                className="mt-12">
 
                 <motion.div
                     style={{

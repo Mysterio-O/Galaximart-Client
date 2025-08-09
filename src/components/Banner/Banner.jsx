@@ -5,7 +5,7 @@ import GalacticHeader from '../Headers/GalacticHeader';
 const Banner = () => {
     return (
         <div className='max-w-7xl mx-auto'>
-            <div className='mb-5'>
+            <div className=''>
                 <GalacticHeader/>
             </div>
             <Slider/>

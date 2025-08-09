@@ -169,7 +169,7 @@ const SignUp = () => {
       `
 
     return (
-        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-gray-900 via-violet-950 to-cyan-900 relative overflow-hidden px-4 md:px-0 py-10">
+        <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-gray-900 via-violet-950 to-cyan-900 relative overflow-hidden px-4 md:px-0 py-20">
             <style>{customStyles}</style>
             {/* Background Particle Effect */}
             <div className="absolute inset-0 pointer-events-none">

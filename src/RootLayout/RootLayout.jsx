@@ -13,7 +13,9 @@ const RootLayout = () => {
         <div
             className='inter bg-gradient-to-r from-gray-900/95 via-violet-950/95 to-cyan-900/95'>
             <Scroll />
-            <Navbar />
+            <div className='sticky top-0 z-50'>
+                <Navbar />
+            </div>
             <Outlet />
             
             

@@ -10,7 +10,7 @@ const AboutUs = () => {
     const cardVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-        hover: { scale: 1.05, boxShadow: '0 0 15px rgba(249, 115, 22, 0.5)' }
+        hover: { scale: 1.05, boxShadow: '0 0 15px #63A1FD' }
     };
 
     return (
@@ -22,7 +22,7 @@ const AboutUs = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
             >
-                <h1 className="text-4xl md:text-5xl font-bold text-orange-400 mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] orbitron mb-4">
                     About Galaximart
                 </h1>
                 <p className="text-lg md:text-xl text-neutral-300">
@@ -33,7 +33,7 @@ const AboutUs = () => {
             {/* Mission Section */}
             <section className="max-w-6xl mx-auto mb-16">
                 <motion.h2
-                    className="text-3xl font-semibold text-orange-400 text-center mb-8"
+                    className="text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] orbitron text-center mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -68,14 +68,14 @@ const AboutUs = () => {
                 ].map((value, index) => (
                     <motion.div
                         key={index}
-                        className="bg-[#2a2a5e]/50 backdrop-blur-sm p-6 rounded-lg text-center border border-orange-500/30"
+                        className="bg-[#2a2a5e]/50 backdrop-blur-sm p-6 rounded-lg text-center border border-cyan-400/60"
                         variants={cardVariants}
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
                         transition={{ delay: index * 0.2 }}
                     >
-                        <h3 className="text-xl font-semibold text-orange-400 mb-2">{value.title}</h3>
+                        <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] orbitron mb-2">{value.title}</h3>
                         <p className="text-neutral-300">{value.description}</p>
                     </motion.div>
                 ))}

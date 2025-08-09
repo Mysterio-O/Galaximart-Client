@@ -166,7 +166,7 @@ const Home = () => {
 
     return (
         <div>
-            <section className='mb-36 mt-10'>
+            <section className='mb-20'>
                 <Banner />
             </section>
             <section id="categories">
