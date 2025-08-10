@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 import { IoCartOutline, IoRocketOutline, IoTrashOutline, IoAddOutline, IoRemoveOutline } from 'react-icons/io5';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+import CheckOutModal from './CheckOutModal';
 
 const MyCart = () => {
 
@@ -16,6 +17,8 @@ const MyCart = () => {
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
 
     const emptyStateVariants = {
@@ -163,8 +166,8 @@ const MyCart = () => {
 
             if (res?.data?.result?.modifiedCount > 0) {
                 Swal.fire({
-                    title:'Quantity updated',
-                    icon:'success',
+                    title: 'Quantity updated',
+                    icon: 'success',
                     toast: true,
                     timer: 1500,
                     position: 'top',
@@ -235,18 +238,21 @@ const MyCart = () => {
             if (result.isConfirmed) {
                 // Implement your checkout logic here
                 // For example, redirect to checkout page or process payment
-                Swal.fire({
-                    title: 'Checkout Successful!',
-                    text: 'Your order has been placed successfully.',
-                    icon: 'success',
-                    customClass: {
-                        container: 'swal-dark',
-                        popup: 'swal-dark',
-                        title: 'swal-title',
-                        htmlContainer: 'swal-text',
-                        confirmButton: 'swal-confirm-button'
-                    }
-                });
+
+                setIsModalOpen(true);
+
+                // Swal.fire({
+                //     title: 'Checkout Successful!',
+                //     text: 'Your order has been placed successfully.',
+                //     icon: 'success',
+                //     customClass: {
+                //         container: 'swal-dark',
+                //         popup: 'swal-dark',
+                //         title: 'swal-title',
+                //         htmlContainer: 'swal-text',
+                //         confirmButton: 'swal-confirm-button'
+                //     }
+                // });
             }
         } catch (error) {
             console.log('error checking out from my cart', error);
@@ -274,7 +280,143 @@ const MyCart = () => {
     const handleContinueShopping = () => {
         // Implement navigation to shop page
         console.log('Continue shopping clicked');
+        navigate('/#categories')
     };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    }
+
+    const confirmPayment = async (cartItems, total, paymentMethod) => {
+        // console.log(cartItems, total());
+
+        if (paymentMethod === '') {
+            return Swal.fire({
+                title: 'Payment Method Required',
+                text: 'Please select a payment method to continue',
+                icon: 'warning',
+                confirmButtonText: 'OK',
+                customClass: {
+                    container: 'swal-dark',
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    htmlContainer: 'swal-text',
+                    confirmButton: 'swal-confirm-button'
+                },
+                background: '#1a1a2e',
+                buttonsStyling: false,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        }
+
+        try {
+            const transactionId = `TXN-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+
+            const orderedDate = new Date().toISOString();
+
+            const userEmail = user?.email;
+
+            const totalAmount = +total(); // (+) prevents turing into string
+
+            const purchaseDetails = {
+                transactionId,
+                orderedDate,
+                userEmail,
+                items: cartItems.map(item => ({
+                    productId: item?._id,
+                    name: item?.name,
+                    brand: item?.brand,
+                    price: item?.price,
+                    quantity: item?.quantity,
+                    image: item?.image[0]
+                })),
+                totalAmount,
+                paymentStatus: "pending",
+                deliveryStatus: 'processing'
+            }
+            console.log(purchaseDetails);
+
+            const res = await axios.post('http://localhost:3000/create-confirm-order', { purchaseDetails });
+            // console.log(res);
+
+            if (res?.data?.insertedId) {
+
+                await clearCartItems();
+
+                await Swal.fire({
+                    title: 'Order Successful!',
+                    text: 'Your order was confirmed.',
+                    icon: 'success',
+                    confirmButtonText: 'View Order',
+                    customClass: {
+                        container: 'swal-dark',
+                        popup: 'swal-dark',
+                        title: 'swal-title',
+                        htmlContainer: 'swal-text',
+                        confirmButton: 'swal-confirm-button'
+                    },
+                    buttonsStyling: false
+                });
+
+                /**  
+                 * TODO // CREATE MY ORDERS SECTIONS AND NAVIGATE FROM HERE
+                 */
+
+                setIsModalOpen(false);
+            } else {
+                throw new Error('Order placement failed!');
+            }
+        }
+        catch (error) {
+            console.log("error confirming order from my cart", error);
+            Swal.fire({
+                title: 'Order Failed!',
+                text: error?.message || 'Your order was failed.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    container: 'swal-dark',
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    htmlContainer: 'swal-text',
+                    confirmButton: 'swal-confirm-button'
+                },
+                buttonsStyling: false
+            })
+        }
+
+    };
+
+    const clearCartItems = async () => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/delete-all-cart-items?email=${user?.email}`);
+            console.log(res);
+            setCartItems([]);
+
+            setProducts([]);
+        }
+        catch(error){
+            Swal.fire({
+                title: 'Delete Failed!',
+                text: error?.message || 'Your delete request failed.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    container: 'swal-dark',
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    htmlContainer: 'swal-text',
+                    confirmButton: 'swal-confirm-button'
+                },
+                buttonsStyling: false
+            })
+        }
+    }
 
 
 
@@ -320,7 +462,7 @@ const MyCart = () => {
 
     return (
         <div className="container mx-auto px-4 max-w-5xl py-8">
-            <h1 className="text-3xl font-bold text-cyan-100 mb-8 orbitron flex items-center gap-2">
+            <h1 className="text-xl md:text-3xl font-bold text-cyan-100 mb-8 orbitron flex items-center gap-2">
                 <IoCartOutline size={28} />
                 My Shopping Cart
             </h1>
@@ -379,7 +521,7 @@ const MyCart = () => {
                                             <img
                                                 src={item.image?.[0] || 'https://via.placeholder.com/300x200?text=Product'}
                                                 alt={item.name}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-[257px] object-cover"
                                                 onError={(e) => {
                                                     e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
                                                 }}
@@ -393,7 +535,7 @@ const MyCart = () => {
                                                 <button
                                                     onClick={() => handleRemoveItem(item.cartItemId, item.name)}
                                                     disabled={isUpdating}
-                                                    className="text-red-400 hover:text-red-300 transition-colors"
+                                                    className="text-red-400 hover:text-red-300 cursor-pointer hover:scale-110 transition-all duration-300"
                                                 >
                                                     <IoTrashOutline size={20} />
                                                 </button>
@@ -487,6 +629,11 @@ const MyCart = () => {
                     </div>
                 </>
             )}
+
+            {
+                isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} />
+            }
+
         </div>
     );
 };
