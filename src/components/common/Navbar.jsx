@@ -8,13 +8,14 @@ import { Tooltip } from 'react-tooltip';
 import Swal from 'sweetalert2';
 import { FaCircleUser } from "react-icons/fa6";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import ThemeSwitch from '../../shared/ThemeSwitch';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [dropDown, setDropDown] = useState(false);
 
-    const { user, signOutUser,loading } = useContext(AuthContext);
+    const { user, signOutUser, loading } = useContext(AuthContext);
 
     // console.log(user);
     // console.log(user?.photoURL);
@@ -303,14 +304,14 @@ const Navbar = () => {
                                 {/* Cart */}
                                 {
                                     user && !loading && <motion.div
-                                    whileHover={{ scale: 1.2, rotate: 10 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="text-gray-100 hover:text-cyan-400 transition-all duration-300"
-                                >
-                                    <Link to="/cart">
-                                        <IoCartOutline size={30} className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
-                                    </Link>
-                                </motion.div>
+                                        whileHover={{ scale: 1.2, rotate: 10 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="text-gray-100 hover:text-cyan-400 transition-all duration-300"
+                                    >
+                                        <Link to="/cart">
+                                            <IoCartOutline size={30} className="drop-shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
+                                        </Link>
+                                    </motion.div>
                                 }
 
                                 {
@@ -386,7 +387,7 @@ const Navbar = () => {
                                     }
                                 </div>
 
-
+                                <ThemeSwitch />
 
 
 

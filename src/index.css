@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&display=swap');
 
 @import "tailwindcss";
-@plugin "daisyui";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "daisyui" {
+  themes: light --default, dark;
+  root: ":root";
+  include: ;
+  exclude: ;
+  prefix: ;
+  logs: true;
+}
 
 @tailwind utilities;
 
@@ -41,7 +50,8 @@
   font-size: 1.5rem !important;
   margin-bottom: 10px !important;
 }
-.swal-text{
+
+.swal-text {
   font-family: 'Orbitron', sans-serif !important;
   color: #22d3ee !important;
   /* cyan-400 */
