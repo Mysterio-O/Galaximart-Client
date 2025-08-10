@@ -654,6 +654,7 @@ const MyCart = () => {
 
             {isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} />}
         </div>
+        
     );
 };
 

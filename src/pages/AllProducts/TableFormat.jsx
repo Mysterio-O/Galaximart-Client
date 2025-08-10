@@ -1,9 +1,8 @@
-import React, { use } from 'react';
+import React from 'react';
 import TableRow from './TableRow';
 import { motion } from 'motion/react';
 
-const TableFormat = ({ productsPromise }) => {
-    const products = use(productsPromise);
+const TableFormat = ({ products }) => {
 
     return (
         <div className="overflow-x-auto px-4 py-8 bg-gradient-to-br from-gray-900/95 via-violet-950/95 to-cyan-900/95 dark:from-gray-100/95 dark:via-violet-100/95 dark:to-cyan-100/95 rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.3)] dark:shadow-[0_0_15px_rgba(139,92,246,0.2)]">

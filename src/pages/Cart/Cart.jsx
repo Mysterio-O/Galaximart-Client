@@ -7,7 +7,7 @@ import { motion } from 'motion/react';
 import Swal from 'sweetalert2';
 
 const Cart = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
     useEffect(() => {
         let title = "";
@@ -15,10 +15,11 @@ const Cart = () => {
             title = `${user?.displayName}'s Cart`
         }
         else {
-            title = "My Cart"
+            title = "Cart"
         }
         document.title = title
     }, [user])
+    if(loading) return;
 
     if (!user?.email) {
         return (

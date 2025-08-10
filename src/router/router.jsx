@@ -19,6 +19,7 @@ import ContactUs from '../pages/ContactUs/ContactUs';
 import MyCart from '../pages/MyCart/MyCart';
 import MyOrder from '../pages/MyOrder/MyOrder';
 import WishList from '../pages/WishList/WishList';
+import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage';
 
 const router = createBrowserRouter([
     {
@@ -95,9 +96,14 @@ const router = createBrowserRouter([
             {
                 path: 'about-us',
                 Component: AboutUs
-            }, {
+            }, 
+            {
                 path: 'contact-us',
                 Component: ContactUs
+            },
+            {
+                path:'/forbidden',
+                Component:ForbiddenPage
             }
         ]
     },

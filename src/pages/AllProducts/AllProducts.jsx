@@ -18,6 +18,19 @@ const AllProducts = () => {
 
     const [title, setTitle] = useState('');
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [paginationInfo, setPaginationInfo] = useState({
+        total: 0,
+        totalPages: 1,
+        hasNextPage: false,
+        hasPrevPage: false
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState('');
+
     useEffect(() => {
         let newTitle = 'All Products'
         if (sortValue == 50) {
@@ -44,18 +57,52 @@ const AllProducts = () => {
         const value = e.target.value
         setSortValue(value === '' ? '' : value);
         // console.log('Selected sort value:', value);
+        setCurrentPage(1);
     }
 
-    const productsPromise = axios.get(`https://galaxia-mart-server.vercel.app/allProducts?sortParam=${sortValue}`, {
-        headers: {
-            authorization: `Bearer ${token}`
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    }
+
+    const handleItemsPerPageChange = (e) => {
+        setItemsPerPage(e.target.value);
+        setCurrentPage(1);
+    }
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setLoading(true);
+                const res = await axios.get(`http://localhost:3000/allProducts?sortParam=${sortValue}&page=${currentPage}&limit=${itemsPerPage}`, {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                });
+                setProducts(res?.data?.data);
+                setPaginationInfo({
+                    total: res?.data?.pagination?.total,
+                    totalPages: res?.data?.pagination?.totalPages || Math.ceil(res?.data?.pagination?.total / itemsPerPage),
+                    hasNextPage: res?.data?.pagination?.hasNextPage,
+                    hasPrevPage: res?.data?.pagination?.hasPrevPage
+                });
+            }
+            catch (err) {
+                console.error("error fetching products", err);
+                setProducts([]);
+                setError("Failed to load products");
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+
+        if(token){
+            fetchProducts();
         }
-    })
-        .then(res => res.data)
-        .catch(err => {
-            console.log('error fetching products data', err);
-        });
-    // console.log(productsPromise)
+
+    }, [sortValue, currentPage, itemsPerPage, token]);
+
+
 
 
 
@@ -66,7 +113,7 @@ const AllProducts = () => {
     }
 
     return (
-        <div className='min-h-screen mt-32 max-w-6xl mx-auto mb-10 relative'>
+        <div className='min-h-screen max-w-6xl mx-auto mb-10 relative'>
 
             <div className="flex flex-col md:flex-row justify-between items-center">
                 <div>
@@ -98,6 +145,24 @@ const AllProducts = () => {
                             <option value="100">Min Buy 100 or higher</option>
                         </motion.select>
                     </motion.form>
+                </div>
+
+                {/* Items per page selector */}
+                <div className="flex items-center">
+                    <label htmlFor="itemsPerPage" className="mr-2 text-sm text-gray-300 dark:text-gray-700">
+                        Items per page:
+                    </label>
+                    <select
+                        id="itemsPerPage"
+                        value={itemsPerPage}
+                        onChange={handleItemsPerPageChange}
+                        className="p-1 rounded bg-gray-800/50 dark:bg-gray-200/50 border border-cyan-500/30 dark:border-violet-500/30 text-gray-300 dark:text-gray-700"
+                    >
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
                 </div>
 
                 {/* // table format button */}
@@ -148,13 +213,62 @@ const AllProducts = () => {
             {
                 !isTable ?
                     <Suspense fallback={<CardSkeleton />}>
-                        <Products productsPromise={productsPromise}></Products>
+                        <Products products={products}></Products>
                     </Suspense>
                     :
                     <Suspense fallback={<TableSkeleton />}>
-                        <TableFormat productsPromise={productsPromise} />
+                        <TableFormat products={products} />
                     </Suspense>
             }
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center mt-8">
+                <nav className="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={!paginationInfo.hasPrevPage}
+                        className={`relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-700 dark:border-gray-300 bg-gray-800/50 dark:bg-gray-200/50 text-sm font-medium ${paginationInfo.hasPrevPage ? 'text-gray-100 dark:text-gray-800 hover:bg-gray-700/50 dark:hover:bg-gray-300/50' : 'text-gray-500 dark:text-gray-400 cursor-not-allowed'}`}
+                    >
+                        Previous
+                    </button>
+
+                    {Array.from({ length: Math.min(5, paginationInfo.totalPages) }, (_, i) => {
+                        // Show pages around current page
+                        let pageNum;
+                        if (paginationInfo.totalPages <= 5) {
+                            pageNum = i + 1;
+                        } else if (currentPage <= 3) {
+                            pageNum = i + 1;
+                        } else if (currentPage >= paginationInfo.totalPages - 2) {
+                            pageNum = paginationInfo.totalPages - 4 + i;
+                        } else {
+                            pageNum = currentPage - 2 + i;
+                        }
+
+                        return (
+                            <button
+                                key={pageNum}
+                                onClick={() => handlePageChange(pageNum)}
+                                className={`relative inline-flex items-center px-4 py-2 border border-gray-700 dark:border-gray-300 text-sm font-medium ${currentPage === pageNum ? 'bg-cyan-600/50 dark:bg-violet-600/50 text-white dark:text-white' : 'bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 hover:bg-gray-700/50 dark:hover:bg-gray-300/50'}`}
+                            >
+                                {pageNum}
+                            </button>
+                        );
+                    })}
+
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={!paginationInfo.hasNextPage}
+                        className={`relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-700 dark:border-gray-300 bg-gray-800/50 dark:bg-gray-200/50 text-sm font-medium ${paginationInfo.hasNextPage ? 'text-gray-100 dark:text-gray-800 hover:bg-gray-700/50 dark:hover:bg-gray-300/50' : 'text-gray-500 dark:text-gray-400 cursor-not-allowed'}`}
+                    >
+                        Next
+                    </button>
+                </nav>
+            </div>
+
+            <div className="text-center text-sm text-gray-400 dark:text-gray-500 mt-2">
+                Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, paginationInfo.total)} of {paginationInfo.total} items
+            </div>
 
             <motion.span
                 onClick={handleScroll}
