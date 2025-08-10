@@ -121,7 +121,7 @@ const WishList = () => {
                 title: 'swal-title',
                 confirmButton: 'swal-confirm-button',
                 cancelButton: 'swal-cancel-button',
-                actions:'flex gap-4'
+                actions: 'flex gap-4'
             },
             buttonsStyling: false,
         }).then((result) => {
@@ -131,19 +131,23 @@ const WishList = () => {
         });
     };
 
+    const handleGoBack = () => {
+        navigate(-1); // Go back to previous page
+    };
+
 
     return (
-        <div className="min-h-screen bg-[#1a1a2e] text-white p-4 md:p-8">
+        <div className="min-h-screen bg-gray-900/90 dark:bg-gray-100/90 text-gray-100 dark:text-gray-800 p-4 md:p-8">
             <div className="max-w-6xl mx-auto">
                 <div className="flex items-center mb-8">
-                    <Link
-                        to="/products"
-                        className="mr-4 p-2 rounded-full bg-[#2a2a40] hover:bg-[#3a3a5a] transition-colors"
+                    <button
+                        onClick={handleGoBack}
+                        className="mr-4 p-2 rounded-full bg-gray-800/50 dark:bg-gray-200/50 hover:bg-gray-700/50 dark:hover:bg-gray-300/50 transition-colors"
                     >
-                        <FaArrowLeft className="text-xl" />
-                    </Link>
-                    <h1 className="text-3xl font-bold text-cyan-100">Your Wishlist</h1>
-                    <span className="ml-4 px-3 py-1 bg-cyan-600/50 rounded-full text-sm">
+                        <FaArrowLeft className="text-xl text-cyan-400 dark:text-cyan-500" />
+                    </button>
+                    <h1 className="text-3xl font-bold text-cyan-400 dark:text-cyan-500">Your Wishlist</h1>
+                    <span className="ml-4 px-3 py-1 bg-cyan-600/50 dark:bg-cyan-400/50 rounded-full text-sm">
                         {wishlist.length} items
                     </span>
                 </div>
@@ -151,26 +155,26 @@ const WishList = () => {
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[...Array(3)].map((_, index) => (
-                            <div key={index} className="bg-[#2a2a40] rounded-xl overflow-hidden animate-pulse">
-                                <div className="h-48 bg-[#3a3a5a]"></div>
+                            <div key={index} className="bg-gray-800/50 dark:bg-gray-200/50 rounded-xl overflow-hidden animate-pulse">
+                                <div className="h-48 bg-gray-700/50 dark:bg-gray-300/50"></div>
                                 <div className="p-4 space-y-3">
-                                    <div className="h-6 bg-[#3a3a5a] rounded w-3/4"></div>
-                                    <div className="h-4 bg-[#3a3a5a] rounded w-1/2"></div>
-                                    <div className="h-10 bg-[#3a3a5a] rounded mt-4"></div>
+                                    <div className="h-6 bg-gray-700/50 dark:bg-gray-300/50 rounded w-3/4"></div>
+                                    <div className="h-4 bg-gray-700/50 dark:bg-gray-300/50 rounded w-1/2"></div>
+                                    <div className="h-10 bg-gray-700/50 dark:bg-gray-300/50 rounded mt-4"></div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 ) : products.length === 0 ? (
                     <div className="text-center py-12">
-                        <div className="mx-auto w-24 h-24 bg-[#2a2a40] rounded-full flex items-center justify-center mb-6">
-                            <FaHeart className="text-4xl text-cyan-400" />
+                        <div className="mx-auto w-24 h-24 bg-gray-800/50 dark:bg-gray-200/50 rounded-full flex items-center justify-center mb-6">
+                            <FaHeart className="text-4xl text-cyan-400 dark:text-cyan-500" />
                         </div>
-                        <h2 className="text-2xl font-semibold mb-2 text-cyan-100">Your wishlist is empty</h2>
-                        <p className="text-cyan-200 mb-6">Start adding items you love!</p>
+                        <h2 className="text-2xl font-semibold mb-2 text-cyan-400 dark:text-cyan-500">Your wishlist is empty</h2>
+                        <p className="text-cyan-300 dark:text-cyan-400 mb-6">Start adding items you love!</p>
                         <Link
                             to="/#categories"
-                            className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 rounded-lg hover:shadow-lg transition-all"
+                            className="inline-block px-6 py-3 bg-gradient-to-r from-cyan-600 to-indigo-600 dark:from-cyan-500 dark:to-indigo-500 rounded-lg hover:shadow-lg transition-all"
                         >
                             Browse Products
                         </Link>
@@ -180,7 +184,7 @@ const WishList = () => {
                         {products.map((product) => (
                             <motion.div
                                 key={product._id}
-                                className="bg-[#2a2a40] rounded-xl overflow-hidden shadow-lg relative"
+                                className="bg-gray-800/50 dark:bg-gray-200/50 rounded-xl overflow-hidden shadow-lg relative border border-cyan-500/30 dark:border-violet-500/30"
                                 whileHover={{ y: -5 }}
                                 transition={{ duration: 0.2 }}
                             >
@@ -192,31 +196,31 @@ const WishList = () => {
                                     />
                                     <button
                                         onClick={() => handleRemoveItem(product._id)}
-                                        className="absolute top-2 right-2 p-2 bg-red-500/80 rounded-full hover:bg-red-500 transition-colors"
+                                        className="absolute top-2 right-2 p-2 bg-red-500/80 dark:bg-red-600/80 rounded-full hover:bg-red-500 dark:hover:bg-red-600 transition-colors"
                                         aria-label="Remove from wishlist"
                                     >
                                         <FaTrash className="text-white" />
                                     </button>
                                     {product.stock < product.minQuantity && (
-                                        <div className="absolute top-2 left-2 px-2 py-1 bg-red-500/80 rounded text-xs font-semibold">
+                                        <div className="absolute top-2 left-2 px-2 py-1 bg-red-500/80 dark:bg-red-600/80 rounded text-xs font-semibold">
                                             Out of Stock
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="p-4">
-                                    <h3 className="text-xl font-semibold mb-2 text-cyan-100 truncate">{product.name}</h3>
+                                    <h3 className="text-xl font-semibold mb-2 text-cyan-100 dark:text-cyan-800 truncate">{product.name}</h3>
                                     <div className="flex justify-between items-center mb-4">
                                         <div>
                                             <span className="text-lg font-bold">${product.price}</span>
                                             {product.price * 2 && (
-                                                <span className="ml-2 text-sm text-cyan-200/50 line-through">
+                                                <span className="ml-2 text-sm text-cyan-300/50 dark:text-cyan-600/50 line-through">
                                                     ${product.price * 2}
                                                 </span>
                                             )}
                                         </div>
                                         <div className="flex items-center">
-                                            <FaHeart className="text-red-500 mr-1" />
+                                            <FaHeart className="text-red-500 dark:text-red-600 mr-1" />
                                             <span>{product.rating || '0'}</span>
                                         </div>
                                     </div>
@@ -224,14 +228,14 @@ const WishList = () => {
                                     <div className="flex gap-2">
                                         <Link
                                             to={`/product/details/${product._id}`}
-                                            className="flex-1 py-2 text-center bg-cyan-600/50 hover:bg-cyan-600 rounded-lg transition-colors"
+                                            className="flex-1 py-2 text-center bg-cyan-600/50 dark:bg-cyan-500/50 hover:bg-cyan-600 dark:hover:bg-cyan-500 rounded-lg transition-colors"
                                         >
                                             View Details
                                         </Link>
                                         <button
                                             onClick={() => handleAddToCart(product)}
                                             disabled={cartLoading || product.stock < product.minQuantity}
-                                            className={`flex-1 py-2 bg-indigo-600/50 hover:bg-indigo-600 rounded-lg transition-colors flex items-center justify-center gap-2 ${product.stock < product.minQuantity ? 'opacity-50 cursor-not-allowed' : ''
+                                            className={`flex-1 py-2 bg-indigo-600/50 dark:bg-indigo-500/50 hover:bg-indigo-600 dark:hover:bg-indigo-500 rounded-lg transition-colors flex items-center justify-center gap-2 ${product.stock < product.minQuantity ? 'opacity-50 cursor-not-allowed' : ''
                                                 }`}
                                         >
                                             {cartLoading ? 'Adding...' : (

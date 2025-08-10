@@ -187,7 +187,7 @@ const ProductDetailsShape = ({ productPromise }) => {
 
 
     return (
-        <div className="mx-auto md:px-8 md:py-12 bg-[#1a1a2e] text-white ">
+        <div className="mx-auto px-2 md:px-8 md:py-12 bg-[#1a1a2e] dark:bg-gray-100 text-white dark:text-gray-900 rounded-xl shadow-xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 {/* Left side - Image gallery */}
                 <div className="space-y-4">
@@ -195,13 +195,13 @@ const ProductDetailsShape = ({ productPromise }) => {
                         {/* NEW and SALE tags */}
                         <div className="absolute top-4 left-4 z-10 space-y-2">
                             <motion.span
-                                className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-gray-900/95 to-cyan-900/95 text-white rounded-lg shadow-[0_0_10px_rgba(34,211,238,0.4)]"
+                                className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-gray-900/95 to-cyan-900/95 dark:from-gray-100/95 dark:to-cyan-100/95 text-white dark:text-gray-900 rounded-lg shadow-[0_0_10px_rgba(34,211,238,0.4)] dark:shadow-[0_0_10px_rgba(139,92,246,0.2)]"
                                 whileHover={{ scale: 1.05 }}
                             >
                                 NEW
                             </motion.span>
                             <motion.div
-                                className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-emerald-600/80 to-emerald-800/80 text-white rounded-lg shadow-[0_0_10px_rgba(16,185,129,0.4)]"
+                                className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-emerald-600/80 to-emerald-800/80 dark:from-emerald-500/80 dark:to-emerald-700/80 text-white dark:text-gray-900 rounded-lg shadow-[0_0_10px_rgba(16,185,129,0.4)] dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]"
                                 whileHover={{ scale: 1.05 }}
                             >
                                 -50%
@@ -224,21 +224,21 @@ const ProductDetailsShape = ({ productPromise }) => {
                             </AnimatePresence>
                             <motion.button
                                 onClick={previousImage}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 shadow-lg hover:from-cyan-500 hover:to-indigo-500"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-500/50 dark:to-indigo-500/50 shadow-lg hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400"
                                 aria-label="Previous image"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                             >
-                                <BiChevronLeft className="w-6 h-6 text-white" />
+                                <BiChevronLeft className="w-6 h-6 text-white dark:text-gray-900" />
                             </motion.button>
                             <motion.button
                                 onClick={nextImage}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 shadow-lg hover:from-cyan-500 hover:to-indigo-500"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-500/50 dark:to-indigo-500/50 shadow-lg hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400"
                                 aria-label="Next image"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                             >
-                                <BiChevronRight className="w-6 h-6 text-white" />
+                                <BiChevronRight className="w-6 h-6 text-white dark:text-gray-900" />
                             </motion.button>
                         </div>
                     </div>
@@ -250,8 +250,8 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 key={index}
                                 onClick={() => setCurrentImageIndex(index)}
                                 className={`relative transition-all duration-300 w-[8rem] aspect-square rounded-lg ${currentImageIndex === index
-                                    ? "ring-2 ring-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
-                                    : "hover:ring-2 hover:ring-cyan-400 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    ? "ring-2 ring-cyan-400 dark:ring-violet-500 shadow-[0_0_10px_rgba(34,211,238,0.5)] dark:shadow-[0_0_10px_rgba(139,92,246,0.3)]"
+                                    : "hover:ring-2 hover:ring-cyan-400 dark:hover:ring-violet-500 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] dark:hover:shadow-[0_0_8px_rgba(139,92,246,0.2)]"
                                     }`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -267,30 +267,30 @@ const ProductDetailsShape = ({ productPromise }) => {
                     <div className="flex items-center gap-2">
                         <div className="flex gap-0.5">
                             {[...Array(ratingNumber)].map((_, i) => (
-                                <FaStar key={i} className="w-4 h-4 fill-cyan-400" />
+                                <FaStar key={i} className="w-4 h-4 fill-cyan-400 dark:fill-violet-500" />
                             ))}
                         </div>
-                        <span className="text-sm text-cyan-200">11 Reviews</span>
+                        <span className="text-sm text-cyan-200 dark:text-violet-600">11 Reviews</span>
                     </div>
 
-                    <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-cyan-100 tracking-wide">{product.name}</h1>
+                    <h1 className="text-[1.8rem] md:text-[2.2rem] font-bold text-cyan-100 dark:text-violet-800 tracking-wide">{product.name}</h1>
 
                     {
-                        !isStocked && <p className="text-red-400 font-semibold">(Out Of Stock)</p>
+                        !isStocked && <p className="text-red-400 dark:text-red-600 font-semibold">(Out Of Stock)</p>
                     }
 
-                    <p className="text-cyan-200/80 text-[0.9rem] leading-relaxed">
+                    <p className="text-cyan-200/80 dark:text-violet-700/80 text-[0.9rem] leading-relaxed">
                         {product.description ||
                             "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks."}
                     </p>
 
                     <div className="flex items-center gap-3">
-                        <span className="text-[1.6rem] font-semibold text-cyan-100">${product.price || "199.00"}</span>
-                        <span className="text-lg text-cyan-200/50 line-through">${product.price * 2}</span>
+                        <span className="text-[1.6rem] font-semibold text-cyan-100 dark:text-violet-800">${product.price || "199.00"}</span>
+                        <span className="text-lg text-cyan-200/50 dark:text-violet-600/50 line-through">${product.price * 2}</span>
                     </div>
 
                     <div className="pb-2">
-                        <p className="font-medium text-[0.9rem] text-cyan-100">Offer expires in:</p>
+                        <p className="font-medium text-[0.9rem] text-cyan-100 dark:text-violet-700">Offer expires in:</p>
                         <div className="flex items-center gap-[10px] mt-2">
                             {["days", "hours", "minutes", "seconds"].map((unit) => (
                                 <motion.div
@@ -300,30 +300,29 @@ const ProductDetailsShape = ({ productPromise }) => {
                                     animate={{ scale: 1, opacity: 1 }}
                                     transition={{ delay: 0.1 * ["days", "hours", "minutes", "seconds"].indexOf(unit) }}
                                 >
-                                    <h5 className="py-2 px-4 bg-gradient-to-r from-gray-900/95 to-cyan-900/95 text-[1.9rem] font-semibold text-cyan-100 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)]">
+                                    <h5 className="py-2 px-4 bg-gradient-to-r from-gray-900/95 to-cyan-900/95 dark:from-gray-100/95 dark:to-cyan-100/95 text-[1.9rem] font-semibold text-cyan-100 dark:text-gray-900 rounded-lg shadow-[0_0_8px_rgba(34,211,238,0.3)] dark:shadow-[0_0_8px_rgba(139,92,246,0.2)]">
                                         {formatNumber(timeLeft[unit])}
                                     </h5>
-                                    <span className="text-[0.7rem] text-cyan-200 capitalize">{unit}</span>
+                                    <span className="text-[0.7rem] text-cyan-200 dark:text-violet-600 capitalize">{unit}</span>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
 
-                    <div className="space-y-2 border-t border-cyan-300/30 pt-4">
-                        <p className="font-medium text-[0.9rem] text-cyan-100">Short Details</p>
+                    <div className="space-y-2 border-t border-cyan-300/30 dark:border-violet-300/30 pt-4">
+                        <p className="font-medium text-[0.9rem] text-cyan-100 dark:text-violet-700">Short Details</p>
                         {
                             product.features.map((details, index) => <p
                                 key={index}
-                                className="text-cyan-200/80"><span className="text-cyan-100 font-bold">{details.title}:</span> <span>{details?.details}</span></p>)
+                                className="text-cyan-200/80 dark:text-violet-700/80"><span className="text-cyan-100 dark:text-violet-700 font-bold">{details.title}:</span> <span>{details?.details}</span></p>)
                         }
-
                     </div>
 
                     <div className="flex gap-4 items-center pt-6">
-                        <div className="flex items-center bg-gradient-to-r from-gray-900/95 to-cyan-900/95 rounded-md">
+                        <div className="flex items-center bg-gradient-to-r from-gray-900/95 to-cyan-900/95 dark:from-gray-100/95 dark:to-cyan-100/95 rounded-md">
                             <motion.button
                                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                className="px-4 py-[0.560rem] text-[1.3rem] font-[300] text-cyan-100 hover:bg-cyan-500/30 rounded-l-md"
+                                className="px-4 py-[0.560rem] text-[1.3rem] font-[300] text-cyan-100 dark:text-gray-900 hover:bg-cyan-500/30 dark:hover:bg-cyan-400/30 rounded-l-md"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -333,11 +332,11 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 type="number"
                                 value={quantity}
                                 onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                                className="w-10 font-medium outline-none text-[0.9rem] bg-transparent text-center text-cyan-100"
+                                className="w-10 font-medium outline-none text-[0.9rem] bg-transparent text-center text-cyan-100 dark:text-gray-900"
                             />
                             <motion.button
                                 onClick={() => setQuantity(quantity + 1)}
-                                className="px-4 py-[0.560rem] text-[1.3rem] font-[300] text-cyan-100 hover:bg-cyan-500/30 rounded-r-md"
+                                className="px-4 py-[0.560rem] text-[1.3rem] font-[300] text-cyan-100 dark:text-gray-900 hover:bg-cyan-500/30 dark:hover:bg-cyan-400/30 rounded-r-md"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -354,7 +353,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 setIsFavorite(!isFavorite)
                             }}
                             disabled={!isInitialized || !product?._id}
-                            className={`py-3 border border-cyan-300/30 rounded-md text-cyan-100 hover:bg-cyan-500/20 flex items-center justify-center gap-[10px] grow ${!isInitialized ? 'opacity-50' : ''
+                            className={`py-3 border border-cyan-300/30 dark:border-violet-300/30 rounded-md text-cyan-100 dark:text-violet-700 hover:bg-cyan-500/20 dark:hover:bg-violet-500/20 flex items-center justify-center gap-[10px] grow ${!isInitialized ? 'opacity-50' : ''
                                 }`}
                         >
                             {!isInitialized ? (
@@ -366,7 +365,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 </>
                             ) : (
                                 <>
-                                    <FaRegHeart className="w-5 h-5 text-cyan-100" />
+                                    <FaRegHeart className="w-5 h-5 text-cyan-100 dark:text-violet-700" />
                                     Wishlist
                                 </>
                             )}
@@ -377,7 +376,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                         isStocked && <div className="flex gap-5">
                             <motion.button
                                 onClick={() => handleAddToCart(product?._id)}
-                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-500/50 dark:to-indigo-500/50 text-white dark:text-gray-900 rounded-xl hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(139,92,246,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-500"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                             >
@@ -387,7 +386,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                             </motion.button>
                             <motion.button
                                 onClick={handleBuyNow}
-                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-500"
+                                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-500/50 dark:to-indigo-500/50 text-white dark:text-gray-900 rounded-xl hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(139,92,246,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-500"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                             >
@@ -400,12 +399,9 @@ const ProductDetailsShape = ({ productPromise }) => {
                 </div>
             </div>
 
-
             <AnimatePresence>
                 {isModalOpen && <PurchaseModal product={product} handleCloseModal={handleCloseModal} quantity={quantity} setIsModalOpen={setIsModalOpen} />}
             </AnimatePresence>
-
-
         </div>
     );
 };

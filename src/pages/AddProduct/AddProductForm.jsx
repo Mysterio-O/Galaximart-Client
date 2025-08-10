@@ -4,6 +4,7 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const AddProductForm = () => {
 
@@ -12,6 +13,8 @@ const AddProductForm = () => {
     const [extraImages, setExtraImages] = useState([]);
 
     const [extraDetails, setExtraDetails] = useState([]);
+
+    const navigate = useNavigate();
 
     // Animation variants for input fields
     const inputVariants = {
@@ -113,7 +116,12 @@ const AddProductForm = () => {
                             confirmButton: 'swal-confirm-button',
                         },
                         buttonsStyling: false,
-                    });
+                    }).then(() => {
+                        form.reset();
+                        setExtraDetails([]);
+                        setExtraImages([]);
+                        navigate('/my-product')
+                    })
                     // console.log('Product added:', data);
                 }
             })
@@ -160,24 +168,24 @@ const AddProductForm = () => {
     return (
         <motion.form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 bg-[#1a1a2e] rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] relative overflow-hidden max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 bg-gray-900/90 dark:bg-gray-100/90 rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] dark:shadow-[0_0_20px_rgba(34,211,238,0.4),0_0_30px_rgba(79,70,229,0.2)] relative overflow-hidden max-w-4xl mx-auto backdrop-blur-md border border-cyan-500/30 dark:border-violet-500/30"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
         >
             {/* Background glow effect */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute w-96 h-96 bg-cyan-500/20 rounded-full filter blur-3xl opacity-20 top-[-100px] left-[-100px] animate-pulse-slow"></div>
-                <div className="absolute w-96 h-96 bg-indigo-500/20 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
+                <div className="absolute w-96 h-96 bg-cyan-500/25 dark:bg-cyan-500/15 rounded-full filter blur-3xl opacity-20 top-[-100px] left-[-100px] animate-pulse-slow"></div>
+                <div className="absolute w-96 h-96 bg-magenta-500/25 dark:bg-magenta-500/15 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
             </div>
 
             {/* Product Name */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Product Name</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Product Name</label>
                 <input
                     type="text"
                     name="name"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Product Name"
                     required
                 />
@@ -185,7 +193,7 @@ const AddProductForm = () => {
 
             {/* Product Images */}
             <motion.fieldset variants={inputVariants} className="relative z-10">
-                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">
+                <label className="flex gap-2 items-center text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron text-lg">
                     Product Images
                     <motion.span
                         className="cursor-pointer"
@@ -201,7 +209,7 @@ const AddProductForm = () => {
                     <input
                         type="url"
                         name="image-0"
-                        className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                        className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                         placeholder="Enter Image URL"
                         required
                     />
@@ -218,13 +226,13 @@ const AddProductForm = () => {
                                 <input
                                     type="url"
                                     name={`image-${index + 1}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                                     placeholder={`Enter Image URL ${index + 1}`}
                                     required
                                 />
                                 <span
                                     onClick={() => removeImageInput(imageId)}
-                                    className="absolute right-7 top-1/2 transform -translate-y-1/2 opacity-40 cursor-pointer hover:opacity-100 transition-opacity"
+                                    className="absolute right-7 top-1/2 transform -translate-y-1/2 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-red-500 dark:text-red-600"
                                 >
                                     <RxCross2 size={24} />
                                 </span>
@@ -236,11 +244,11 @@ const AddProductForm = () => {
 
             {/* Product Brand */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Brand</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Brand</label>
                 <input
                     type="text"
                     name="brand"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Brand Name"
                     required
                 />
@@ -248,10 +256,10 @@ const AddProductForm = () => {
 
             {/* Product Category */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Category</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Category</label>
                 <select
                     name="category"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     required
                 >
                     <option value="Electronics">Electronics</option>
@@ -265,11 +273,11 @@ const AddProductForm = () => {
 
             {/* Product Rating */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Rating</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Rating</label>
                 <input
                     type="number"
                     name="rating"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Rating (0-5)"
                     min="0"
                     max="5"
@@ -278,13 +286,13 @@ const AddProductForm = () => {
                 />
             </motion.div>
 
-            {/* product price */}
+            {/* Product Price */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Product Price</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Product Price</label>
                 <input
                     type="number"
                     name="price"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Product Price"
                     step='0.01'
                     required
@@ -293,10 +301,10 @@ const AddProductForm = () => {
 
             {/* Product Description */}
             <motion.div variants={inputVariants} className="relative z-10 md:col-span-2">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Description</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Description</label>
                 <textarea
                     name="description"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[100px]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[100px]"
                     placeholder="Enter Product Description"
                     required
                 />
@@ -304,11 +312,11 @@ const AddProductForm = () => {
 
             {/* Stock Quantity */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Stock Quantity</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Stock Quantity</label>
                 <input
                     type="number"
                     name="stock"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Stock Quantity"
                     min="1"
                     required
@@ -317,20 +325,20 @@ const AddProductForm = () => {
 
             {/* Minimum Order Quantity */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Minimum Order Quantity</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Minimum Order Quantity</label>
                 <input
                     type="number"
                     name="minQuantity"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Enter Minimum Order Quantity"
                     min="1"
                     required
                 />
             </motion.div>
 
-            {/* product details */}
+            {/* Product Details */}
             <motion.div variants={inputVariants} className="relative z-10 md:col-span-2">
-                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">
+                <label className="flex gap-2 items-center text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron text-lg">
                     Product Details
                     <motion.span
                         className="cursor-pointer"
@@ -347,20 +355,20 @@ const AddProductForm = () => {
                     className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 mb-4 relative"
                 >
                     <div>
-                        <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                        <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Title</label>
                         <input
                             type="text"
                             name="title-0"
-                            className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                            className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                             placeholder="Enter Title"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                        <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Details</label>
                         <textarea
                             name="details-0"
-                            className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                            className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
                             placeholder="Enter Details"
                             required
                         />
@@ -377,27 +385,27 @@ const AddProductForm = () => {
                             className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 mb-4 relative"
                         >
                             <div>
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Title</label>
                                 <input
                                     type="text"
                                     name={`title-${index + 1}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                                     placeholder="Enter Title"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Details</label>
                                 <textarea
                                     name={`details-${index + 1}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
                                     placeholder="Enter Details"
                                     required
                                 />
                             </div>
                             <span
                                 onClick={() => removeDetailsInput(detailsId)}
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-cyan-100"
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-red-500 dark:text-red-600"
                             >
                                 <RxCross2 size={24} />
                             </span>
@@ -410,7 +418,7 @@ const AddProductForm = () => {
             <motion.div variants={inputVariants} className="md:col-span-2 relative z-10 mt-6">
                 <motion.button
                     type="submit"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] orbitron font-semibold"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 rounded-xl hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] orbitron font-semibold"
                     whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
                     whileTap={{ scale: 0.95 }}
                 >

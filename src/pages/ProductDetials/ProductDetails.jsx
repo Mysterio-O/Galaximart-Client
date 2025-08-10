@@ -21,10 +21,8 @@ const ProductDetails = () => {
 
 
     return (
-        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 m-4 p-4 rounded-2xl my-10'>
-
-            {/* <h2 className="text-4xl font-bold">{productTags.name}{productTags.brand}</h2> */}
-            <Suspense fallback={<ProductDetailsLoader/>}>
+        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 dark:bg-gray-900/30 m-4 p-4 rounded-2xl my-10 border border-cyan-500/30 dark:border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.3)] dark:shadow-[0_0_15px_rgba(139,92,246,0.2)]'>
+            <Suspense fallback={<ProductDetailsLoader />}>
                 <ProductDetailsShape productPromise={productPromise} />
             </Suspense>
         </div>

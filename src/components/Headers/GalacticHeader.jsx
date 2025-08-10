@@ -1,5 +1,6 @@
+// GalacticHeader.jsx
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const GalacticHeader = () => {
     const text = 'Shop the Galactic Frontier';
@@ -29,12 +30,12 @@ const GalacticHeader = () => {
 
     return (
         <motion.div
-            className="text-center py-4 bg-gray-900/50"
+            className="text-center py-4 bg-gray-900/50 dark:bg-gray-100/50 backdrop-blur-sm"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold orbitron bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent inline-block text-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold orbitron bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 dark:from-cyan-600 dark:to-violet-600 text-transparent inline-block drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] dark:drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">
                 {characters.map((char, index) => (
                     <motion.span
                         key={`${char}-${index}`}

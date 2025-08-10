@@ -1,11 +1,10 @@
+// CategoryShape.jsx
 import React, { useEffect } from 'react';
 import { motion, useAnimationControls } from 'motion/react';
 import { Link } from 'react-router';
 import { useInView } from 'react-intersection-observer';
 
 const CategoryShape = ({ product, index }) => {
-    // console.log(product)
-
     const controls = useAnimationControls();
 
     const { ref, inView } = useInView({
@@ -13,7 +12,6 @@ const CategoryShape = ({ product, index }) => {
         rootMargin: '-100px 0px 0px 0px',
         triggerOnce: false,
     });
-
 
     const cardVariants = {
         hidden: { opacity: 0, y: 50 },
@@ -31,7 +29,11 @@ const CategoryShape = ({ product, index }) => {
             y: -50,
             transition: { duration: 0.4, ease: 'easeIn' }
         },
-        hover: { scale: 1.05, boxShadow: '0 0 20px rgba(124, 58, 237, 0.5)' },
+        hover: { 
+            scale: 1.05, 
+            boxShadow: '0 0 20px rgba(124, 58, 237, 0.5)',
+            borderColor: 'rgba(34, 211, 238, 0.5)'
+        },
         tap: { scale: 0.95 },
     };
 
@@ -51,22 +53,22 @@ const CategoryShape = ({ product, index }) => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative place-items-center place-content-center bg-gray-900/80 backdrop-blur-md rounded-lg h-[120px] p-6 border border-cyan-500/30 shadow-[0_0_10px_rgba(139,92,246,0.3)] overflow-hidden"
+                className="relative place-items-center place-content-center bg-gray-900/80 dark:bg-gray-100/80 backdrop-blur-md rounded-lg h-[120px] p-6 border border-cyan-500/30 dark:border-violet-500/30 shadow-[0_0_10px_rgba(139,92,246,0.3)] dark:shadow-[0_0_10px_rgba(139,92,246,0.2)] overflow-hidden"
             >
                 {/* Particle Effect */}
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute w-24 h-24 bg-cyan-500/20 rounded-full filter blur-xl animate-pulse opacity-30 top-[-20px] left-[-20px]"></div>
-                    <div className="absolute w-32 h-32 bg-magenta-500/20 rounded-full filter blur-xl animate-pulse-slow opacity-30 bottom-[-30px] right-[-30px]"></div>
+                    <div className="absolute w-24 h-24 bg-cyan-500/20 dark:bg-cyan-500/15 rounded-full filter blur-xl animate-pulse opacity-30 top-[-20px] left-[-20px]"></div>
+                    <div className="absolute w-32 h-32 bg-magenta-500/20 dark:bg-magenta-500/15 rounded-full filter blur-xl animate-pulse-slow opacity-30 bottom-[-30px] right-[-30px]"></div>
                 </div>
 
                 {/* Category Name */}
-                <h3 className="relative z-10 text-base text-balance font-bold text-white text-center bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 orbitron">
+                <h3 className="relative z-10 text-base text-balance font-bold text-white dark:text-gray-900 text-center bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 dark:from-cyan-600 dark:to-violet-600 orbitron">
                     {product.category}
                 </h3>
 
                 {/* Hover Overlay */}
                 <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 opacity-0"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 dark:from-cyan-500/20 dark:to-violet-500/20 opacity-0"
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                 />

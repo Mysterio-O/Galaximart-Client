@@ -18,29 +18,29 @@ const videoSlides = [
     src: holoGlass,
     title: 'HoloSmart Glasses',
     tagline: 'See the Future, Wear the Galaxy',
-    icon: <FaGlasses className="text-4xl text-purple-400" />,
-    duration: 8000, // 8 seconds
-    overlayClass: 'bg-gradient-to-b from-purple-900/50 to-black/70',
-    titleClass: 'text-3xl md:text-5xl text-white font-bold drop-shadow-[0_0_10px_rgba(124,58,237,0.8)]',
-    taglineClass: 'text-lg md:text-2xl text-purple-300 font-semibold mb-6',
+    icon: <FaGlasses className="text-4xl text-purple-400 dark:text-purple-300" />,
+    duration: 8000,
+    overlayClass: 'bg-gradient-to-b from-purple-900/50 to-black/70 dark:from-purple-800/50 dark:to-black/70',
+    titleClass: 'text-3xl md:text-5xl text-white dark:text-purple-100 font-bold drop-shadow-[0_0_10px_rgba(124,58,237,0.8)] dark:drop-shadow-[0_0_10px_rgba(124,58,237,0.5)]',
+    taglineClass: 'text-lg md:text-2xl text-purple-300 dark:text-purple-200 font-semibold mb-6',
     button: {
       text: 'Discover Vision',
-      className: 'btn btn-primary bg-purple-600 hover:bg-purple-700 text-white border-none px-8 py-3 flex items-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.5)]',
+      className: 'btn btn-primary bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 text-white border-none px-8 py-3 flex items-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.5)] dark:shadow-[0_0_15px_rgba(124,58,237,0.3)]',
       icon: <FaEye />,
     },
-},
+  },
   {
     src: hoverBoard,
     title: 'Quantum Hoverboards',
     tagline: 'Ride the Wave of Tomorrow',
-    icon: <FaRocket className="text-4xl text-yellow-300" />,
-    duration: 10000, // 10 seconds
-    overlayClass: 'bg-gradient-to-r from-black/60 to-yellow-900/40',
-    titleClass: 'text-3xl md:text-5xl text-yellow-400 font-extrabold tracking-wider drop-shadow-[0_2px_5px_rgba(251,191,36,0.6)]',
-    taglineClass: 'text-lg md:text-2xl text-white font-medium mb-6 italic',
+    icon: <FaRocket className="text-4xl text-yellow-300 dark:text-yellow-400" />,
+    duration: 10000,
+    overlayClass: 'bg-gradient-to-r from-black/60 to-yellow-900/40 dark:from-black/60 dark:to-yellow-800/40',
+    titleClass: 'text-3xl md:text-5xl text-yellow-400 dark:text-yellow-300 font-extrabold tracking-wider drop-shadow-[0_2px_5px_rgba(251,191,36,0.6)] dark:drop-shadow-[0_2px_5px_rgba(251,191,36,0.4)]',
+    taglineClass: 'text-lg md:text-2xl text-white dark:text-yellow-100 font-medium mb-6 italic',
     button: {
       text: 'Ride Now',
-      className: 'btn btn-accent bg-yellow-500 hover:bg-yellow-600 text-black rounded-full px-6 py-2 flex items-center gap-2',
+      className: 'btn btn-accent bg-yellow-500 hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700 text-black dark:text-gray-900 rounded-full px-6 py-2 flex items-center gap-2',
       icon: <FaArrowRight />,
     },
   },
@@ -48,18 +48,19 @@ const videoSlides = [
     src: smartHomeHub,
     title: 'Galactic Smart Home Hub',
     tagline: 'Control Your Universe',
-    icon: <FaHome className="text-4xl text-white" />,
-    duration: 7000, // 7 seconds
-    overlayClass: 'bg-gradient-to-t from-black/70 to-purple-800/40',
-    titleClass: 'text-3xl md:text-5xl text-white font-serif font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]',
-    taglineClass: 'text-lg md:text-2xl text-yellow-200 font-light mb-6',
+    icon: <FaHome className="text-4xl text-white dark:text-cyan-200" />,
+    duration: 7000,
+    overlayClass: 'bg-gradient-to-t from-black/70 to-purple-800/40 dark:from-black/70 dark:to-cyan-800/40',
+    titleClass: 'text-3xl md:text-5xl text-white dark:text-cyan-100 font-serif font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] dark:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]',
+    taglineClass: 'text-lg md:text-2xl text-yellow-200 dark:text-cyan-200 font-light mb-6',
     button: {
       text: 'Connect Now',
-      className: 'btn btn-ghost text-white border-white hover:bg-white/20 px-6 py-2 flex items-center gap-2',
+      className: 'btn btn-ghost text-white dark:text-cyan-100 border-white dark:border-cyan-200 hover:bg-white/20 dark:hover:bg-cyan-900/30 px-6 py-2 flex items-center gap-2',
       icon: <FaHome />,
     },
   },
 ];
+
 
 // Animation variants for each slide
 const animationVariants = [
@@ -157,10 +158,10 @@ const Slider = () => {
   };
 
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] p-6 rounded-3xl bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+    <div className="relative w-full h-[500px] md:h-[600px] p-6 rounded-3xl bg-gradient-to-b from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 overflow-hidden">
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 z-50">
-          <p className="text-lg text-gray-200">Error: {error}. Please try again later.</p>
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 dark:bg-gray-800/80 z-50">
+          <p className="text-lg text-gray-200 dark:text-gray-100">Error: {error}. Please try again later.</p>
         </div>
       )}
       <Swiper
@@ -175,24 +176,22 @@ const Slider = () => {
         {videoSlides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full video-container">
-              {/* Loading placeholder */}
               <AnimatePresence>
                 {!loadedVideos[index] && (
                   <motion.div
-                    className="absolute inset-0 bg-black flex items-center justify-center z-20"
+                    className="absolute inset-0 bg-black dark:bg-gray-900 flex items-center justify-center z-20"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="text-white text-lg font-semibold">Loading...</p>
+                    <p className="text-white dark:text-gray-200 text-lg font-semibold">Loading...</p>
                   </motion.div>
                 )}
               </AnimatePresence>
               <video
                 ref={videoRefs.current[index]}
-                className={`absolute top-0 left-0 w-full h-full object-cover ${loadedVideos[index] && activeSlide === index ? '' : 'opacity-0'
-                  }`}
+                className={`absolute top-0 left-0 w-full h-full object-cover ${loadedVideos[index] && activeSlide === index ? '' : 'opacity-0'}`}
                 src={slide.src}
                 autoPlay={activeSlide === index}
                 muted

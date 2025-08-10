@@ -43,15 +43,15 @@ const MyOrder = () => {
     const getStatusIcon = (status) => {
         switch (status) {
             case 'processing':
-                return <FaBox className="text-yellow-400" />;
+                return <FaBox className="text-yellow-400 dark:text-yellow-500" />;
             case 'shipped':
-                return <FaShippingFast className="text-blue-400" />;
+                return <FaShippingFast className="text-blue-400 dark:text-blue-500" />;
             case 'delivered':
-                return <FaCheckCircle className="text-green-400" />;
+                return <FaCheckCircle className="text-green-400 dark:text-green-500" />;
             default:
-                return <FaBoxOpen className="text-gray-400" />;
+                return <FaBoxOpen className="text-gray-400 dark:text-gray-500" />;
         }
-    };
+    }
 
 
     const formatDate = (dateString) => {
@@ -112,14 +112,43 @@ const MyOrder = () => {
     if (isFetching) {
         return (
             <div className="container mx-auto px-4 py-8 max-w-5xl">
+                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-10 w-1/3 rounded mb-8 animate-pulse"></div>
                 <div className="space-y-6">
                     {[...Array(3)].map((_, index) => (
-                        <div key={index} className="bg-[#2a2a3e] rounded-xl border border-cyan-300/30 p-6">
-                            <Skeleton height={30} width={200} className="mb-4" />
-                            <Skeleton count={3} />
-                            <div className="flex justify-between mt-4">
-                                <Skeleton width={100} height={40} />
-                                <Skeleton width={100} height={40} />
+                        <div key={index} className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl border border-cyan-500/30 dark:border-violet-500/30 p-6 animate-pulse">
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="space-y-2">
+                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-32 rounded"></div>
+                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-24 rounded"></div>
+                                </div>
+                                <div className="space-y-2 text-right">
+                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-20 rounded"></div>
+                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-16 rounded"></div>
+                                </div>
+                            </div>
+                            <div className="border-t border-cyan-500/20 dark:border-violet-500/20 pt-4 mt-4">
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-24 rounded mb-3"></div>
+                                <div className="space-y-4">
+                                    {[...Array(2)].map((_, i) => (
+                                        <div key={i} className="flex justify-between items-center bg-gray-800/50 dark:bg-gray-200/50 rounded-lg p-3">
+                                            <div className="flex items-center space-x-4">
+                                                <div className="w-16 h-16 bg-gray-700/50 dark:bg-gray-300/50 rounded-lg"></div>
+                                                <div className="space-y-2">
+                                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-32 rounded"></div>
+                                                    <div className="bg-gray-800/50 dark:bg-gray-200/50 h-3 w-20 rounded"></div>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2 text-right">
+                                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-16 rounded"></div>
+                                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-3 w-24 rounded"></div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center mt-6 pt-4 border-t border-cyan-500/20 dark:border-violet-500/20">
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-48 rounded"></div>
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-8 w-32 rounded"></div>
                             </div>
                         </div>
                     ))}
@@ -132,12 +161,12 @@ const MyOrder = () => {
     if (error) {
         return (
             <div className="container mx-auto px-4 py-8 max-w-5xl text-center">
-                <div className="bg-red-900/20 border border-red-500/50 rounded-xl p-6">
-                    <h2 className="text-2xl font-bold text-red-400 mb-2">Error Loading Orders</h2>
-                    <p className="text-red-300">{error}</p>
+                <div className="bg-red-900/20 dark:bg-red-500/10 border border-red-500/50 dark:border-red-500/30 rounded-xl p-6">
+                    <h2 className="text-2xl font-bold text-red-400 dark:text-red-500 mb-2">Error Loading Orders</h2>
+                    <p className="text-red-300 dark:text-red-400">{error}</p>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mt-4 px-4 py-2 bg-red-600/50 hover:bg-red-600 rounded-lg text-white"
+                        className="mt-4 px-4 py-2 bg-red-600/50 dark:bg-red-500/50 hover:bg-red-600 dark:hover:bg-red-500 rounded-lg text-gray-100 dark:text-gray-800"
                     >
                         Retry
                     </button>
@@ -151,12 +180,12 @@ const MyOrder = () => {
     return (
         <div className="container mx-auto px-4 py-8 max-w-5xl">
             <motion.h1
-                className="text-2xl md:text-3xl font-bold text-cyan-100 mb-8 flex items-center gap-2"
+                className="text-2xl md:text-3xl font-bold text-gray-100 dark:text-gray-800 mb-8 flex items-center gap-2"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <FaBoxOpen className="text-cyan-400" />
+                <FaBoxOpen className="text-cyan-400 dark:text-cyan-500" />
                 My Order History
             </motion.h1>
 
@@ -167,11 +196,11 @@ const MyOrder = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <div className="w-32 h-32 bg-cyan-900/20 rounded-full flex items-center justify-center mb-6">
-                        <FaBoxOpen className="text-cyan-400 text-5xl" />
+                    <div className="w-32 h-32 bg-cyan-900/20 dark:bg-cyan-700/20 rounded-full flex items-center justify-center mb-6">
+                        <FaBoxOpen className="text-cyan-400 dark:text-cyan-500 text-5xl" />
                     </div>
-                    <h2 className="text-2xl font-bold text-cyan-100 mb-2">No Orders Found</h2>
-                    <p className="text-cyan-200 max-w-md">
+                    <h2 className="text-2xl font-bold text-gray-100 dark:text-gray-800 mb-2">No Orders Found</h2>
+                    <p className="text-gray-300 dark:text-gray-600 max-w-md">
                         You haven't placed any orders yet. Start shopping to see your order history here.
                     </p>
                 </motion.div>
@@ -180,7 +209,7 @@ const MyOrder = () => {
                     {orders.map((order) => (
                         <motion.div
                             key={order._id}
-                            className="bg-[#2a2a3e] rounded-xl overflow-hidden border border-cyan-300/30 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                            className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl overflow-hidden border border-cyan-500/30 dark:border-violet-500/30 shadow-[0_0_15px_rgba(34,211,238,0.3)] dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] backdrop-blur-md"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3 }}
@@ -189,59 +218,59 @@ const MyOrder = () => {
                             <div className="p-6">
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <h2 className="text-xl font-bold text-cyan-100 flex items-center gap-2">
+                                        <h2 className="text-xl font-bold text-gray-100 dark:text-gray-800 flex items-center gap-2">
                                             {getStatusIcon(order.purchaseDetails.deliveryStatus)}
                                             Order #{order._id.toString().slice(-6).toUpperCase()}
                                         </h2>
-                                        <p className="text-cyan-300 text-sm mt-1">
+                                        <p className="text-gray-300 dark:text-gray-600 text-sm mt-1">
                                             {formatDate(order.purchaseDetails.orderedDate)}
                                         </p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-lg font-bold text-cyan-100">
+                                        <p className="text-lg font-bold text-gray-100 dark:text-gray-800">
                                             ${order.purchaseDetails.totalAmount.toFixed(2)}
                                         </p>
                                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-1 ${order.purchaseDetails.deliveryStatus === 'processing'
-                                            ? 'bg-yellow-500/20 text-yellow-400'
+                                            ? 'bg-yellow-500/20 dark:bg-yellow-500/10 text-yellow-400 dark:text-yellow-500'
                                             : order.purchaseDetails.deliveryStatus === 'shipped'
-                                                ? 'bg-blue-500/20 text-blue-400'
-                                                : 'bg-green-500/20 text-green-400'
+                                                ? 'bg-blue-500/20 dark:bg-blue-500/10 text-blue-400 dark:text-blue-500'
+                                                : 'bg-green-500/20 dark:bg-green-500/10 text-green-400 dark:text-green-500'
                                             }`}>
                                             {order.purchaseDetails.deliveryStatus}
                                         </span>
                                     </div>
                                 </div>
 
-                                <div className="border-t border-cyan-400/20 pt-4 mt-4">
-                                    <h3 className="text-lg font-semibold text-cyan-200 mb-3">
+                                <div className="border-t border-cyan-500/20 dark:border-violet-500/20 pt-4 mt-4">
+                                    <h3 className="text-lg font-semibold text-gray-300 dark:text-gray-600 mb-3">
                                         Items ({order.purchaseDetails.items.length})
                                     </h3>
                                     <div className="space-y-4">
                                         {order.purchaseDetails.items.map((item, index) => (
                                             <motion.div
                                                 key={index}
-                                                className="flex justify-between items-center bg-[#2a2a3e]/50 rounded-lg p-3"
+                                                className="flex justify-between items-center bg-gray-800/50 dark:bg-gray-200/50 rounded-lg p-3"
                                                 whileHover={{ scale: 1.01 }}
                                             >
                                                 <div className="flex items-center space-x-4">
                                                     <img
                                                         src={item.image}
                                                         alt={item.name}
-                                                        className="w-16 h-16 rounded-lg object-cover border border-cyan-400/20"
+                                                        className="w-16 h-16 rounded-lg object-cover border border-cyan-500/20 dark:border-violet-500/20"
                                                         onError={(e) => {
                                                             e.target.src = 'https://via.placeholder.com/100?text=Image+Error';
                                                         }}
                                                     />
                                                     <div>
-                                                        <h4 className="text-cyan-100 font-medium">{item.name}</h4>
-                                                        <p className="text-cyan-400 text-sm">{item.brand}</p>
+                                                        <h4 className="text-gray-100 dark:text-gray-800 font-medium">{item.name}</h4>
+                                                        <p className="text-gray-300 dark:text-gray-600 text-sm">{item.brand}</p>
                                                     </div>
                                                 </div>
                                                 <div className="text-right">
-                                                    <p className="text-cyan-100">
+                                                    <p className="text-gray-100 dark:text-gray-800">
                                                         ${(item.price * item.quantity).toFixed(2)}
                                                     </p>
-                                                    <p className="text-cyan-400 text-sm">
+                                                    <p className="text-gray-300 dark:text-gray-600 text-sm">
                                                         {item.quantity} × ${item.price.toFixed(2)}
                                                     </p>
                                                 </div>
@@ -250,12 +279,12 @@ const MyOrder = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-between items-center mt-6 pt-4 border-t border-cyan-400/20">
-                                    <p className="text-cyan-300 text-sm">
+                                <div className="flex justify-between items-center mt-6 pt-4 border-t border-cyan-500/20 dark:border-violet-500/20">
+                                    <p className="text-gray-300 dark:text-gray-600 text-sm">
                                         Transaction ID: {order.purchaseDetails.transactionId}
                                     </p>
                                     <motion.button
-                                        className="flex items-center gap-2 px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg text-sm transition-colors cursor-pointer"
+                                        className="flex items-center gap-2 px-4 py-2 bg-red-600/20 dark:bg-red-500/20 hover:bg-red-600/30 dark:hover:bg-red-500/30 text-red-400 dark:text-red-500 rounded-lg text-sm transition-colors cursor-pointer"
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={() => handleDeleteOrder(order._id)}

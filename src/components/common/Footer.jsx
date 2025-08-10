@@ -55,21 +55,21 @@ const Footer = () => {
         .animate-wave {
           animation: wave 20s linear infinite;
         }
-      `
+    `;
 
     return (
-        <footer className="relative bg-gradient-to-t from-gray-900/90 via-violet-950/90 to-cyan-900/90 backdrop-blur-2xl shadow-[0_0_20px_rgba(139,92,246,0.4)] border-t border-cyan-500/40 py-12 overflow-hidden">
+        <footer className="relative bg-gradient-to-t from-gray-900/90 via-violet-950/90 to-cyan-900/90 dark:from-gray-100/90 dark:via-violet-100/90 dark:to-cyan-100/90 backdrop-blur-2xl shadow-[0_0_20px_rgba(139,92,246,0.4)] dark:shadow-[0_0_20px_rgba(139,92,246,0.2)] border-t border-cyan-500/40 dark:border-violet-500/40 py-12 overflow-hidden">
             <style>{customStyles}</style>
             {/* Wave Background Animation */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute w-full h-full bg-bottom bg-no-repeat opacity-30 animate-wave"></div>
-                <div className="absolute w-72 h-72 bg-cyan-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 top-[10%] left-[5%]"></div>
-                <div className="absolute w-80 h-80 bg-magenta-500/25 rounded-full filter blur-3xl animate-pulse opacity-20 bottom-[15%] right-[5%] animate-pulse-slow"></div>
+                <div className="absolute w-full h-full bg-bottom bg-no-repeat opacity-30 dark:opacity-20 animate-wave"></div>
+                <div className="absolute w-72 h-72 bg-cyan-500/25 dark:bg-cyan-500/15 rounded-full filter blur-3xl animate-pulse opacity-20 top-[10%] left-[5%]"></div>
+                <div className="absolute w-80 h-80 bg-magenta-500/25 dark:bg-magenta-500/15 rounded-full filter blur-3xl animate-pulse opacity-20 bottom-[15%] right-[5%] animate-pulse-slow"></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-10 text-gray-200"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-10 text-gray-200 dark:text-gray-800"
                     variants={footerVariants}
                     initial="hidden"
                     animate="visible"
@@ -86,7 +86,7 @@ const Footer = () => {
                             >
                                 {/* Neon Ring Effect */}
                                 <motion.div
-                                    className="absolute w-28 h-28 rounded-full border-2 border-cyan-400/50 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+                                    className="absolute w-28 h-28 rounded-full border-2 border-cyan-400/50 dark:border-violet-500/50 shadow-[0_0_10px_rgba(34,211,238,0.5)] dark:shadow-[0_0_10px_rgba(139,92,246,0.3)]"
                                     variants={ringVariants}
                                     initial="hidden"
                                     animate="visible"
@@ -95,27 +95,27 @@ const Footer = () => {
                                 <img
                                     src="/main-logo.webp"
                                     alt="GalaxiMart Logo"
-                                    className="w-20 h-20 rounded-full z-10 shadow-[0_0_12px_rgba(139,92,246,0.4)]"
+                                    className="w-20 h-20 rounded-full z-10 shadow-[0_0_12px_rgba(139,92,246,0.4)] dark:shadow-[0_0_12px_rgba(139,92,246,0.2)]"
                                 />
-                                <span className="orbitron text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 tracking-tight mt-2">
+                                <span className="orbitron text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 dark:from-cyan-600 dark:via-magenta-600 dark:to-violet-600 tracking-tight mt-2">
                                     GalaxiMart
                                 </span>
                             </motion.div>
                         </NavLink>
-                        <p className="inter text-sm text-center md:text-left mt-4">
+                        <p className="inter text-sm text-center md:text-left mt-4 text-gray-300 dark:text-gray-700">
                             Dive into a stellar shopping experience.
                         </p>
                     </motion.div>
 
                     {/* Navigation Links */}
                     <motion.div variants={footerVariants} className="flex flex-col items-center md:items-start">
-                        <h3 className="orbitron text-xl font-semibold text-cyan-300 mb-4">Explore</h3>
+                        <h3 className="orbitron text-xl font-semibold text-cyan-300 dark:text-cyan-600 mb-4">Explore</h3>
                         <ul className="space-y-3">
                             {links.map((link) => (
                                 <motion.li key={link.name} variants={linkVariants} whileHover="hover">
                                     <NavLink
                                         to={link.to}
-                                        className="inter text-sm text-gray-300 hover:text-cyan-400 transition-all duration-300"
+                                        className="inter text-sm text-gray-300 dark:text-gray-700 hover:text-cyan-400 dark:hover:text-cyan-600 transition-all duration-300"
                                     >
                                         {link.name}
                                     </NavLink>
@@ -126,7 +126,7 @@ const Footer = () => {
 
                     {/* Social Media & Contact */}
                     <motion.div variants={footerVariants} className="flex flex-col items-center md:items-start">
-                        <h3 className="orbitron text-xl font-semibold text-cyan-300 mb-4">Stay Connected</h3>
+                        <h3 className="orbitron text-xl font-semibold text-cyan-300 dark:text-cyan-600 mb-4">Stay Connected</h3>
                         <div className="flex space-x-5 mb-4">
                             <motion.a
                                 href="https://twitter.com"
@@ -134,7 +134,7 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 variants={iconVariants}
                                 whileHover="hover"
-                                className="text-gray-300"
+                                className="text-gray-300 dark:text-gray-700"
                             >
                                 <FaTwitter size={24} />
                             </motion.a>
@@ -144,7 +144,7 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 variants={iconVariants}
                                 whileHover="hover"
-                                className="text-gray-300"
+                                className="text-gray-300 dark:text-gray-700"
                             >
                                 <FaInstagram size={24} />
                             </motion.a>
@@ -154,7 +154,7 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 variants={iconVariants}
                                 whileHover="hover"
-                                className="text-gray-300"
+                                className="text-gray-300 dark:text-gray-700"
                             >
                                 <FaFacebookF size={24} />
                             </motion.a>
@@ -164,23 +164,23 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 variants={iconVariants}
                                 whileHover="hover"
-                                className="text-gray-300"
+                                className="text-gray-300 dark:text-gray-700"
                             >
                                 <FaGithub size={24} />
                             </motion.a>
                         </div>
-                        <p className="inter text-sm text-center md:text-left">
-                            Email: <a href="mailto:support@galaximart.com" className="hover:text-cyan-400 transition-all duration-300">support@galaximart.com</a>
+                        <p className="inter text-sm text-center md:text-left text-gray-300 dark:text-gray-700">
+                            Email: <a href="mailto:support@galaximart.com" className="hover:text-cyan-400 dark:hover:text-cyan-600 transition-all duration-300">support@galaximart.com</a>
                         </p>
                     </motion.div>
                 </motion.div>
 
                 {/* Copyright Section */}
                 <motion.div
-                    className="mt-10 pt-6 border-t border-cyan-500/30 text-center"
+                    className="mt-10 pt-6 border-t border-cyan-500/30 dark:border-violet-500/30 text-center"
                     variants={footerVariants}
                 >
-                    <p className="inter text-sm text-gray-400">
+                    <p className="inter text-sm text-gray-400 dark:text-gray-600">
                         © {new Date().getFullYear()} GalaxiMart. All rights reserved.
                     </p>
                 </motion.div>

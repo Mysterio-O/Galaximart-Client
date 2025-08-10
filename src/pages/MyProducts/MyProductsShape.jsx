@@ -105,29 +105,29 @@ const MyProductsShape = ({ productsPromise }) => {
                             animate="visible"
                             variants={cardVariants}
                             whileHover="hover"
-                            className="bg-[#2a2a3e] rounded-xl overflow-hidden border border-cyan-300/30"
+                            className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl overflow-hidden border border-cyan-500/30 dark:border-violet-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.3)] dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] max-w-[300px]"
                         >
                             <img
                                 src={product.image?.[0] || 'https://via.placeholder.com/300x200?text=Product'}
                                 alt={product.name}
-                                className="w-full h-48 object-cover"
+                                className="w-full h-36 object-cover"
                                 onError={(e) => {
                                     e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
                                 }}
                             />
-                            <div className="p-6">
-                                <h3 className="text-lg font-semibold text-cyan-100 truncate orbitron">
+                            <div className="p-4">
+                                <h3 className="text-base font-semibold text-gray-100 dark:text-gray-800 truncate orbitron">
                                     {product.name}
                                 </h3>
-                                <p className="text-sm text-cyan-200 mt-1 orbitron">
+                                <p className="text-sm text-gray-300 dark:text-gray-600 mt-1 orbitron">
                                     Brand: {product.brand}
                                 </p>
-                                <p className="text-sm text-cyan-200 orbitron">
+                                <p className="text-sm text-gray-300 dark:text-gray-600 orbitron">
                                     Category: {product.category}
                                 </p>
-                                <div className="flex items-center mt-3">
-                                    <span className="text-yellow-400 text-lg">★</span>
-                                    <span className="ml-1 text-sm font-medium text-cyan-100 orbitron">
+                                <div className="flex items-center mt-2">
+                                    <span className="text-yellow-400 dark:text-yellow-500 text-base">★</span>
+                                    <span className="ml-1 text-sm font-medium text-gray-100 dark:text-gray-800 orbitron">
                                         {product.rating}
                                     </span>
                                 </div>
@@ -135,7 +135,7 @@ const MyProductsShape = ({ productsPromise }) => {
                                     <motion.button
                                         whileHover={{ scale: 1.03 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="mt-4 w-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white py-2.5 rounded-lg font-medium orbitron hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)]"
+                                        className="mt-3 w-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 py-2 rounded-lg font-medium orbitron hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                                     >
                                         View Details
                                     </motion.button>
@@ -144,7 +144,7 @@ const MyProductsShape = ({ productsPromise }) => {
                                     onClick={() => handleDelete(product._id)}
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="mt-2 w-full bg-gradient-to-r from-red-600/50 to-red-800/50 text-white py-2.5 rounded-lg font-medium orbitron hover:from-red-500 hover:to-red-700 shadow-[0_0_10px_rgba(239,68,68,0.3)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)]"
+                                    className="mt-2 w-full bg-gradient-to-r from-red-600/50 to-red-800/50 dark:from-red-500/50 dark:to-red-700/50 text-gray-100 dark:text-gray-800 py-2 rounded-lg font-medium orbitron hover:from-red-500 hover:to-red-700 dark:hover:from-red-400 dark:hover:to-red-600 shadow-[0_0_10px_rgba(239,68,68,0.3)] dark:shadow-[0_0_10px_rgba(239,68,68,0.2)] hover:shadow-[0_0_20px_rgba(239,68,68,0.7)] dark:hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]"
                                 >
                                     Delete Product
                                 </motion.button>

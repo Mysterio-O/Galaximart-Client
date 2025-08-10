@@ -10,6 +10,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
     const [extraInput, setExtraInput] = useState([]);
     const [extraDetails, setExtraDetails] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -31,6 +32,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
     const handleUpdateProduct = (e) => {
         e.preventDefault();
+        setLoading(true);
         const form = e.target;
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries());
@@ -71,6 +73,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                 .then(res => {
                     // console.log(res.data)
                     if (res.data?.acknowledged || res.data.matchedCount > 0) {
+                        setLoading(false);
                         Swal.fire({
                             title: 'Success!',
                             text: 'Product updated successfully!',
@@ -88,7 +91,8 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    console.log(err);
+                    setLoading(false);
                     Swal.fire({
                         title: 'Error!',
                         text: 'Failed to update product. Please try again.',
@@ -145,24 +149,24 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
     return (
         <motion.form
             onSubmit={handleUpdateProduct}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 bg-[#1a1a2e] rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] relative overflow-hidden max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8 bg-gray-900/90 dark:bg-gray-100/90 rounded-[20px_18px_14px_16px] shadow-[0_0_20px_rgba(34,211,238,0.5),0_0_30px_rgba(79,70,229,0.3)] dark:shadow-[0_0_20px_rgba(34,211,238,0.4),0_0_30px_rgba(79,70,229,0.2)] relative overflow-hidden max-w-4xl mx-auto backdrop-blur-md border border-cyan-500/30 dark:border-violet-500/30"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
         >
             {/* Background glow effect */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute w-96 h-96 bg-cyan-500/20 rounded-full filter blur-3xl opacity-20 top-[-100px] left-[-100px] animate-pulse-slow"></div>
-                <div className="absolute w-96 h-96 bg-indigo-500/20 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
+                <div className="absolute w-96 h-96 bg-cyan-500/25 dark:bg-cyan-500/15 rounded-full filter blur-3xl opacity-20 top-[-100px] left-[-100px] animate-pulse-slow"></div>
+                <div className="absolute w-96 h-96 bg-magenta-500/25 dark:bg-magenta-500/15 rounded-full filter blur-3xl opacity-20 bottom-[-100px] right-[-100px] animate-pulse-slow"></div>
             </div>
 
             {/* Image Fields */}
             <motion.fieldset variants={inputVariants} className="relative z-10">
-                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">Product Images
+                <label className="flex gap-2 items-center text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron text-lg">Product Images
                     <motion.span
                         className='cursor-pointer'
                         initial={{ scale: 1 }}
-                        whileHover={{ scale: 1.2, rotate: 90, color: 'green' }}
+                        whileHover={{ scale: 1.2, rotate: 90, color: '#22d3ee' }}
                         whileTap={{ scale: 1 }}
                         onClick={fnAddInput}>
                         <IoMdAddCircleOutline size={26} />
@@ -175,7 +179,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                             name={`image-${index}`}
                             type="text"
                             defaultValue={image}
-                            className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                            className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                             placeholder={`Image URL ${index + 1}`}
                         />
                     ))}
@@ -192,7 +196,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                                 <motion.input
                                     name={`newImage-${index + 1}`}
                                     type="text"
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] relative"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] relative"
                                     placeholder={`enter new image url-${index + 1}`}
                                 />
                                 <motion.span
@@ -201,9 +205,8 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                                     whileTap={{ scale: 1, opacity: 0.4 }}
                                     transition={{ duration: 0.3 }}
                                     onClick={() => fnRemoveInput(inputId)}
-                                    className=' right-7 top-45 z-10 text-red-500 cursor-pointer'>
+                                    className='right-7 top-45 z-10 text-red-500 dark:text-red-600 cursor-pointer'>
                                     <RxCross2 size={24} />
-
                                 </motion.span>
                             </motion.div>
                         ))}
@@ -213,34 +216,34 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
             {/* Name Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Name</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Name</label>
                 <input
                     type="text"
                     name="name"
                     defaultValue={product?.name}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-900/30 focus:border-cyan-500 focus:ring-2 focus:ring-blue-500/50 outline-none"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Product name"
                 />
             </motion.div>
 
             {/* Brand Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Brand</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Brand</label>
                 <input
                     type="text"
                     name="brand"
                     defaultValue={product?.brand}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Brand name"
                 />
             </motion.div>
 
             {/* Category Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Category</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Category</label>
                 <select
                     name="category"
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                 >
                     <option value="Electronics">Electronics</option>
                     <option value="Clothing & Apparel">Clothing & Apparel</option>
@@ -253,12 +256,12 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
             {/* Rating Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Rating</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Rating</label>
                 <input
                     type="number"
                     name="rating"
                     defaultValue={product?.rating}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Rating (0-5)"
                     min="0"
                     max="5"
@@ -268,23 +271,23 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
             {/* Description Field */}
             <motion.div variants={inputVariants} className="relative z-10 md:col-span-2">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Description</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Description</label>
                 <textarea
                     name="description"
                     defaultValue={product?.description}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[100px]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[100px]"
                     placeholder="Product description"
                 />
             </motion.div>
 
             {/* Main Quantity Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Main Quantity</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Main Quantity</label>
                 <input
                     type="number"
                     name="mainQuantity"
                     defaultValue={product?.stock}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Stock quantity"
                     min="0"
                 />
@@ -292,22 +295,20 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
             {/* Min Quantity Field */}
             <motion.div variants={inputVariants} className="relative z-10">
-                <label className="block text-cyan-100 font-medium mb-2 orbitron">Min Quantity</label>
+                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron">Min Quantity</label>
                 <input
                     type="number"
                     name="minQuantity"
                     defaultValue={product?.minQuantity}
-                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none transition-all duration-300 hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                     placeholder="Minimum order quantity"
                     min="1"
                 />
             </motion.div>
 
-
-
-            {/* product features */}
+            {/* Product Features */}
             <motion.div variants={inputVariants} className="relative z-10 md:col-span-2">
-                <label className="flex gap-2 items-center text-cyan-100 font-medium mb-2 orbitron text-lg">
+                <label className="flex gap-2 items-center text-gray-100 dark:text-gray-800 font-medium mb-2 orbitron text-lg">
                     Product Features
                     <motion.span
                         className="cursor-pointer"
@@ -320,7 +321,6 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     </motion.span>
                 </label>
 
-
                 <motion.div
                     variants={inputVariants}
                     className="flex flex-col gap-4 mb-4"
@@ -328,27 +328,27 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                     {product?.features.map((feature, index) => (
                         <div key={index} className="relative flex flex-row items-start gap-4">
                             <div className="w-1/3">
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Title</label>
                                 <input
                                     type="text"
                                     name={`title-${index}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                                     placeholder="Enter Title"
                                     defaultValue={feature?.title}
                                     required
                                 />
                             </div>
                             <div className="w-2/3">
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Details</label>
                                 <textarea
                                     name={`details-${index}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
                                     placeholder="Enter Details"
                                     defaultValue={feature?.details}
                                     required
                                 />
                             </div>
-                            <span className="absolute right-4 top-4 opacity-0 cursor-default text-cyan-100">
+                            <span className="absolute right-4 top-4 opacity-0 cursor-default text-gray-100 dark:text-gray-800">
                                 <RxCross2 size={24} />
                             </span>
                         </div>
@@ -365,34 +365,33 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
                             className="flex flex-row items-start gap-4 mb-4 relative"
                         >
                             <div className="w-1/3">
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Title</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Title</label>
                                 <input
                                     type="text"
                                     name={`title-${index + 3}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)]"
                                     placeholder="Enter Title"
                                     required
                                 />
                             </div>
                             <div className="w-2/3">
-                                <label className="block text-cyan-100 font-medium mb-1 orbitron">Details</label>
+                                <label className="block text-gray-100 dark:text-gray-800 font-medium mb-1 orbitron">Details</label>
                                 <textarea
                                     name={`details-${index + 3}`}
-                                    className="w-full p-3 rounded-lg bg-gray-900/50 text-cyan-100 border border-cyan-300/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
+                                    className="w-full p-3 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 border border-cyan-500/30 dark:border-violet-500/30 focus:border-cyan-400 dark:focus:border-violet-600 focus:ring-2 focus:ring-cyan-400/50 dark:focus:ring-violet-600/50 outline-none hover:shadow-[0_0_8px_rgba(34,211,238,0.3)] resize-y min-h-[80px]"
                                     placeholder="Enter Details"
                                     required
                                 />
                             </div>
                             <span
                                 onClick={() => removeDetailsInput(detailsId)}
-                                className="absolute right-4 top-12 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-cyan-100"
+                                className="absolute right-4 top-12 opacity-40 cursor-pointer hover:opacity-100 transition-opacity text-red-500 dark:text-red-600"
                             >
                                 <RxCross2 size={24} />
                             </span>
                         </motion.div>
                     ))}
                 </AnimatePresence>
-
             </motion.div>
 
             {/* Submit Button */}
@@ -402,14 +401,17 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
             >
                 <motion.button
                     type="submit"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] transition-all duration-300 orbitron font-semibold cursor-pointer"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 rounded-xl hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.7)] dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all duration-300 orbitron font-semibold cursor-pointer"
                     whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(34,211,238,0.7)' }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    Update Product
+                    {
+                        loading ? <span className="loading loading-spinner text-info"></span>
+                            : "Update Product"
+                    }
+
                 </motion.button>
             </motion.div>
-
         </motion.form>
     );
 };

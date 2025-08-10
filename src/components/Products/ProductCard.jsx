@@ -14,7 +14,7 @@ const ProductCard = ({ product, index }) => {
         <>
             <motion.div
                 key={product?.id}
-                className="card bg-gradient-to-br from-gray-900/90 via-violet-950/90 to-cyan-900/90 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.3)] rounded-xl overflow-hidden border border-cyan-500/30"
+                className="card bg-gradient-to-br from-gray-900/90 via-violet-950/90 to-cyan-900/90 dark:from-gray-100/90 dark:via-violet-100/90 dark:to-cyan-100/90 backdrop-blur-md shadow-[0_0_15px_rgba(139,92,246,0.3)] dark:shadow-[0_0_15px_rgba(139,92,246,0.2)] rounded-xl overflow-hidden border border-cyan-500/30 dark:border-violet-500/30 hover:border-cyan-400/60 dark:hover:border-violet-400/60 transition-all duration-300"
                 initial={{ opacity: 0, y: 50, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
@@ -32,12 +32,12 @@ const ProductCard = ({ product, index }) => {
                         className="rounded-lg object-cover w-full h-30 transition-all duration-300 group-hover:brightness-110"
                     />
                 </figure>
-                <div className="card-body items-center text-center text-gray-100">
+                <div className="card-body items-center text-center text-gray-100 dark:text-gray-800">
                     <ProductTitle product={product}/>
                     <p
-                        className={`text-green-400 ${product?.stock < product?.minQuantity && 'text-red-500'} font-semibold text-sm`}
-                    >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` : 'Out of Stock'}`}</p>
-                    <p className='text-base md:text-lg font-medium text-gray-200'>Price: {product?.price}$</p>
+                    className={`text-green-400 dark:text-green-600 ${product?.stock < product?.minQuantity && 'text-red-500 dark:text-red-600'} font-semibold text-sm`}
+                >{`${product?.stock > product?.minQuantity ? `${product?.stock} left` : 'Out of Stock'}`}</p>
+                    <p className='text-base md:text-lg font-medium text-gray-200 dark:text-gray-700'>Price: {product?.price}$</p>
 
                     <div id='rating' className='flex'>
                         <ProductRating ratingNumber={ratingNumber} />

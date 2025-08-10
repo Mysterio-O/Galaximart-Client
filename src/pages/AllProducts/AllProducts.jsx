@@ -6,6 +6,8 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import TableFormat from './TableFormat';
 import { FaAnglesUp } from "react-icons/fa6";
+import TableSkeleton from '../../Loaders/TableSkeleton/TableSkeleton';
+import CardSkeleton from '../../Loaders/CardSkeleton/CardSkeleton';
 
 const AllProducts = () => {
     const { user } = useContext(AuthContext);
@@ -76,15 +78,15 @@ const AllProducts = () => {
                     >
                         <label
                             htmlFor="sortOptions"
-                            className="text-sm md:text-base font-bold text-white"
+                            className="text-sm md:text-base font-bold text-gray-100 dark:text-gray-800"
                         >
                             Sort Items:
                         </label>
                         <motion.select
                             id="sortOptions"
                             name="sortOptions"
-                            className="p-2 rounded-lg bg-neutral-800 border-2 border-neutral-600 text-neutral-400 text-sm md:text-base focus:border-teal-400 focus:outline-none cursor-pointer"
-                            whileHover={{ scale: 1.05, borderColor: '#2DD4BF' }}
+                            className="p-2 rounded-lg bg-gray-800/50 dark:bg-gray-200/50 border border-cyan-500/30 dark:border-violet-500/30 text-gray-300 dark:text-gray-700 text-sm md:text-base focus:border-cyan-400 dark:focus:border-violet-600 focus:outline-none cursor-pointer focus:shadow-[0_0_8px_rgba(139,92,246,0.3)] transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
                             whileFocus={{ scale: 1.05, boxShadow: '0 0 10px rgba(45, 212, 191, 0.5)' }}
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             onChange={handleSortChange}
@@ -104,13 +106,13 @@ const AllProducts = () => {
                         <div className="relative group">
                             <button
                                 onClick={() => setIsTable(!isTable)}
-                                className="relative inline-block p-px font-semibold leading-6 text-white bg-gray-800 shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+                                className="relative inline-block p-px font-semibold leading-6 text-gray-100 dark:text-gray-800 bg-gray-900/95 dark:bg-gray-100/95 shadow-2xl cursor-pointer rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.3)] dark:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
                             >
                                 <span
-                                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 dark:from-cyan-600 dark:via-magenta-600 dark:to-violet-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                                 ></span>
 
-                                <span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
+                                <span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950 dark:bg-gray-50">
                                     <div className="relative z-10 flex items-center space-x-2">
                                         <span className="transition-all duration-500 group-hover:translate-x-1"
                                         >
@@ -143,16 +145,20 @@ const AllProducts = () => {
                 </div>
             </div>
 
-            <Suspense fallback={<Loader />}>
-                {
-                    !isTable ? <Products productsPromise={productsPromise}></Products>
-                        : <TableFormat productsPromise={productsPromise} />
-                }
-            </Suspense>
+            {
+                !isTable ?
+                    <Suspense fallback={<CardSkeleton />}>
+                        <Products productsPromise={productsPromise}></Products>
+                    </Suspense>
+                    :
+                    <Suspense fallback={<TableSkeleton />}>
+                        <TableFormat productsPromise={productsPromise} />
+                    </Suspense>
+            }
 
             <motion.span
                 onClick={handleScroll}
-                className="fixed z-50 bottom-10 right-10 cursor-pointer bg-indigo-300 text-white p-3 rounded-full shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all duration-300"
+                className="fixed z-50 bottom-10 right-10 cursor-pointer bg-gradient-to-r from-cyan-500/30 to-violet-500/30 dark:from-cyan-300/30 dark:to-violet-300/30 text-gray-100 dark:text-gray-800 p-3 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)] dark:shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-400 hover:to-violet-400 dark:hover:from-cyan-500 dark:hover:to-violet-500 transition-all duration-300"
                 role="button"
                 aria-label="Scroll to top"
                 whileHover={{ translateY: -10 }}

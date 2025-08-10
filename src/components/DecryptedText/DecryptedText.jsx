@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
 export default function DecryptedText({
     text,
@@ -11,7 +11,7 @@ export default function DecryptedText({
     characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+',
     className = '',
     parentClassName = '',
-    encryptedClassName = '',
+    encryptedClassName = 'text-gray-400 dark:text-gray-600',
     animateOn = 'hover',
     ...props
 }) {

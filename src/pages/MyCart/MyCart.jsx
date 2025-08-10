@@ -4,8 +4,6 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { motion } from 'motion/react';
 import Swal from 'sweetalert2';
 import { IoCartOutline, IoRocketOutline, IoTrashOutline, IoAddOutline, IoRemoveOutline } from 'react-icons/io5';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import { useLocation, useNavigate } from 'react-router';
 import CheckOutModal from './CheckOutModal';
 
@@ -423,17 +421,41 @@ const MyCart = () => {
     if (isFetching) {
         return (
             <div className="container mx-auto px-4 max-w-5xl py-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[...Array(3)].map((_, index) => (
-                        <div key={index} className="bg-[#2a2a3e] rounded-xl overflow-hidden border border-cyan-300/30 p-6">
-                            <Skeleton height={192} className="mb-4" />
-                            <Skeleton count={5} />
-                            <div className="flex justify-between mt-4">
-                                <Skeleton width={100} height={40} />
-                                <Skeleton width={100} height={40} />
+                <div className="bg-gray-900/90 dark:bg-gray-100/90 h-10 w-1/3 rounded mb-8 animate-pulse"></div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="md:col-span-2 space-y-6">
+                        {[...Array(3)].map((_, index) => (
+                            <div key={index} className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl overflow-hidden border border-cyan-500/30 dark:border-violet-500/30 p-6 animate-pulse">
+                                <div className="flex flex-col sm:flex-row">
+                                    <div className="sm:w-1/3">
+                                        <div className="w-full h-[257px] bg-gray-800/50 dark:bg-gray-200/50 rounded"></div>
+                                    </div>
+                                    <div className="sm:w-2/3 p-6 space-y-4">
+                                        <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-3/4 rounded"></div>
+                                        <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-1/2 rounded"></div>
+                                        <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-1/4 rounded"></div>
+                                        <div className="flex items-center space-x-4">
+                                            <div className="bg-gray-800/50 dark:bg-gray-200/50 h-8 w-24 rounded"></div>
+                                            <div className="bg-gray-800/50 dark:bg-gray-200/50 h-8 w-16 rounded"></div>
+                                        </div>
+                                        <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-1/3 rounded"></div>
+                                    </div>
+                                </div>
                             </div>
+                        ))}
+                    </div>
+                    <div className="md:col-span-1">
+                        <div className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl border border-cyan-500/30 dark:border-violet-500/30 p-6 sticky top-6 animate-pulse">
+                            <div className="bg-gray-800/50 dark:bg-gray-200/50 h-6 w-1/2 rounded mb-4"></div>
+                            <div className="space-y-3">
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-full rounded"></div>
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-full rounded"></div>
+                                <div className="bg-gray-800/50 dark:bg-gray-200/50 h-4 w-full rounded"></div>
+                            </div>
+                            <div className="bg-gray-800/50 dark:bg-gray-200/50 h-10 w-full rounded mt-6"></div>
+                            <div className="bg-gray-800/50 dark:bg-gray-200/50 h-10 w-full rounded mt-4"></div>
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         );
@@ -444,12 +466,12 @@ const MyCart = () => {
     if (error) {
         return (
             <div className="container mx-auto px-4 max-w-5xl py-8 text-center">
-                <div className="bg-red-900/20 border border-red-500/50 rounded-xl p-6">
-                    <h2 className="text-2xl font-bold text-red-400 mb-2">Error Loading Cart</h2>
-                    <p className="text-red-300">{error}</p>
+                <div className="bg-red-900/20 dark:bg-red-500/10 border border-red-500/50 dark:border-red-500/30 rounded-xl p-6">
+                    <h2 className="text-2xl font-bold text-red-400 dark:text-red-500 mb-2">Error Loading Cart</h2>
+                    <p className="text-red-300 dark:text-red-400">{error}</p>
                     <button
                         onClick={() => window.location.reload()}
-                        className="mt-4 px-4 py-2 bg-red-600/50 hover:bg-red-600 rounded-lg text-white"
+                        className="mt-4 px-4 py-2 bg-red-600/50 dark:bg-red-500/50 hover:bg-red-600 dark:hover:bg-red-500 rounded-lg text-gray-100 dark:text-gray-800"
                     >
                         Retry
                     </button>
@@ -462,7 +484,7 @@ const MyCart = () => {
 
     return (
         <div className="container mx-auto px-4 max-w-5xl py-8">
-            <h1 className="text-xl md:text-3xl font-bold text-cyan-100 mb-8 orbitron flex items-center gap-2">
+            <h1 className="text-xl md:text-3xl font-bold text-gray-100 dark:text-gray-800 mb-8 orbitron flex items-center gap-2">
                 <IoCartOutline size={28} />
                 My Shopping Cart
             </h1>
@@ -475,18 +497,18 @@ const MyCart = () => {
                     className="flex flex-col items-center justify-center min-h-[60vh] text-center relative"
                 >
                     <motion.div
-                        className="absolute w-64 h-10 bg-cyan-500/10 rounded-full filter blur-3xl opacity-30"
+                        className="absolute w-64 h-10 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full filter blur-3xl opacity-30"
                         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                     />
                     <motion.div variants={emptyItemVariants}>
-                        <h2 className="text-3xl font-bold text-cyan-100 mb-4 orbitron">
+                        <h2 className="text-3xl font-bold text-gray-100 dark:text-gray-800 mb-4 orbitron">
                             Your Cart is Empty
                         </h2>
                     </motion.div>
                     <motion.p
                         variants={emptyItemVariants}
-                        className="text-lg text-cyan-200 mb-8 orbitron max-w-md"
+                        className="text-lg text-gray-300 dark:text-gray-600 mb-8 orbitron max-w-md"
                     >
                         You haven't added any products yet. Explore our collection and find something amazing!
                     </motion.p>
@@ -495,7 +517,7 @@ const MyCart = () => {
                             onClick={handleContinueShopping}
                             whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(34,211,238,0.7)' }}
                             whileTap={{ scale: 0.95 }}
-                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white rounded-xl orbitron font-semibold shadow-[0_0_10px_rgba(34,211,238,0.3)] hover:from-cyan-500 hover:to-indigo-500 cursor-pointer"
+                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 rounded-xl orbitron font-semibold shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(34,211,238,0.2)] hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 cursor-pointer"
                         >
                             <IoRocketOutline size={24} />
                             Continue Shopping
@@ -514,7 +536,7 @@ const MyCart = () => {
                                     animate="visible"
                                     variants={cardVariants}
                                     whileHover="hover"
-                                    className="bg-[#2a2a3e] rounded-xl overflow-hidden border border-cyan-300/30"
+                                    className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl overflow-hidden border border-cyan-500/30 dark:border-violet-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.3)] dark:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
                                 >
                                     <div className="flex flex-col sm:flex-row">
                                         <div className="sm:w-1/3">
@@ -529,41 +551,41 @@ const MyCart = () => {
                                         </div>
                                         <div className="sm:w-2/3 p-6">
                                             <div className="flex justify-between items-start">
-                                                <h3 className="text-xl font-semibold text-cyan-100 orbitron">
+                                                <h3 className="text-xl font-semibold text-gray-100 dark:text-gray-800 orbitron">
                                                     {item.name}
                                                 </h3>
                                                 <button
                                                     onClick={() => handleRemoveItem(item.cartItemId, item.name)}
                                                     disabled={isUpdating}
-                                                    className="text-red-400 hover:text-red-300 cursor-pointer hover:scale-110 transition-all duration-300"
+                                                    className="text-red-400 dark:text-red-500 hover:text-red-300 dark:hover:text-red-400 cursor-pointer hover:scale-110 transition-all duration-300"
                                                 >
                                                     <IoTrashOutline size={20} />
                                                 </button>
                                             </div>
-                                            <p className="text-sm text-cyan-200 mt-1 orbitron">
+                                            <p className="text-sm text-gray-300 dark:text-gray-600 mt-1 orbitron">
                                                 Brand: {item.brand}
                                             </p>
-                                            <p className="text-cyan-400 text-lg font-bold mt-2">
+                                            <p className="text-cyan-400 dark:text-cyan-500 text-lg font-bold mt-2">
                                                 ${item.price.toFixed(2)}
                                             </p>
 
                                             <div className="flex items-center mt-4">
-                                                <span className="text-sm text-cyan-200 mr-3 orbitron">Quantity:</span>
-                                                <div className="flex items-center border border-cyan-400/30 rounded-lg overflow-hidden">
+                                                <span className="text-sm text-gray-300 dark:text-gray-600 mr-3 orbitron">Quantity:</span>
+                                                <div className="flex items-center border border-cyan-400/30 dark:border-violet-400/30 rounded-lg overflow-hidden">
                                                     <button
                                                         onClick={() => handleUpdateQuantity(item.cartItemId, item.quantity - 1)}
                                                         disabled={isUpdating || item.quantity <= 1}
-                                                        className="px-3 py-1 bg-cyan-900/20 hover:bg-cyan-800/40 text-cyan-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                                                        className="px-3 py-1 bg-cyan-900/20 dark:bg-violet-900/20 hover:bg-cyan-800/40 dark:hover:bg-violet-800/40 text-gray-100 dark:text-gray-800 disabled:opacity-30 disabled:cursor-not-allowed"
                                                     >
                                                         <IoRemoveOutline size={16} />
                                                     </button>
-                                                    <span className="px-4 py-1 text-cyan-100">
+                                                    <span className="px-4 py-1 text-gray-100 dark:text-gray-800">
                                                         {item.quantity}
                                                     </span>
                                                     <button
                                                         onClick={() => handleUpdateQuantity(item.cartItemId, item.quantity + 1)}
                                                         disabled={isUpdating}
-                                                        className="px-3 py-1 bg-cyan-900/20 hover:bg-cyan-800/40 text-cyan-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                                                        className="px-3 py-1 bg-cyan-900/20 dark:bg-violet-900/20 hover:bg-cyan-800/40 dark:hover:bg-violet-800/40 text-gray-100 dark:text-gray-800 disabled:opacity-30 disabled:cursor-not-allowed"
                                                     >
                                                         <IoAddOutline size={16} />
                                                     </button>
@@ -572,12 +594,12 @@ const MyCart = () => {
 
                                             <div className="mt-4 flex justify-between items-center">
                                                 <div className="flex items-center">
-                                                    <span className="text-yellow-400 text-lg">★</span>
-                                                    <span className="ml-1 text-sm font-medium text-cyan-100 orbitron">
+                                                    <span className="text-yellow-400 dark:text-yellow-500 text-lg">★</span>
+                                                    <span className="ml-1 text-sm font-medium text-gray-100 dark:text-gray-800 orbitron">
                                                         {item.rating}
                                                     </span>
                                                 </div>
-                                                <p className="text-cyan-100 orbitron">
+                                                <p className="text-gray-100 dark:text-gray-800 orbitron">
                                                     Subtotal: <span className="font-bold">${(item.price * item.quantity).toFixed(2)}</span>
                                                 </p>
                                             </div>
@@ -588,21 +610,21 @@ const MyCart = () => {
                         </div>
 
                         <div className="md:col-span-1">
-                            <div className="bg-[#2a2a3e] rounded-xl border border-cyan-300/30 p-6 sticky top-6">
-                                <h3 className="text-xl font-bold text-cyan-100 mb-4 orbitron">Order Summary</h3>
+                            <div className="bg-gray-900/90 dark:bg-gray-100/90 rounded-xl border border-cyan-500/30 dark:border-violet-500/30 p-6 sticky top-6 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.3)] dark:shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <h3 className="text-xl font-bold text-gray-100 dark:text-gray-800 mb-4 orbitron">Order Summary</h3>
 
                                 <div className="space-y-3 mb-6">
                                     <div className="flex justify-between">
-                                        <span className="text-cyan-200 orbitron">Subtotal</span>
-                                        <span className="text-cyan-100 font-medium">${calculateTotal()}</span>
+                                        <span className="text-gray-300 dark:text-gray-600 orbitron">Subtotal</span>
+                                        <span className="text-gray-100 dark:text-gray-800 font-medium">${calculateTotal()}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-cyan-200 orbitron">Shipping</span>
-                                        <span className="text-cyan-100 font-medium">$0.00</span>
+                                        <span className="text-gray-300 dark:text-gray-600 orbitron">Shipping</span>
+                                        <span className="text-gray-100 dark:text-gray-800 font-medium">$0.00</span>
                                     </div>
-                                    <div className="flex justify-between border-t border-cyan-300/20 pt-3">
-                                        <span className="text-cyan-100 orbitron font-bold">Total</span>
-                                        <span className="text-cyan-50 font-bold text-lg">${calculateTotal()}</span>
+                                    <div className="flex justify-between border-t border-cyan-300/20 dark:border-violet-300/20 pt-3">
+                                        <span className="text-gray-100 dark:text-gray-800 orbitron font-bold">Total</span>
+                                        <span className="text-gray-50 dark:text-gray-900 font-bold text-lg">${calculateTotal()}</span>
                                     </div>
                                 </div>
 
@@ -611,7 +633,7 @@ const MyCart = () => {
                                     whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(34,211,238,0.7)' }}
                                     whileTap={{ scale: 0.98 }}
                                     disabled={isUpdating || mergedCart.length === 0}
-                                    className="w-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 text-white py-3 rounded-lg font-bold orbitron hover:from-cyan-500 hover:to-indigo-500 shadow-[0_0_10px_rgba(34,211,238,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 py-3 rounded-lg font-bold orbitron hover:from-cyan-500 hover:to-indigo-500 dark:hover:from-cyan-400 dark:hover:to-indigo-400 shadow-[0_0_10px_rgba(34,211,238,0.3)] dark:shadow-[0_0_10px_rgba(34,211,238,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     Proceed to Checkout
                                 </motion.button>
@@ -620,7 +642,7 @@ const MyCart = () => {
                                     onClick={handleContinueShopping}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full mt-4 bg-transparent border border-cyan-400/30 text-cyan-100 py-3 rounded-lg font-medium orbitron hover:bg-cyan-900/20"
+                                    className="w-full mt-4 bg-transparent border border-cyan-400/30 dark:border-violet-400/30 text-gray-100 dark:text-gray-800 py-3 rounded-lg font-medium orbitron hover:bg-cyan-900/20 dark:hover:bg-violet-900/20"
                                 >
                                     Continue Shopping
                                 </motion.button>
@@ -630,10 +652,7 @@ const MyCart = () => {
                 </>
             )}
 
-            {
-                isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} />
-            }
-
+            {isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} />}
         </div>
     );
 };
