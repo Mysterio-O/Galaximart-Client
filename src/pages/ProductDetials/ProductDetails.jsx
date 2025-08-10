@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import ProductDetailsShape from './ProductDetailsShape';
 import Loader from '../../Loaders/Product_Loader/Loader';
 import { AuthContext } from '../../Provider/AuthProvider';
+import ProductDetailsLoader from '../../Loaders/ProductDetailsLoader/ProductDetailsLoader';
 
 const ProductDetails = () => {
     const id = useParams();
@@ -20,10 +21,10 @@ const ProductDetails = () => {
 
 
     return (
-        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 m-4 p-4 rounded-2xl my-10 md:my-32'>
+        <div className='min-h-screen max-w-6xl mx-auto backdrop-blur-md bg-white/20 m-4 p-4 rounded-2xl my-10'>
 
             {/* <h2 className="text-4xl font-bold">{productTags.name}{productTags.brand}</h2> */}
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<ProductDetailsLoader/>}>
                 <ProductDetailsShape productPromise={productPromise} />
             </Suspense>
         </div>

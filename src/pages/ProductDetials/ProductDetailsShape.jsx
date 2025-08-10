@@ -1,19 +1,22 @@
-import React, { useState, useEffect, use, useContext} from "react";
+import React, { useState, useEffect, use, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import PurchaseModal from "./PurchaseModal";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useNavigate, useLocation, Navigate  } from "react-router";
+import { useNavigate, useLocation, Navigate } from "react-router";
 import Swal from "sweetalert2";
 import axios from 'axios';
+import useWishlist from "../../hooks/useWishlist";
 
 const ProductDetailsShape = ({ productPromise }) => {
+
+    const { addToWishlist, removeFromWishlist, isInWishlist, isInitialized } = useWishlist();
 
     const location = useLocation();
 
     const { user, loading } = useContext(AuthContext);
-    const [cartLoading,setCartLoading]=useState(false);
+    const [cartLoading, setCartLoading] = useState(false);
     const navigate = useNavigate();
 
     const product = use(productPromise)
@@ -30,6 +33,7 @@ const ProductDetailsShape = ({ productPromise }) => {
 
 
 
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -41,10 +45,16 @@ const ProductDetailsShape = ({ productPromise }) => {
         minutes: 45,
         seconds: 5,
     });
+    // console.log(isFavorite);
 
     useEffect(() => {
-        document.title = `${product?.name}'s Details`
-    }, [product])
+        document.title = `${product?.name}'s Details`;
+
+        if (product?._id && isInitialized) {
+            setIsFavorite(isInWishlist(product?._id));
+        }
+
+    }, [product, isInWishlist, isInitialized]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -128,7 +138,7 @@ const ProductDetailsShape = ({ productPromise }) => {
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    return navigate('/auth/signin',{
+                    return navigate('/auth/signin', {
                         state: location?.pathname
                     })
                 }
@@ -335,17 +345,31 @@ const ProductDetailsShape = ({ productPromise }) => {
                             </motion.button>
                         </div>
                         <motion.button
-                            onClick={() => setIsFavorite(!isFavorite)}
-                            className="py-3 border border-cyan-300/30 rounded-md text-cyan-100 hover:bg-cyan-500/20 flex items-center justify-center gap-[10px] grow"
-                            whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(34, 211, 238, 0.4)" }}
-                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                                if (isFavorite) {
+                                    removeFromWishlist(product?._id);
+                                } else {
+                                    addToWishlist(product)
+                                }
+                                setIsFavorite(!isFavorite)
+                            }}
+                            disabled={!isInitialized || !product?._id}
+                            className={`py-3 border border-cyan-300/30 rounded-md text-cyan-100 hover:bg-cyan-500/20 flex items-center justify-center gap-[10px] grow ${!isInitialized ? 'opacity-50' : ''
+                                }`}
                         >
-                            {isFavorite ? (
-                                <FaHeart className="w-5 h-5 text-red-500" />
+                            {!isInitialized ? (
+                                'Loading...'
+                            ) : isFavorite ? (
+                                <>
+                                    <FaHeart className="w-5 h-5 text-red-500" />
+                                    Wishlisted
+                                </>
                             ) : (
-                                <FaRegHeart className="w-5 h-5 text-cyan-100" />
+                                <>
+                                    <FaRegHeart className="w-5 h-5 text-cyan-100" />
+                                    Wishlist
+                                </>
                             )}
-                            Wishlist
                         </motion.button>
                     </div>
 

@@ -18,6 +18,7 @@ import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
 import MyCart from '../pages/MyCart/MyCart';
 import MyOrder from '../pages/MyOrder/MyOrder';
+import WishList from '../pages/WishList/WishList';
 
 const router = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyOrder />
                 </PrivateRoute>
+            },
+            {
+                path:'/my-wishlist',
+                Component: WishList
             },
             {
                 path: 'about-us',

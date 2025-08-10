@@ -128,6 +128,11 @@ const Navbar = () => {
             to: '/my-orders',
             active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
         },
+        {
+            name: 'Wishlist',
+            to: '/my-wishlist',
+            active: 'bg-gradient-to-r from-cyan-500/30 to-violet-500/30 text-white font-bold shadow-[0_0_10px_rgba(139,92,246,0.5)]',
+        },
     ];
 
 
