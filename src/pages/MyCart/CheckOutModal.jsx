@@ -1,9 +1,56 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Swal from 'sweetalert2';
 
-const CheckOutModal = ({ isOpen, onClose, cartItems, total, confirmPayment }) => {
-
+const CheckOutModal = ({ isOpen, onClose, cartItems, total, confirmPayment, paymentLoading }) => {
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [address, setAddress] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [errors, setErrors] = useState({ address: '', mobileNumber: '' });
+
+    const validateInputs = () => {
+        let isValid = true;
+        const newErrors = { address: '', mobileNumber: '' };
+
+        if (!address.trim()) {
+            newErrors.address = 'Address is required';
+            isValid = false;
+        }
+        if (!mobileNumber.trim()) {
+            newErrors.mobileNumber = 'Mobile number is required';
+            isValid = false;
+        } else if (!/^\+?\d{10,15}$/.test(mobileNumber)) {
+            newErrors.mobileNumber = 'Invalid mobile number';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
+    const handleConfirmPayment = () => {
+        if (!paymentMethod) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please select a payment method.',
+                icon: 'error',
+                customClass: {
+                    popup: 'swal-dark',
+                    title: 'swal-title',
+                    htmlContainer: 'swal-text',
+                    confirmButton: 'swal-confirm-button'
+                },
+                buttonsStyling: false
+            });
+            return;
+        }
+
+        if (!validateInputs()) {
+            return;
+        }
+
+        confirmPayment(cartItems, total, paymentMethod, { address, mobileNumber });
+    };
 
     return (
         <AnimatePresence>
@@ -136,40 +183,69 @@ const CheckOutModal = ({ isOpen, onClose, cartItems, total, confirmPayment }) =>
                                 </div>
                             </motion.div>
 
-                            {/* Payment form */}
+                            {/* Payment and shipping form */}
                             <motion.div
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.6 }}
                             >
                                 <h3 className="text-lg font-semibold text-gray-300 dark:text-gray-600 mb-4 orbitron border-b border-cyan-400/20 dark:border-violet-400/20 pb-2">
-                                    Payment Method
+                                    Shipping & Payment Details
                                 </h3>
-                                <div className="space-y-3">
-                                    <motion.div
-                                        className="flex items-center space-x-3 p-3 bg-gray-800/50 dark:bg-gray-200/50 rounded-lg border border-cyan-400/20 dark:border-violet-400/20 hover:border-cyan-400/40 dark:hover:border-violet-400/40 transition-colors cursor-pointer"
-                                        whileHover={{ scale: 1.01 }}
-                                        whileTap={{ scale: 0.99 }}
-                                        onClick={() => setPaymentMethod('cash')}
-                                    >
-                                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${paymentMethod === 'cash'
-                                            ? 'border-cyan-400 dark:border-violet-400 bg-cyan-400/20 dark:bg-violet-400/20'
-                                            : 'border-cyan-400/40 dark:border-violet-400/40'
-                                            }`}>
-                                            {paymentMethod === 'cash' && (
-                                                <motion.div
-                                                    className="w-2 h-2 rounded-full bg-cyan-400 dark:bg-violet-400"
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    transition={{ type: 'spring' }}
-                                                />
-                                            )}
-                                        </div>
-                                        <div>
-                                            <h4 className="text-gray-100 dark:text-gray-800 font-medium">Cash on Delivery</h4>
-                                            <p className="text-sm text-gray-300 dark:text-gray-600">Pay when you receive your order</p>
-                                        </div>
-                                    </motion.div>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-gray-300 dark:text-gray-600 mb-2 orbitron">Address</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter your shipping address"
+                                            value={address}
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            className={`w-full p-3 bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 rounded-lg border ${errors.address ? 'border-red-500/50' : 'border-cyan-400/30 dark:border-violet-400/30'} focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-violet-500`}
+                                        />
+                                        {errors.address && (
+                                            <p className="text-red-400 dark:text-red-500 text-sm mt-1">{errors.address}</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label className="block text-gray-300 dark:text-gray-600 mb-2 orbitron">Mobile Number</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter your mobile number"
+                                            value={mobileNumber}
+                                            onChange={(e) => setMobileNumber(e.target.value)}
+                                            className={`w-full p-3 bg-gray-800/50 dark:bg-gray-200/50 text-gray-100 dark:text-gray-800 rounded-lg border ${errors.mobileNumber ? 'border-red-500/50' : 'border-cyan-400/30 dark:border-violet-400/30'} focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-violet-500`}
+                                        />
+                                        {errors.mobileNumber && (
+                                            <p className="text-red-400 dark:text-red-500 text-sm mt-1">{errors.mobileNumber}</p>
+                                        )}
+                                    </div>
+                                    <div className="mt-6">
+                                        <h4 className="text-gray-300 dark:text-gray-600 mb-2 orbitron">Payment Method</h4>
+                                        <motion.div
+                                            className="flex items-center space-x-3 p-3 bg-gray-800/50 dark:bg-gray-200/50 rounded-lg border border-cyan-400/20 dark:border-violet-400/20 hover:border-cyan-400/40 dark:hover:border-violet-400/40 transition-colors cursor-pointer"
+                                            whileHover={{ scale: 1.01 }}
+                                            whileTap={{ scale: 0.99 }}
+                                            onClick={() => setPaymentMethod('cash')}
+                                        >
+                                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${paymentMethod === 'cash'
+                                                ? 'border-cyan-400 dark:border-violet-400 bg-cyan-400/20 dark:bg-violet-400/20'
+                                                : 'border-cyan-400/40 dark:border-violet-400/40'
+                                                }`}>
+                                                {paymentMethod === 'cash' && (
+                                                    <motion.div
+                                                        className="w-2 h-2 rounded-full bg-cyan-400 dark:bg-violet-400"
+                                                        initial={{ scale: 0 }}
+                                                        animate={{ scale: 1 }}
+                                                        transition={{ type: 'spring' }}
+                                                    />
+                                                )}
+                                            </div>
+                                            <div>
+                                                <h4 className="text-gray-100 dark:text-gray-800 font-medium">Cash on Delivery</h4>
+                                                <p className="text-sm text-gray-300 dark:text-gray-600">Pay when you receive your order</p>
+                                            </div>
+                                        </motion.div>
+                                    </div>
                                 </div>
                             </motion.div>
 
@@ -189,12 +265,15 @@ const CheckOutModal = ({ isOpen, onClose, cartItems, total, confirmPayment }) =>
                                     Cancel
                                 </motion.button>
                                 <motion.button
-                                    onClick={() => confirmPayment(cartItems, total, paymentMethod)}
+                                    onClick={handleConfirmPayment}
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.97 }}
                                     className="px-6 py-3 bg-gradient-to-r from-cyan-600/50 to-indigo-600/50 dark:from-cyan-400/50 dark:to-indigo-400/50 text-gray-100 dark:text-gray-800 rounded-lg font-bold orbitron shadow-[0_0_15px_rgba(34,211,238,0.3)] dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] dark:hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all"
                                 >
-                                    Confirm Payment
+                                    {
+                                        paymentLoading ? <span className="loading loading-spinner text-info"></span>
+                                            : 'Confirm Payment'
+                                    }
                                 </motion.button>
                             </motion.div>
                         </div>

@@ -24,7 +24,7 @@ const WishList = () => {
             try {
                 setLoading(true);
                 const productPromises = wishlist.map(item =>
-                    axios.get(`http://localhost:3000/product/${item._id}`)
+                    axios.get(`https://galaxia-mart-server.vercel.app/product/${item._id}`)
                 );
                 const responses = await Promise.all(productPromises);
                 setProducts(responses.map(res => res.data));
@@ -54,7 +54,7 @@ const WishList = () => {
             };
 
             try {
-                const result = await axios.post('http://localhost:3000/add-to-cart', cartDetails, {
+                const result = await axios.post('https://galaxia-mart-server.vercel.app/add-to-cart', cartDetails, {
                     headers: {
                         authorization: `Bearer ${user?.accessToken}`
                     }

@@ -23,11 +23,6 @@ const videoSlides = [
     overlayClass: 'bg-gradient-to-b from-purple-900/50 to-black/70 dark:from-purple-800/50 dark:to-black/70',
     titleClass: 'text-3xl md:text-5xl text-white dark:text-purple-100 font-bold drop-shadow-[0_0_10px_rgba(124,58,237,0.8)] dark:drop-shadow-[0_0_10px_rgba(124,58,237,0.5)]',
     taglineClass: 'text-lg md:text-2xl text-purple-300 dark:text-purple-200 font-semibold mb-6',
-    button: {
-      text: 'Discover Vision',
-      className: 'btn btn-primary bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 text-white border-none px-8 py-3 flex items-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.5)] dark:shadow-[0_0_15px_rgba(124,58,237,0.3)]',
-      icon: <FaEye />,
-    },
   },
   {
     src: hoverBoard,
@@ -38,11 +33,6 @@ const videoSlides = [
     overlayClass: 'bg-gradient-to-r from-black/60 to-yellow-900/40 dark:from-black/60 dark:to-yellow-800/40',
     titleClass: 'text-3xl md:text-5xl text-yellow-400 dark:text-yellow-300 font-extrabold tracking-wider drop-shadow-[0_2px_5px_rgba(251,191,36,0.6)] dark:drop-shadow-[0_2px_5px_rgba(251,191,36,0.4)]',
     taglineClass: 'text-lg md:text-2xl text-white dark:text-yellow-100 font-medium mb-6 italic',
-    button: {
-      text: 'Ride Now',
-      className: 'btn btn-accent bg-yellow-500 hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700 text-black dark:text-gray-900 rounded-full px-6 py-2 flex items-center gap-2',
-      icon: <FaArrowRight />,
-    },
   },
   {
     src: smartHomeHub,
@@ -53,11 +43,6 @@ const videoSlides = [
     overlayClass: 'bg-gradient-to-t from-black/70 to-purple-800/40 dark:from-black/70 dark:to-cyan-800/40',
     titleClass: 'text-3xl md:text-5xl text-white dark:text-cyan-100 font-serif font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] dark:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]',
     taglineClass: 'text-lg md:text-2xl text-yellow-200 dark:text-cyan-200 font-light mb-6',
-    button: {
-      text: 'Connect Now',
-      className: 'btn btn-ghost text-white dark:text-cyan-100 border-white dark:border-cyan-200 hover:bg-white/20 dark:hover:bg-cyan-900/30 px-6 py-2 flex items-center gap-2',
-      icon: <FaHome />,
-    },
   },
 ];
 
@@ -223,14 +208,6 @@ const Slider = () => {
                     <motion.p className={slide.taglineClass} variants={animationVariants[index].tagline}>
                       {slide.tagline}
                     </motion.p>
-                    <motion.a
-                      href={slide.button.href}
-                      className={slide.button.className}
-                      variants={animationVariants[index].button}
-                      whileHover="whileHover"
-                    >
-                      {slide.button.text} {slide.button.icon}
-                    </motion.a>
                   </motion.div>
                 )}
               </AnimatePresence>

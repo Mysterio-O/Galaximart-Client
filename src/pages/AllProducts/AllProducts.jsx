@@ -70,10 +70,11 @@ const AllProducts = () => {
     }
 
     useEffect(() => {
+        if (!token) return;
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(`http://localhost:3000/allProducts?sortParam=${sortValue}&page=${currentPage}&limit=${itemsPerPage}`, {
+                const res = await axios.get(`https://galaxia-mart-server.vercel.app/allProducts?sortParam=${sortValue}&page=${currentPage}&limit=${itemsPerPage}`, {
                     headers: {
                         authorization: `Bearer ${token}`
                     }
@@ -96,7 +97,7 @@ const AllProducts = () => {
             }
         };
 
-        if(token){
+        if (token) {
             fetchProducts();
         }
 
@@ -212,13 +213,9 @@ const AllProducts = () => {
 
             {
                 !isTable ?
-                    <Suspense fallback={<CardSkeleton />}>
-                        <Products products={products}></Products>
-                    </Suspense>
+                    <Products products={products}></Products>
                     :
-                    <Suspense fallback={<TableSkeleton />}>
-                        <TableFormat products={products} />
-                    </Suspense>
+                    <TableFormat products={products} />
             }
 
             {/* Pagination Controls */}

@@ -1,10 +1,11 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const UpdateProductForm = ({ productPromise, fnProductName }) => {
 
@@ -13,6 +14,7 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
 
     const product = use(productPromise);
@@ -69,7 +71,11 @@ const UpdateProductForm = ({ productPromise, fnProductName }) => {
         // console.log(updatedProduct)
 
         if (updatedProduct) {
-            axios.patch(`https://galaxia-mart-server.vercel.app/update/product/${product?._id}`, { updatedProduct })
+            axios.patch(`https://galaxia-mart-server.vercel.app/update/product/${product?._id}`, { updatedProduct }, {
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`
+                }
+            })
                 .then(res => {
                     // console.log(res.data)
                     if (res.data?.acknowledged || res.data.matchedCount > 0) {

@@ -97,7 +97,8 @@ const AddProductForm = () => {
         fetch('https://galaxia-mart-server.vercel.app/products', {
             method: "POST",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${user?.accessToken}`
             },
             body: JSON.stringify(newProduct)
         })

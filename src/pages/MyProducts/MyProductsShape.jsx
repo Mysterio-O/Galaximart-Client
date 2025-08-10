@@ -1,12 +1,16 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router'; // Assuming React Router
 import EmptyPage from './EmptyPage';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const MyProductsShape = ({ productsPromise }) => {
     const [myProducts, setMyProducts] = useState([]);
+
+    const { user, loading } = useContext(AuthContext);
+    if (loading) return;
 
     const products = use(productsPromise);
 
@@ -51,7 +55,11 @@ const MyProductsShape = ({ productsPromise }) => {
             buttonsStyling: false,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://galaxia-mart-server.vercel.app/products/delete/${id}`)
+                axios.delete(`https://galaxia-mart-server.vercel.app/products/delete/${id}`, {
+                    headers: {
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                })
                     .then(res => {
                         // console.log(res)
                         Swal.fire({

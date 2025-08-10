@@ -1,13 +1,15 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { IoRocketOutline } from 'react-icons/io5';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const CartShape = ({ orderedProductsPromise }) => {
 
     const orderedProducts = use(orderedProductsPromise);
+    const { user } = useContext(AuthContext);
 
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
@@ -81,12 +83,20 @@ const CartShape = ({ orderedProductsPromise }) => {
                     },
                 });
 
-                const response = await axios.delete(`https://galaxia-mart-server.vercel.app/ordered/product/${productId}`);
+                const response = await axios.delete(`https://galaxia-mart-server.vercel.app/ordered/product/${productId}`,{
+                    headers:{
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
 
                 if (response.data.acknowledged && response.data.deletedCount > 0) {
                     setProducts(products.filter((product) => product._id !== productId));
 
-                    await axios.patch(`https://galaxia-mart-server.vercel.app/ordered/products/${productName}`, { quantity })
+                    await axios.patch(`https://galaxia-mart-server.vercel.app/ordered/products/${productName}`, { quantity }, {
+                        headers: {
+                            authorization: `Bearer ${user?.accessToken}`
+                        }
+                    })
                         .then(res => console.log(res.data))
                         .catch(err => console.log(err));
 

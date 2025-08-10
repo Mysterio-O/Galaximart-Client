@@ -48,7 +48,11 @@ const MyCart = () => {
             setError(null);
 
             try {
-                const res = await axios.get(`http://localhost:3000/cart-items?email=${user?.email}`);
+                const res = await axios.get(`https://galaxia-mart-server.vercel.app/cart-items?email=${user?.email}`, {
+                    headers: {
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
                 setCartItems(res.data);
             }
             catch (err) {
@@ -72,7 +76,11 @@ const MyCart = () => {
 
         const fetchProducts = async () => {
             try {
-                const res = await axios.post('http://localhost:3000/cart-item-details-by-id', { ids: itemIds });
+                const res = await axios.post('https://galaxia-mart-server.vercel.app/cart-item-details-by-id', { ids: itemIds }, {
+                    headers: {
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
                 setProducts(res.data);
             }
             catch (err) {
@@ -81,7 +89,7 @@ const MyCart = () => {
         }
         fetchProducts();
 
-    }, [cartItems]);
+    }, [cartItems, user]);
     // console.log(products);
 
     const mergedCart = products.map(product => {
@@ -116,7 +124,11 @@ const MyCart = () => {
 
             if (result.isConfirmed) {
                 setIsUpdating(true);
-                await axios.delete(`http://localhost:3000/cart-items/${cartItemId}`);
+                await axios.delete(`https://galaxia-mart-server.vercel.app/cart-items/${cartItemId}`, {
+                    headers: {
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
                 setCartItems(cartItems.filter(item => item._id !== cartItemId));
 
                 Swal.fire({
@@ -157,8 +169,12 @@ const MyCart = () => {
 
         try {
             setIsUpdating(true);
-            const res = await axios.patch(`http://localhost:3000/cart-items/${cartItemId}`, {
+            const res = await axios.patch(`https://galaxia-mart-server.vercel.app/cart-items/${cartItemId}`, {
                 quantity: newQuantity
+            }, {
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`
+                }
             });
             console.log(res);
 
@@ -285,6 +301,7 @@ const MyCart = () => {
         setIsModalOpen(false);
     }
 
+    const [paymentLoading, setPaymentLoading] = useState(false);
     const confirmPayment = async (cartItems, total, paymentMethod) => {
         // console.log(cartItems, total());
 
@@ -313,6 +330,7 @@ const MyCart = () => {
         }
 
         try {
+            setPaymentLoading(true)
             const transactionId = `TXN-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
             const orderedDate = new Date().toISOString();
@@ -339,12 +357,17 @@ const MyCart = () => {
             }
             console.log(purchaseDetails);
 
-            const res = await axios.post('http://localhost:3000/create-confirm-order', { purchaseDetails });
+            const res = await axios.post('https://galaxia-mart-server.vercel.app/create-confirm-order', { purchaseDetails }, {
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`
+                }
+            });
             // console.log(res);
 
             if (res?.data?.insertedId) {
 
                 await clearCartItems();
+                setPaymentLoading(false);
 
                 await Swal.fire({
                     title: 'Order Successful!',
@@ -359,11 +382,13 @@ const MyCart = () => {
                         confirmButton: 'swal-confirm-button'
                     },
                     buttonsStyling: false
-                });
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        navigate('/my-orders')
+                    }
+                })
 
-                /**  
-                 * TODO // CREATE MY ORDERS SECTIONS AND NAVIGATE FROM HERE
-                 */
+
 
                 setIsModalOpen(false);
             } else {
@@ -372,6 +397,7 @@ const MyCart = () => {
         }
         catch (error) {
             console.log("error confirming order from my cart", error);
+            setPaymentLoading(false);
             Swal.fire({
                 title: 'Order Failed!',
                 text: error?.message || 'Your order was failed.',
@@ -392,13 +418,17 @@ const MyCart = () => {
 
     const clearCartItems = async () => {
         try {
-            const res = await axios.delete(`http://localhost:3000/delete-all-cart-items?email=${user?.email}`);
+            const res = await axios.delete(`https://galaxia-mart-server.vercel.app/delete-all-cart-items?email=${user?.email}`, {
+                headers: {
+                    authorization: `Bearer ${user?.accessToken}`
+                }
+            });
             console.log(res);
             setCartItems([]);
 
             setProducts([]);
         }
-        catch(error){
+        catch (error) {
             Swal.fire({
                 title: 'Delete Failed!',
                 text: error?.message || 'Your delete request failed.',
@@ -652,9 +682,9 @@ const MyCart = () => {
                 </>
             )}
 
-            {isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} />}
+            {isModalOpen && <CheckOutModal isOpen={isModalOpen} onClose={handleCloseModal} cartItems={mergedCart} total={calculateTotal} confirmPayment={confirmPayment} paymentLoading={paymentLoading} />}
         </div>
-        
+
     );
 };
 

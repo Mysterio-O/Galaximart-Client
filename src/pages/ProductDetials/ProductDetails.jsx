@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
 
 
-    const productPromise = fetch(`http://localhost:3000/product/${id?.id}`, {
+    const productPromise = fetch(`https://galaxia-mart-server.vercel.app/product/${id?.id}`, {
         headers: {
             authorization: `Bearer ${user?.accessToken}`
         }

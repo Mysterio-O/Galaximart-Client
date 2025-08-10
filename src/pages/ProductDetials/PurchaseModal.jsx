@@ -116,11 +116,21 @@ const PurchaseModal = ({ product, handleCloseModal, quantity, setIsModalOpen }) 
             brand, category, description, image, name, minQuantity, rating, quantity, buyingDate, address, paymentOption, userName, email, stock
         }
 
+        if(!user) return;
 
-        axios.post(`https://galaxia-mart-server.vercel.app/ordered/products`, { orderedProducts })
+
+        axios.post(`https://galaxia-mart-server.vercel.app/ordered/products`, { orderedProducts }, {
+            headers: {
+                authorization: `Bearer ${user?.accessToken}`
+            }
+        })
             .then(res => {
                 if (res.data.acknowledged || res.data.insertedId) {
-                    axios.patch(`https://galaxia-mart-server.vercel.app/purchase/product/${product?._id}`, { quantity })
+                    axios.patch(`https://galaxia-mart-server.vercel.app/purchase/product/${product?._id}`, { quantity }, {
+                        headers: {
+                            authorization: `Bearer ${user?.accessToken}`
+                        }
+                    })
                         .then(res => {
                             // console.log('Purchase successful', res.data);
                             setLoading(false);

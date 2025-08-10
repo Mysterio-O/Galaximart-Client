@@ -26,7 +26,7 @@ const ContactUs = () => {
         console.log('Form submitted:', formData);
         // Add API call or form submission logic here
 
-        const postMessage = await axios.post('http://localhost:3000/send-message', formData);
+        const postMessage = await axios.post('https://galaxia-mart-server.vercel.app/send-message', formData);
         console.log(postMessage?.status);
 
         if (postMessage?.status === 201) {

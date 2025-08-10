@@ -97,7 +97,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                 user: user?.email
             }
 
-            const result = await axios.post('http://localhost:3000/add-to-cart', cartDetails, {
+            const result = await axios.post('https://galaxia-mart-server.vercel.app/add-to-cart', cartDetails, {
                 headers: {
                     authorization: `Bearer ${user?.accessToken}`
                 }
@@ -381,7 +381,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 whileTap={{ scale: 0.98 }}
                             >
                                 {
-                                    loading ? "Loading.." : "Add to Cart"
+                                    loading || cartLoading? "Loading.." : "Add to Cart"
                                 }
                             </motion.button>
                             <motion.button
@@ -391,7 +391,7 @@ const ProductDetailsShape = ({ productPromise }) => {
                                 whileTap={{ scale: 0.98 }}
                             >
                                 {
-                                    loading || cartLoading ? "Loading.." : "Buy Now"
+                                    loading ? "Loading.." : "Buy Now"
                                 }
                             </motion.button>
                         </div>

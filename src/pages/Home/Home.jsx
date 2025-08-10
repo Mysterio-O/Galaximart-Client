@@ -7,6 +7,8 @@ import { motion, useScroll, useSpring, useTransform } from 'motion/react';
 import Lanyard from '../../components/Lanyard/Lanyard'
 import InfiniteScroll from '../../components/TopProducts/InfiniteScroll';
 import DecryptedText from '../../components/DecryptedText/DecryptedText';
+import OrderTrackingWidget from '../../components/OrderTrackingWidget/OrderTrackingWidget';
+import Subscribe from '../../components/Subscribe/Subscribe';
 
 
 const Home = () => {
@@ -211,6 +213,9 @@ const Home = () => {
                 </div>
             </section>
             <section>
+                <Subscribe />
+            </section>
+            <section>
                 <h2 className="text-4xl text-center font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-magenta-500 to-violet-500 dark:from-cyan-600 dark:via-magenta-600 dark:to-violet-600 tracking-tighter drop-shadow-[0_0_8px_rgba(139,92,246,0.5)] dark:drop-shadow-[0_0_8px_rgba(139,92,246,0.3)] orbitron">
                     <div style={{ marginTop: '4rem' }}>
                         <DecryptedText
@@ -221,7 +226,7 @@ const Home = () => {
                     </div>
                 </h2>
                 <div
-                    className="max-w-6xl mx-auto rounded-2xl py-10 mb-20"
+                    className="max-w-7xl mx-auto rounded-2xl py-10 mb-10"
                     style={{ height: '500px', position: 'relative' }}>
 
                     <InfiniteScroll
@@ -234,6 +239,9 @@ const Home = () => {
                         pauseOnHover={true}
                     />
                 </div>
+            </section>
+            <section>
+                <OrderTrackingWidget />
             </section>
         </div>
     );

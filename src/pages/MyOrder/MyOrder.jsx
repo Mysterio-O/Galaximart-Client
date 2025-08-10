@@ -23,7 +23,11 @@ const MyOrder = () => {
             setError(null);
 
             try {
-                const res = await axios.get(`http://localhost:3000/my-ordered-items?email=${user?.email}`);
+                const res = await axios.get(`https://galaxia-mart-server.vercel.app/my-ordered-items?email=${user?.email}`,{
+                    headers:{
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
                 setOrders(res.data);
             }
             catch (err) {
@@ -58,7 +62,7 @@ const MyOrder = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         return new Date(dateString).toLocaleDateString('en-US', options);
     };
-
+// console.log(user);
     const handleDeleteOrder = async (id) => {
 
         Swal.fire({
@@ -80,7 +84,11 @@ const MyOrder = () => {
             buttonsStyling: false
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axios.delete(`http://localhost:3000/delete-my-orders?id=${id}`);
+                const res = await axios.delete(`https://galaxia-mart-server.vercel.app/delete-my-orders?id=${id}`,{
+                    headers:{
+                        authorization: `Bearer ${user?.accessToken}`
+                    }
+                });
                 console.log(res);
                 if (res?.data?.deletedCount > 0) {
 
