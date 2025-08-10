@@ -48,10 +48,17 @@ GaalxiMart is an online wholesale web platform where users can browse a wide ran
 - **Minimal Info**: Displays basic product details with a **Details** button.
 - **Details Page**:
   - Contains extensive product information.
-  - Includes **Wishlist** and **Add to Cart** buttons (decorative).
+  - Includes **Wishlist** and **Add to Cart** buttons.
   - **Buy Now** button opens a modal with user details, address, and payment methods.
   - **Sweet Alert**: Confirms user action after purchase.
   - **Out-of-Stock Handling**: Add to Cart and Buy Now buttons are hidden for out-of-stock products.
+  - **Wishlist** button add product to wishlist.
+  - **Add To Cart** button add products into cart.
+  - There is a dropdown in the navbar with multiple options and functionality.
+
+  ### All Products
+  - **All Products** section contains all the products with pagination, filter and format changing feature.
+  - **Update** button navigates to another page where user can update that specific products details.
 
 ### Galaxy Parallax Component
 - A unique, visually distinct component created with significant effort.
@@ -62,9 +69,15 @@ GaalxiMart is an online wholesale web platform where users can browse a wide ran
 - **Technology**: Built using GSAP and Three.js.
 - **Interaction**: Animated based on scroll progress.
 
+### Join the GalaxiMart Universe
+ - **Subscribe** section let users subscribe with their email only
+
 ### Best Selling Products
 - **Heading**: Features a decrypted entering style.
 - **Infinite Loop**: Displays a box of best-selling products.
+
+### Track Your Order
+ - Users can track their order by transactionId
 
 ### Footer
 - **Glowing Logo**: Central visual element.
@@ -77,6 +90,15 @@ GaalxiMart is an online wholesale web platform where users can browse a wide ran
 - **Design Ideas**: Used Grok to generate banner photo ideas, later switched to video ideas.
 - **Video Creation**: Took Grok's video prompt to Gemini Pro for generation, then optimized with HandBrake.
 - **Impact**: AI tools like Grok, Gemini, and ChatGPT significantly saved time with design ideas and solving errors.
+
+
+### Installation and run the project
+```bash
+git clone https://github.com/Mysterio-O/Galaximart-Client.git
+cd Galaximart-Client
+npm i
+npm run dev
+```
 
 
 ## Dependencies

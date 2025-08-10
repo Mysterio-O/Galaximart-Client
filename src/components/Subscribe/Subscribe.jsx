@@ -80,7 +80,7 @@ console.log('clicked');
             className="relative bg-gray-900/95 dark:bg-gray-100/95 max-w-7xl mx-auto py-16 rounded-2xl px-4 mb-20 sm:px-8 border-t border-b border-cyan-500/50 dark:border-violet-500/50 overflow-hidden"
         >
             <div className="relative z-10 max-w-6xl mx-auto">
-                <h3 className="text-2xl font-bold text-gray-100 dark:text-gray-800 orbitron mb-2 text-center">Join the GalaxiaMart Universe</h3>
+                <h3 className="text-2xl font-bold text-gray-100 dark:text-gray-800 orbitron mb-2 text-center">Join the GalaxiMart Universe</h3>
                 <p className="text-sm text-gray-300 dark:text-gray-600 mb-4 text-center">Subscribe for exclusive B2B deals, restock alerts, and cosmic updates!</p>
                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 items-center">
                     <motion.input
