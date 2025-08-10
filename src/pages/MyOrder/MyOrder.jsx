@@ -14,6 +14,10 @@ const MyOrder = () => {
     const [isFetching, setIsFetching] = useState(false);
     const [error, setError] = useState(null);
 
+    useEffect(()=> {
+        document.title = 'My Orders'
+    },[])
+
     useEffect(() => {
 
         if (!user || loading) return;

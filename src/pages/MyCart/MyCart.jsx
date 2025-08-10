@@ -39,6 +39,9 @@ const MyCart = () => {
         hover: { y: -5, boxShadow: '0 10px 20px rgba(34, 211, 238, 0.3)' }
     };
 
+    useEffect(()=>{
+        document.title = "My Cart"
+    },[])
 
     useEffect(() => {
         if (loading || !user?.email) return;

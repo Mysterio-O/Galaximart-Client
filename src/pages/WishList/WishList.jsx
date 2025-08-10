@@ -19,6 +19,10 @@ const WishList = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    useEffect(()=>{
+        document.title = 'Wishlist'
+    },[])
+
     useEffect(() => {
         const fetchWishlistProducts = async () => {
             try {
